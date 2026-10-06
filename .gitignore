@@ -1,0 +1,50 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/database/database.sqlite
+/database/database.sqlite-journal
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Laravel specific
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+!storage/framework/cache/.gitignore
+!storage/framework/sessions/.gitignore
+!storage/framework/views/.gitignore
+
+# Testing
+/coverage
+
+# Laravel Mix
+/public/js/manifest.js
+/public/js/vendor.js
+/public/js/admin.js
+/public/css/antd.css
+/public/mix-manifest.json
+
+# Optional: jika ingin commit built assets
+# !public/js/manifest.js
+# !public/js/vendor.js
+# !public/js/admin.js
+# !public/css/antd.css
+# !public/mix-manifest.json
