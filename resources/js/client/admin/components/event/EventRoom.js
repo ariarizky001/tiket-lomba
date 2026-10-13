@@ -7,6 +7,7 @@ import SessionTab from '../session/SessionTab';
 import InvoiceTab from '../invoice/InvoiceTab';
 import ReportTab from '../report/ReportTab';
 import ExpenseTab from '../expense/ExpenseTab';
+import ParticipantRecapTab from '../participant-recap/ParticipantRecapTab';
 
 const EventRoom = () => {
   const { id } = useParams();
@@ -77,6 +78,11 @@ const EventRoom = () => {
       key: 'expense',
       label: 'Pengeluaran',
       children: <ExpenseTab eventId={event.id} />,
+    },
+    {
+      key: 'participant-recap',
+      label: 'Rekap Peserta',
+      children: <ParticipantRecapTab eventId={event.id} />,
     },
   ];
 
