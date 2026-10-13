@@ -26,4 +26,9 @@ class Event extends Model
     {
         return $this->hasMany(Invoice::class, 'event_id');
     }
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(Expense::class, 'event_id');
+    }
 }

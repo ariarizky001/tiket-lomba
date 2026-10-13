@@ -49,6 +49,10 @@ class EventController extends Controller
         if ($event->invoices()->count() > 0) {
             return response()->json(['message' => 'Event sudah memiliki invoice dan tidak dapat dihapus'], 422);
         }
+
+        if ($event->expenses()->withTrashed()->count() > 0) {
+            return response()->json(['message' => 'Event sudah memiliki data pembukuan dan tidak dapat dihapus'], 422);
+        }
         
         $event->delete();
         return response()->json(null, 204);

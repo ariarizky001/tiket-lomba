@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventSessionController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ExpenseController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
@@ -25,4 +26,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/events/{event}/invoice-template', [InvoiceController::class, 'updateTemplate']);
     Route::get('/events/{event}/report', [ReportController::class, 'show']);
     Route::put('/events/{event}/prizes', [ReportController::class, 'updatePrizes']);
+    Route::get('/expense-categories', fn() => response()->json(config('expense.categories')));
+    Route::get('/events/{event}/expenses', [ExpenseController::class, 'index']);
+    Route::post('/events/{event}/expenses', [ExpenseController::class, 'store']);
+    Route::put('/expenses/{expense}', [ExpenseController::class, 'update']);
+    Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
+    Route::get('/events/{event}/bookkeeping', [ExpenseController::class, 'bookkeeping']);
 });
