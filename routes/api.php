@@ -4,9 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventSessionController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -22,4 +23,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/invoices/{invoice}/status', [InvoiceController::class, 'status']);
     Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy']);
     Route::put('/events/{event}/invoice-template', [InvoiceController::class, 'updateTemplate']);
+    Route::get('/events/{event}/report', [ReportController::class, 'show']);
+    Route::put('/events/{event}/prizes', [ReportController::class, 'updatePrizes']);
 });

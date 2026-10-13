@@ -22,4 +22,9 @@ class EventSession extends Model
     {
         return $this->hasMany(InvoiceItem::class, 'event_session_id');
     }
+
+    public function prizes(): HasMany
+    {
+        return $this->hasMany(Prize::class, 'event_session_id');
+    }
 }

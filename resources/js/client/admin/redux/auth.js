@@ -32,6 +32,23 @@ export const authReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+export const initAuth = () => (dispatch) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    return HTTP.get('/me')
+      .then((res) => {
+        dispatch({ type: AUTH_SET_USER, payload: res.data });
+      })
+      .catch(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        dispatch({ type: AUTH_SET_READY });
+      });
+  }
+  dispatch({ type: AUTH_SET_READY });
+  return Promise.resolve();
+};
+
 export const fetchMe = () => (dispatch) => {
   HTTP.get('/me')
     .then((res) => {
@@ -45,8 +62,11 @@ export const fetchMe = () => (dispatch) => {
 export const login = (email, password) => (dispatch) => {
   return HTTP.post('/login', { email, password })
     .then((res) => {
-      dispatch({ type: AUTH_SET_USER, payload: res.data });
-      return res.data;
+      const { token, ...user } = res.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      dispatch({ type: AUTH_SET_USER, payload: user });
+      return user;
     })
     .catch((err) => {
       throw err;
@@ -56,6 +76,8 @@ export const login = (email, password) => (dispatch) => {
 export const logout = () => (dispatch) => {
   return HTTP.post('/logout')
     .then(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
       dispatch({ type: AUTH_LOGOUT });
     });
 };

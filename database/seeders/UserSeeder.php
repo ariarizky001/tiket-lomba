@@ -10,11 +10,17 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
+        $email = env('ADMIN_EMAIL', 'admin@example.com');
+        $password = env('ADMIN_PASSWORD', 'password');
+
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
+            'email' => $email,
+            'password' => Hash::make($password),
             'role' => 'superadmin',
         ]);
+
+        $this->command->info("Default admin user created: {$email}");
+        $this->command->warn('IMPORTANT: Change ADMIN_EMAIL and ADMIN_PASSWORD in .env before production use!');
     }
 }

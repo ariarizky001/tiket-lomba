@@ -5,6 +5,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
 import SessionTab from '../session/SessionTab';
 import InvoiceTab from '../invoice/InvoiceTab';
+import ReportTab from '../report/ReportTab';
 
 const EventRoom = () => {
   const { id } = useParams();
@@ -67,16 +68,9 @@ const EventRoom = () => {
       children: <InvoiceTab event={event} />,
     },
     {
-      key: 'prize',
-      label: 'Hadiah',
-      disabled: true,
-      children: null,
-    },
-    {
       key: 'report',
       label: 'Laporan',
-      disabled: true,
-      children: null,
+      children: <ReportTab event={event} />,
     },
   ];
 

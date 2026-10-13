@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Spin } from 'antd';
-import { fetchMe } from '../redux/auth';
+import { initAuth } from '../redux/auth';
 import Login from '../components/auth/Login';
 import AppLayout from '../components/layout/AppLayout';
 import Dashboard from '../components/dashboard/Dashboard';
@@ -14,7 +14,7 @@ const App = () => {
   const { user, ready } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(fetchMe());
+    dispatch(initAuth());
   }, [dispatch]);
 
   if (!ready) {
