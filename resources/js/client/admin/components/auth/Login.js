@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Card, Form, Input, Button, message } from 'antd';
@@ -9,17 +9,29 @@ const Login = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+  const mountedRef = useRef(true);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   const onFinish = async (values) => {
     setLoading(true);
     try {
       await dispatch(login(values.email, values.password));
+      if (!mountedRef.current) return;
       message.success('Login berhasil');
       history.push('/');
     } catch (error) {
+      if (!mountedRef.current) return;
       message.error(error.response?.data?.message || 'Login gagal');
     } finally {
-      setLoading(false);
+      if (mountedRef.current) {
+        setLoading(false);
+      }
     }
   };
 
@@ -40,14 +52,14 @@ const Login = () => {
               { type: 'email', message: 'Format email tidak valid' },
             ]}
           >
-            <Input />
+            <Input autocomplete="email" placeholder="Masukkan email" />
           </Form.Item>
           <Form.Item
             label="Password"
             name="password"
             rules={[{ required: true, message: 'Password wajib diisi' }]}
           >
-            <Input.Password />
+            <Input.Password autocomplete="current-password" placeholder="Masukkan password" />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={loading} block>

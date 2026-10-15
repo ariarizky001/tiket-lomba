@@ -4,8 +4,9 @@ mix.js('resources/js/client/admin/roots/index.js', 'public/js/admin.js')
    .react()
    .extract()
    .css('node_modules/antd/dist/antd.css', 'public/css/antd.css')
-   .css('resources/css/app.css', 'public/css/app.css')
+   .postCss('resources/css/app.css', 'public/css/app.css')
    .version()
    .options({
-       legacyNodePolyfills: false
+       legacyNodePolyfills: false,
+       postCss: []
    });

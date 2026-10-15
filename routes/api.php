@@ -7,6 +7,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ParticipantRecapController;
+use App\Http\Controllers\RekapPesertaController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
@@ -34,4 +35,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
     Route::get('/events/{event}/bookkeeping', [ExpenseController::class, 'bookkeeping']);
     Route::get('/events/{event}/participant-recap', [ParticipantRecapController::class, 'show']);
+    Route::get('/events/{event}/rekap-peserta', [RekapPesertaController::class, 'show']);
 });

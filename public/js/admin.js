@@ -47,6 +47,13 @@ var Login = function Login() {
   var _Form$useForm = antd__WEBPACK_IMPORTED_MODULE_5__["default"].useForm(),
     _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
     form = _Form$useForm2[0];
+  var mountedRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    mountedRef.current = true;
+    return function () {
+      mountedRef.current = false;
+    };
+  }, []);
   var onFinish = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(values) {
       var _error$response, _t;
@@ -58,22 +65,36 @@ var Login = function Login() {
             _context.n = 2;
             return dispatch((0,_redux_auth__WEBPACK_IMPORTED_MODULE_2__.login)(values.email, values.password));
           case 2:
+            if (mountedRef.current) {
+              _context.n = 3;
+              break;
+            }
+            return _context.a(2);
+          case 3:
             antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Login berhasil');
             history.push('/');
-            _context.n = 4;
+            _context.n = 6;
             break;
-          case 3:
-            _context.p = 3;
-            _t = _context.v;
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error(((_error$response = _t.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message) || 'Login gagal');
           case 4:
             _context.p = 4;
-            setLoading(false);
-            return _context.f(4);
+            _t = _context.v;
+            if (mountedRef.current) {
+              _context.n = 5;
+              break;
+            }
+            return _context.a(2);
           case 5:
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error(((_error$response = _t.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message) || 'Login gagal');
+          case 6:
+            _context.p = 6;
+            if (mountedRef.current) {
+              setLoading(false);
+            }
+            return _context.f(6);
+          case 7:
             return _context.a(2);
         }
-      }, _callee, null, [[1, 3, 4, 5]]);
+      }, _callee, null, [[1, 4, 6, 7]]);
     }));
     return function onFinish(_x) {
       return _ref.apply(this, arguments);
@@ -110,7 +131,10 @@ var Login = function Login() {
             type: 'email',
             message: 'Format email tidak valid'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            autocomplete: "email",
+            placeholder: "Masukkan email"
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
           label: "Password",
           name: "password",
@@ -118,7 +142,10 @@ var Login = function Login() {
             required: true,
             message: 'Password wajib diisi'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Password, {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Password, {
+            autocomplete: "current-password",
+            placeholder: "Masukkan password"
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
             type: "primary",
@@ -623,7 +650,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _invoice_InvoiceTab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../invoice/InvoiceTab */ "./resources/js/client/admin/components/invoice/InvoiceTab.js");
 /* harmony import */ var _report_ReportTab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../report/ReportTab */ "./resources/js/client/admin/components/report/ReportTab.js");
 /* harmony import */ var _expense_ExpenseTab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../expense/ExpenseTab */ "./resources/js/client/admin/components/expense/ExpenseTab.js");
-/* harmony import */ var _participant_recap_ParticipantRecapTab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../participant-recap/ParticipantRecapTab */ "./resources/js/client/admin/components/participant-recap/ParticipantRecapTab.js");
+/* harmony import */ var _rekap_RekapPeserta__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../rekap/RekapPeserta */ "./resources/js/client/admin/components/rekap/RekapPeserta.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
@@ -733,6 +760,12 @@ var EventRoom = function EventRoom() {
       event: event
     })
   }, {
+    key: 'rekap-peserta',
+    label: 'Rekap Peserta',
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_rekap_RekapPeserta__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      eventId: event.id
+    })
+  }, {
     key: 'report',
     label: 'Laporan',
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_report_ReportTab__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -742,12 +775,6 @@ var EventRoom = function EventRoom() {
     key: 'expense',
     label: 'Pengeluaran',
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_expense_ExpenseTab__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      eventId: event.id
-    })
-  }, {
-    key: 'participant-recap',
-    label: 'Rekap Peserta',
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_participant_recap_ParticipantRecapTab__WEBPACK_IMPORTED_MODULE_6__["default"], {
       eventId: event.id
     })
   }];
@@ -2842,10 +2869,10 @@ var AppLayout = function AppLayout(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/client/admin/components/participant-recap/ParticipantRecapTab.js":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/client/admin/components/participant-recap/ParticipantRecapTab.js ***!
-  \***************************************************************************************/
+/***/ "./resources/js/client/admin/components/rekap/RekapBoard.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/client/admin/components/rekap/RekapBoard.js ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2854,16 +2881,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/row/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/col/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/card/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/typography/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var _SessionTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SessionTable */ "./resources/js/client/admin/components/rekap/SessionTable.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var RekapBoard = function RekapBoard(_ref) {
+  var sesi = _ref.sesi;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "rekap-grid",
+    children: sesi.map(function (s) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SessionTable__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        sesi: s
+      }, s.id);
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RekapBoard);
+
+/***/ }),
+
+/***/ "./resources/js/client/admin/components/rekap/RekapPeserta.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/client/admin/components/rekap/RekapPeserta.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/typography/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/ReloadOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/FullscreenOutlined.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
-/* harmony import */ var _ParticipantTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ParticipantTable */ "./resources/js/client/admin/components/participant-recap/ParticipantTable.js");
+/* harmony import */ var _RekapBoard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RekapBoard */ "./resources/js/client/admin/components/rekap/RekapBoard.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
@@ -2880,7 +2938,10 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-var ParticipantRecapTab = function ParticipantRecapTab(_ref) {
+
+var Title = antd__WEBPACK_IMPORTED_MODULE_4__["default"].Title,
+  Text = antd__WEBPACK_IMPORTED_MODULE_4__["default"].Text;
+var RekapPeserta = function RekapPeserta(_ref) {
   var eventId = _ref.eventId;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -2907,7 +2968,7 @@ var ParticipantRecapTab = function ParticipantRecapTab(_ref) {
             setError(null);
             _context.p = 1;
             _context.n = 2;
-            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(eventId, "/participant-recap"));
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(eventId, "/rekap-peserta"));
           case 2:
             response = _context.v;
             setData(response.data);
@@ -2916,9 +2977,9 @@ var ParticipantRecapTab = function ParticipantRecapTab(_ref) {
           case 3:
             _context.p = 3;
             _t = _context.v;
-            console.error('Error loading participant recap:', _t);
-            setError(((_err$response = _t.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.message) || _t.message || 'Gagal memuat data peserta');
-            antd__WEBPACK_IMPORTED_MODULE_4__["default"].error('Gagal memuat data peserta');
+            console.error('Error loading rekap peserta:', _t);
+            setError(((_err$response = _t.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.message) || _t.message || 'Gagal memuat data rekap peserta');
+            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error('Gagal memuat data rekap peserta');
           case 4:
             _context.p = 4;
             setLoading(false);
@@ -2932,84 +2993,84 @@ var ParticipantRecapTab = function ParticipantRecapTab(_ref) {
       return _ref2.apply(this, arguments);
     };
   }();
+  var handleOpenFullscreen = function handleOpenFullscreen() {
+    window.open("/admin/events/".concat(eventId, "/rekap-display"), '_blank', 'noopener,noreferrer');
+  };
   if (loading) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      size: "large",
+      style: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    });
   }
   if (error) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      image: antd__WEBPACK_IMPORTED_MODULE_6__["default"].PRESENTED_IMAGE_SIMPLE,
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      image: antd__WEBPACK_IMPORTED_MODULE_7__["default"].PRESENTED_IMAGE_SIMPLE,
       description: error
     });
   }
   if (!data || !data.sesi || data.sesi.length === 0) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      image: antd__WEBPACK_IMPORTED_MODULE_6__["default"].PRESENTED_IMAGE_SIMPLE,
-      description: "Belum ada data peserta"
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      image: antd__WEBPACK_IMPORTED_MODULE_7__["default"].PRESENTED_IMAGE_SIMPLE,
+      description: "Belum ada sesi untuk event ini"
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    gutter: [16, 16],
-    children: data.sesi.map(function (sesi) {
-      var summary = sesi.summary;
-      var totalPeserta = summary.total_peserta;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        xs: 24,
-        sm: 24,
-        md: 12,
-        lg: 6,
-        style: {
-          marginBottom: 16
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          size: "small",
+  var event = data.event,
+    sesi = data.sesi;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "h-full flex flex-col",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "flex items-center justify-between mb-4 no-print",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Title, {
+          level: 4,
           style: {
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column'
+            margin: 0
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            style: {
-              marginBottom: 12,
-              paddingBottom: 8,
-              borderBottom: '1px solid #f0f0f0'
-            },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Title, {
-              level: 5,
-              style: {
-                margin: 0,
-                display: 'inline'
-              },
-              children: sesi.nama
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
-              color: "blue",
-              style: {
-                marginLeft: 8,
-                fontSize: 11
-              },
-              children: [totalPeserta, " Peserta"]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            style: {
-              flex: 1
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ParticipantTable__WEBPACK_IMPORTED_MODULE_2__["default"], {
-              peserta: sesi.peserta,
-              loading: loading
-            })
-          })]
-        })
-      }, sesi.id);
-    })
+          children: (event === null || event === void 0 ? void 0 : event.nama) || 'Event'
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(Text, {
+          className: "text-gray-500 text-sm",
+          children: [event !== null && event !== void 0 && event.tanggal ? new Date(event.tanggal).toLocaleDateString('id-ID', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          }) : '-', (event === null || event === void 0 ? void 0 : event.lokasi) && " - ".concat(event.lokasi)]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "flex items-center gap-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {}),
+          onClick: loadData,
+          loading: loading,
+          children: "Muat Ulang"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {}),
+          onClick: handleOpenFullscreen,
+          children: "Layar Penuh"
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "rekap-grid-container",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_RekapBoard__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        sesi: sesi
+      })
+    })]
   });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ParticipantRecapTab);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RekapPeserta);
 
 /***/ }),
 
-/***/ "./resources/js/client/admin/components/participant-recap/ParticipantTable.js":
-/*!************************************************************************************!*\
-  !*** ./resources/js/client/admin/components/participant-recap/ParticipantTable.js ***!
-  \************************************************************************************/
+/***/ "./resources/js/client/admin/components/rekap/SessionTable.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/client/admin/components/rekap/SessionTable.js ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3018,83 +3079,101 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+/* harmony import */ var _common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/helpers/Utils */ "./resources/js/client/common/helpers/Utils.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
-var ParticipantTable = function ParticipantTable(_ref) {
-  var peserta = _ref.peserta,
-    loading = _ref.loading;
-  var filtered = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    var result = peserta;
+var SessionTable = function SessionTable(_ref) {
+  var sesi = _ref.sesi;
+  var nama = sesi.nama,
+    harga = sesi.harga,
+    kuota = sesi.kuota,
+    peserta = sesi.peserta;
 
-    // Count occurrences of each peserta in original data to determine if prefix needed
-    var pesertaCount = {};
-    peserta.forEach(function (p) {
-      pesertaCount[p.nama_peserta] = (pesertaCount[p.nama_peserta] || 0) + 1;
-    });
+  // Build rows from peserta data
+  var rows = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var rows = [];
+    var filled = peserta || [];
+    var no = 1;
 
-    // Add prefix if qty > 1
-    return result.map(function (p) {
-      return _objectSpread(_objectSpread({}, p), {}, {
-        displayName: pesertaCount[p.nama_peserta] > 1 ? "".concat(p.nama_peserta, " #").concat(p.urutan) : p.nama_peserta
+    // Filled rows
+    filled.forEach(function (p) {
+      rows.push({
+        no: no++,
+        nama: p.nama,
+        status: p.status,
+        invoice_id: p.invoice_id
       });
     });
-  }, [peserta]);
-  var columns = [{
-    title: 'No',
-    width: 60,
-    align: 'center',
-    render: function render(_, __, index) {
-      return index + 1;
-    }
-  }, {
-    title: 'Nama Peserta',
-    dataIndex: 'displayName',
-    key: 'nama_peserta'
-  }, {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
-    width: 120,
-    align: 'center',
-    render: function render(status) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        color: status === 'lunas' ? 'default' : 'red',
-        children: status === 'lunas' ? 'Lunas' : 'Belum Lunas'
+
+    // Empty rows
+    var emptyCount = Math.max(0, kuota - filled.length);
+    for (var i = 0; i < emptyCount; i++) {
+      rows.push({
+        no: filled.length + i + 1,
+        nama: '',
+        status: 'kosong',
+        invoice_id: null
       });
     }
-  }];
-  if (filtered.length === 0 && !loading) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      description: "Tidak ada data peserta",
-      style: {
-        padding: 20
-      }
-    });
-  }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    columns: columns,
-    dataSource: filtered,
-    loading: loading,
-    rowKey: function rowKey(_, index) {
-      return index;
-    },
-    pagination: false,
-    bordered: true,
-    size: "middle"
+    return rows;
+  }, [peserta, kuota]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "rekap-table-wrapper",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+      className: "rekap-table",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("thead", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tr", {
+          className: "rekap-header-row-1",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("th", {
+            colSpan: "2",
+            className: "rekap-session-name",
+            title: nama,
+            children: ["Sesi ", sesi.urutan, " ", nama]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tr", {
+          className: "rekap-header-row-2",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+            colSpan: "2",
+            className: "rekap-session-price",
+            children: (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatAngka)(harga)
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+          className: "rekap-header-row-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+            className: "rekap-col-no",
+            children: "No"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+            className: "rekap-col-nama",
+            children: "Nama"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+        children: rows.map(function (row, idx) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+            className: idx % 2 === 0 ? 'rekap-row-even' : 'rekap-row-odd',
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+              className: "rekap-cell-no",
+              children: row.no
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+              className: "rekap-cell-nama",
+              children: row.nama ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                className: "rekap-nama ".concat(row.status === 'lunas' ? 'rekap-lunas' : row.status === 'belum_lunas' ? 'rekap-belum-lunas' : ''),
+                title: row.nama,
+                children: row.nama
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                className: "rekap-empty",
+                children: "\u2014"
+              })
+            })]
+          }, idx);
+        })
+      })]
+    })
   });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ParticipantTable);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SessionTable);
 
 /***/ }),
 
@@ -4385,6 +4464,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/(0,react_jsx_runtime_
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   formatAngka: () => (/* binding */ formatAngka),
 /* harmony export */   formatRupiah: () => (/* binding */ formatRupiah),
 /* harmony export */   generateInvoiceCode: () => (/* binding */ generateInvoiceCode),
 /* harmony export */   sessionName: () => (/* binding */ sessionName)
@@ -4393,6 +4473,11 @@ var formatRupiah = function formatRupiah(amount) {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
+    minimumFractionDigits: 0
+  }).format(amount);
+};
+var formatAngka = function formatAngka(amount) {
+  return new Intl.NumberFormat('id-ID', {
     minimumFractionDigits: 0
   }).format(amount);
 };
@@ -4410,6 +4495,7 @@ var sessionName = function sessionName(item) {
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   formatRupiah: formatRupiah,
+  formatAngka: formatAngka,
   generateInvoiceCode: generateInvoiceCode,
   sessionName: sessionName
 });

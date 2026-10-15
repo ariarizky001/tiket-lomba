@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Spin, Empty, message, Row, Col, Tag, Typography, Card } from 'antd';
+import { Spin, Empty, message, Button, Typography } from 'antd';
+import { DownloadOutlined, PictureOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
-import ParticipantTable from './ParticipantTable';
+import GantanganGrid from './GantanganGrid';
+
+const { Title, Text } = Typography;
 
 const ParticipantRecapTab = ({ eventId }) => {
   const [data, setData] = useState(null);
@@ -27,6 +30,14 @@ const ParticipantRecapTab = ({ eventId }) => {
     }
   };
 
+  const handleExportPDF = () => {
+    window.print();
+  };
+
+  const handleExportJPG = () => {
+    message.info('Gunakan "Print to PDF" lalu convert ke JPG');
+  };
+
   if (loading) {
     return <Spin />;
   }
@@ -49,31 +60,38 @@ const ParticipantRecapTab = ({ eventId }) => {
     );
   }
 
-  return (
-    <Row gutter={[16, 16]}>
-      {data.sesi.map((sesi) => {
-        const summary = sesi.summary;
-        const totalPeserta = summary.total_peserta;
+  const { event, sesi } = data;
 
-        return (
-          <Col key={sesi.id} xs={24} sm={24} md={12} lg={6} style={{ marginBottom: 16 }}>
-            <Card size="small" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ marginBottom: 12, paddingBottom: 8, borderBottom: '1px solid #f0f0f0' }}>
-                <Typography.Title level={5} style={{ margin: 0, display: 'inline' }}>
-                  {sesi.nama}
-                </Typography.Title>
-                <Tag color="blue" style={{ marginLeft: 8, fontSize: 11 }}>
-                  {totalPeserta} Peserta
-                </Tag>
-              </div>
-              <div style={{ flex: 1 }}>
-                <ParticipantTable peserta={sesi.peserta} loading={loading} />
-              </div>
-            </Card>
-          </Col>
-        );
-      })}
-    </Row>
+  return (
+    <div className="h-screen w-screen bg-[#2d2d2d] flex flex-col p-2 overflow-hidden font-sans select-none">
+      {/* Header Event */}
+      <div className="flex-shrink-0 text-center mb-2">
+        <Title level={1} className="text-yellow-500 font-black text-lg md:text-xl tracking-wide uppercase drop-shadow-md leading-none mb-1" style={{ margin: 0 }}>
+          {event?.nama || 'Event'}
+        </Title>
+        <Text className="text-gray-200 text-[10px] font-bold tracking-wider leading-none">
+          {event?.tanggal ? new Date(event.tanggal).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}
+          {event?.lokasi && ` - ${event.lokasi}`}
+        </Text>
+      </div>
+
+      {/* Toolbar */}
+      <div className="flex-shrink-0 mb-2 flex justify-end no-print">
+        <Button type="primary" icon={<DownloadOutlined />} onClick={handleExportPDF} style={{ marginRight: 8 }}>
+          Export PDF
+        </Button>
+        <Button icon={<PictureOutlined />} onClick={handleExportJPG}>
+          Export JPG
+        </Button>
+      </div>
+
+      {/* Main Content - Horizontal Scrollable Grid */}
+      <main className="flex-1 min-h-0 grid grid-cols-5 gap-1.5 w-full overflow-x-auto overflow-y-hidden p-1">
+        {sesi.map((sesi) => (
+          <GantanganGrid key={sesi.id} sesi={sesi} />
+        ))}
+      </main>
+    </div>
   );
 };
 

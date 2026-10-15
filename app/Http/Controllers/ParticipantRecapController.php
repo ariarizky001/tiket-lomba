@@ -15,7 +15,7 @@ class ParticipantRecapController extends Controller
                 $query->select('id', 'event_id', 'nama_peserta', 'kode', 'status', 'paid_at', 'total');
             }])
             ->orderBy('id')
-            ->get(['id', 'nama', 'event_id']);
+            ->get(['id', 'nama', 'event_id', 'harga', 'kuota']);
 
         $sessionsData = $sessions->map(function ($session) {
             $pesertaList = [];
@@ -47,6 +47,8 @@ class ParticipantRecapController extends Controller
             return [
                 'id' => $session->id,
                 'nama' => $session->nama,
+                'harga' => (int) $session->harga,
+                'kuota' => (int) $session->kuota,
                 'peserta' => $pesertaList,
                 'summary' => [
                     'total_peserta' => count($pesertaList),
@@ -58,6 +60,12 @@ class ParticipantRecapController extends Controller
         });
 
         return response()->json([
+            'event' => [
+                'id' => $event->id,
+                'nama' => $event->nama,
+                'tanggal' => $event->tanggal->format('Y-m-d'),
+                'lokasi' => $event->lokasi,
+            ],
             'sesi' => $sessionsData->values(),
         ]);
     }

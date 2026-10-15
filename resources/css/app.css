@@ -1,3 +1,6 @@
+@import "tailwindcss";
+@import "../js/client/common/assets/css/rekap.css";
+
 /* Print Styles for Participant Recap */
 @media print {
   .no-print {
