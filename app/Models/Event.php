@@ -31,4 +31,9 @@ class Event extends Model
     {
         return $this->hasMany(Expense::class, 'event_id');
     }
+
+    public function spreadsheet()
+    {
+        return $this->hasOne(EventSpreadsheet::class, 'event_id');
+    }
 }
