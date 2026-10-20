@@ -74,7 +74,7 @@
 }
 
 .rekap-col-no {
-  width: 24px;
+  width: 12px;
   text-align: center;
 }
 
@@ -241,7 +241,7 @@
 
 /* Cell content */
 .rekap-cell-no {
-  width: 24px;
+  width:12px;
   text-align: center;
   padding: 2px 6px;
 }
@@ -332,7 +332,7 @@
   .no-print {
     display: none !important;
   }
-  
+
   .rekap-grid {
     grid-template-columns: repeat(5, 1fr) !important;
   }

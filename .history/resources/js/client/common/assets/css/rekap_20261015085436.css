@@ -1,0 +1,339 @@
+/* Rekap Peserta CSS */
+
+/* Container for rekap tab */
+.rekap-grid-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Grid container */
+.rekap-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  width: 100%;
+}
+
+/* Table wrapper */
+.rekap-table-wrapper {
+  overflow: hidden;
+}
+
+/* Table base styles */
+.rekap-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+/* Header rows */
+.rekap-header-row-1 th,
+.rekap-header-row-2 th,
+.rekap-header-row-3 th {
+  padding: 3px 4px;
+  border: 1px solid #cfcfcf;
+  background-color: #f5f5f5;
+}
+
+.rekap-header-row-1 th {
+  font-weight: bold;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.rekap-header-row-2 th {
+  text-align: center;
+  background-color: #fffde7;
+  color: #f57c00;
+  font-weight: bold;
+}
+
+.rekap-header-row-3 th {
+  text-align: center;
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+
+.rekap-session-name {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.rekap-session-price {
+  text-align: center;
+  background-color: #fffde7;
+  color: #f57c00;
+  font-weight: bold;
+}
+
+.rekap-col-no {
+  width: 12px;
+  text-align: center;
+}
+
+.rekap-col-nama {
+  text-align: left;
+}
+
+/* Body rows */
+.rekap-row-even {
+  background-color: #f2f2f2;
+}
+
+.rekap-row-odd {
+  background-color: #e0e0e0;
+}
+
+.rekap-cell-no {
+  width: 24px;
+  text-align: center;
+  padding: 2px 6px;
+  border: 1px solid #cfcfcf;
+}
+
+.rekap-cell-nama {
+  padding: 2px 6px;
+  border: 1px solid #cfcfcf;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.rekap-nama {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.rekap-lunas {
+  color: #000;
+}
+
+.rekap-belum-lunas {
+  color: #cf1322;
+}
+
+.rekap-empty {
+  color: #999;
+}
+
+/* Table wrapper styles */
+.rekap-table-wrapper {
+  overflow: hidden;
+}
+
+/* Grid container for rekap tab */
+.rekap-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  width: 100%;
+}
+
+/* Responsive grid */
+@media (max-width: 1024px) {
+  .rekap-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+}
+
+/* Responsive for rekap tab */
+.rekap-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .rekap-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+}
+
+/* Rekap header in tab */
+.rekap-header {
+  padding: 4px 0;
+}
+
+/* Fullscreen page styles */
+.rekap-fullscreen-page {
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+.rekap-fullscreen-header {
+  background: #fafafa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 8px 16px;
+}
+
+.rekap-fullscreen-controls {
+  position: fixed;
+  top: 8px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.rekap-fullscreen-controls.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rekap-fullscreen-body {
+  padding: 8px;
+}
+
+.rekap-fullscreen-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+}
+
+@media (max-width: 1024px) {
+  .rekap-fullscreen-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+}
+
+/* Table cell padding and height */
+.rekap-table th,
+.rekap-table td {
+  padding: 2px 6px;
+  border: 1px solid #cfcfcf;
+  height: 22px;
+  max-height: 22px;
+  vertical-align: middle;
+}
+
+/* Header row heights */
+.rekap-header-row-1 th,
+.rekap-header-row-2 th {
+  padding: 3px 4px;
+}
+
+.rekap-header-row-3 th {
+  padding: 2px 4px;
+}
+
+/* Cell content */
+.rekap-cell-no {
+  width: 24px;
+  text-align: center;
+  padding: 2px 6px;
+}
+
+.rekap-cell-nama {
+  padding: 2px 6px;
+}
+
+.rekap-nama {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rekap-lunas {
+  color: #000;
+}
+
+.rekap-belum-lunas {
+  color: #cf1322;
+}
+
+.rekap-empty {
+  color: #999;
+}
+
+/* Row striping */
+.rekap-row-even {
+  background-color: #f2f2f2;
+}
+
+.rekap-row-odd {
+  background-color: #e0e0e0;
+}
+
+/* Rekap tab styles */
+.rekap-tab {
+  height: 100%;
+}
+
+.rekap-header {
+  margin-bottom: 8px;
+}
+
+/* Rekap grid in tab */
+.rekap-tab .rekap-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .rekap-tab .rekap-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+}
+
+/* Fullscreen specific */
+.rekap-fullscreen-page {
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+.rekap-fullscreen-body {
+  padding: 8px;
+}
+
+/* Responsive grid for fullscreen */
+@media (min-width: 1024px) {
+  .rekap-fullscreen-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .rekap-fullscreen-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .rekap-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}

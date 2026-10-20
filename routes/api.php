@@ -34,6 +34,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/expenses/{expense}', [ExpenseController::class, 'update']);
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
     Route::get('/events/{event}/bookkeeping', [ExpenseController::class, 'bookkeeping']);
-    Route::get('/events/{event}/participant-recap', [ParticipantRecapController::class, 'show']);
+    // Route::get('/events/{event}/participant-recap', [ParticipantRecapController::class, 'show']);
     Route::get('/events/{event}/rekap-peserta', [RekapPesertaController::class, 'show']);
 });

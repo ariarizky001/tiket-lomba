@@ -1173,7 +1173,7 @@
   font-weight: bold;
 }
 .rekap-col-no {
-  width: 24px;
+  width: 12px;
   text-align: center;
 }
 .rekap-col-nama {
@@ -1302,7 +1302,7 @@
   padding: 2px 4px;
 }
 .rekap-cell-no {
-  width: 24px;
+  width: 12px;
   text-align: center;
   padding: 2px 6px;
 }
