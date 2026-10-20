@@ -9,6 +9,7 @@ import ReportTab from '../report/ReportTab';
 import ExpenseTab from '../expense/ExpenseTab';
 import RekapPeserta from '../rekap/RekapPeserta';
 import SpreadsheetConnection from '../spreadsheet/SpreadsheetConnection';
+import SheetRangeMappingPanel from '../spreadsheet/SheetRangeMappingPanel';
 
 const EventRoom = () => {
   const { id } = useParams();
@@ -89,6 +90,11 @@ const EventRoom = () => {
       key: 'spreadsheet',
       label: 'Koneksi Spreadsheet',
       children: <SpreadsheetConnection eventId={event.id} />,
+    },
+    {
+      key: 'sheet-mapping',
+      label: 'Mapping Sheet',
+      children: <SheetRangeMappingPanel eventId={event.id} />,
     },
   ];
 

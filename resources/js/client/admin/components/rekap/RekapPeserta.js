@@ -83,7 +83,7 @@ const RekapPeserta = ({ eventId }) => {
 
       {/* Board */}
       <div className="rekap-grid-container">
-        <RekapBoard sesi={sesi} />
+        <RekapBoard sesi={sesi} eventId={eventId} />
       </div>
     </div>
   );

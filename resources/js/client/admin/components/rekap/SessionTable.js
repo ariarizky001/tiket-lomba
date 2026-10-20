@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { formatAngka } from '../../../common/helpers/Utils';
+import SendToSheetButton from '../spreadsheet/SendToSheetButton';
 
-const SessionTable = ({ sesi }) => {
-  const { nama, harga, kuota, peserta } = sesi;
+const SessionTable = ({ sesi, eventId }) => {
+  const { nama, harga, kuota, peserta, id: sessionId } = sesi;
 
   // Build rows from peserta data
   const rows = useMemo(() => {
@@ -41,13 +42,22 @@ const SessionTable = ({ sesi }) => {
           <col style={{ width: '30px' }} />
           <col style={{ width: 'auto' }} />
         </colgroup>
-         {/* Header row 1: Sesi {urutan} {nama} */}
-         <thead>
-           <tr className="rekap-header-row-1">
-             <th colSpan="2" className="rekap-session-name" title={nama}>
-               Sesi {sesi.urutan} {nama}
-             </th>
-           </tr>
+{/* Header row 1: Sesi {urutan} {nama} */}
+          <thead>
+            <tr className="rekap-header-row-1">
+              <th colSpan="2" className="rekap-session-name" title={nama}>
+                <div className="flex items-center justify-between">
+                  <span>Sesi {sesi.urutan} {nama}</span>
+                  {eventId && (
+                    <SendToSheetButton
+                      eventId={eventId}
+                      sessionId={sessionId}
+                      sessionName={nama}
+                    />
+                  )}
+                </div>
+              </th>
+            </tr>
            {/* Header row 2: Harga */}
            <tr className="rekap-header-row-2">
              <th colSpan="2" className="rekap-session-price">
