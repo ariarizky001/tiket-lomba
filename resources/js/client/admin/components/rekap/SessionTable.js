@@ -37,25 +37,29 @@ const SessionTable = ({ sesi }) => {
   return (
     <div className="rekap-table-wrapper">
       <table className="rekap-table">
-        {/* Header row 1: Sesi {urutan} {nama} */}
-        <thead>
-          <tr className="rekap-header-row-1">
-            <th colSpan="2" className="rekap-session-name" title={nama}>
-              Sesi {sesi.urutan} {nama}
-            </th>
-          </tr>
-          {/* Header row 2: Harga */}
-          <tr className="rekap-header-row-2">
-            <th colSpan="2" className="rekap-session-price">
-              {formatAngka(harga)}
-            </th>
-          </tr>
-          {/* Header row 3: Column headers */}
-          <tr className="rekap-header-row-3">
-            <th className="rekap-col-no">No</th>
-            <th className="rekap-col-nama">Nama</th>
-          </tr>
-        </thead>
+        <colgroup>
+          <col style={{ width: '30px' }} />
+          <col style={{ width: 'auto' }} />
+        </colgroup>
+         {/* Header row 1: Sesi {urutan} {nama} */}
+         <thead>
+           <tr className="rekap-header-row-1">
+             <th colSpan="2" className="rekap-session-name" title={nama}>
+               Sesi {sesi.urutan} {nama}
+             </th>
+           </tr>
+           {/* Header row 2: Harga */}
+           <tr className="rekap-header-row-2">
+             <th colSpan="2" className="rekap-session-price">
+               {formatAngka(harga)}
+             </th>
+           </tr>
+           {/* Header row 3: Column headers */}
+           <tr className="rekap-header-row-3">
+             <th className="rekap-col-no">No</th>
+             <th className="rekap-col-nama">Nama</th>
+           </tr>
+         </thead>
         <tbody>
           {rows.map((row, idx) => (
             <tr key={idx} className={idx % 2 === 0 ? 'rekap-row-even' : 'rekap-row-odd'}>

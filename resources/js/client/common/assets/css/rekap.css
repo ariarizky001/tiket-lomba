@@ -74,8 +74,11 @@
 }
 
 .rekap-col-no {
-  width: 12px;
+  width: 30px;
+  max-width: 30px;
   text-align: center;
+  padding: 2px 2px;
+  font-size: 11px;
 }
 
 .rekap-col-nama {
@@ -92,10 +95,14 @@
 }
 
 .rekap-cell-no {
-  width: 24px;
+  width: 30px;
+  max-width: 30px;
   text-align: center;
-  padding: 2px 6px;
+  padding: 2px 2px;
   border: 1px solid #cfcfcf;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .rekap-cell-nama {
@@ -237,13 +244,6 @@
 
 .rekap-header-row-3 th {
   padding: 2px 4px;
-}
-
-/* Cell content */
-.rekap-cell-no {
-  width:12px;
-  text-align: center;
-  padding: 2px 6px;
 }
 
 .rekap-cell-nama {
