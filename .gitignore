@@ -48,3 +48,11 @@ storage/framework/views/*
 # !public/js/admin.js
 # !public/css/antd.css
 # !public/mix-manifest.json
+
+# Google Service Account Credentials
+*.json
+!composer.json
+!composer.lock
+!package.json
+!package-lock.json
+!public/mix-manifest.json
