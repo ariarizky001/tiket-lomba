@@ -22,7 +22,7 @@ return [
         ],
         'total_pembayaran' => [
             'aktif' => true,
-            'teks' => "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}",
+            'teks' => "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}\n📌 STATUS : {status_ikon} {status}",
         ],
         'ketentuan_pembayaran' => [
             'aktif' => true,

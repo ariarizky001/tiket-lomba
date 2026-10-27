@@ -375,4 +375,110 @@ class InvoiceRendererTest extends TestCase
 
         $this->assertEquals('Known: Test | Unknown: {unknown_placeholder}', $rendered);
     }
+
+    /** @test */
+    public function it_renders_status_and_status_ikon_placeholders()
+    {
+        $event = Event::create([
+            'nama' => 'Event Testing',
+            'tanggal' => '2026-10-11',
+            'is_active' => true,
+        ]);
+
+        $invoiceBelumLunas = Invoice::create([
+            'event_id' => $event->id,
+            'nomor' => 1,
+            'kode' => 'EVT-0001',
+            'nama_peserta' => 'Test User',
+            'total' => 100000,
+            'status' => 'belum_lunas',
+        ]);
+
+        $templateData = [
+            'pemisah' => '---',
+            'bagian' => [
+                'total_pembayaran' => [
+                    'aktif' => true,
+                    'teks' => "💰 TOTAL\n📌 STATUS : {status_ikon} {status}",
+                ],
+            ],
+        ];
+
+        $rendered = $this->renderer->render($templateData, $event, $invoiceBelumLunas);
+        $this->assertStringContainsString('📌 STATUS : ⏳ BELUM LUNAS', $rendered);
+        $this->assertStringNotContainsString('✅', $rendered);
+
+        $invoiceLunas = Invoice::create([
+            'event_id' => $event->id,
+            'nomor' => 2,
+            'kode' => 'EVT-0002',
+            'nama_peserta' => 'Test User 2',
+            'total' => 200000,
+            'status' => 'lunas',
+        ]);
+
+        $renderedLunas = $this->renderer->render($templateData, $event, $invoiceLunas);
+        $this->assertStringContainsString('📌 STATUS : ✅ LUNAS', $renderedLunas);
+        $this->assertStringNotContainsString('⏳', $renderedLunas);
+    }
+
+    /** @test */
+    public function it_renders_same_invoice_before_and_after_lunas_with_only_status_different()
+    {
+        $event = Event::create([
+            'nama' => 'Event Testing',
+            'tanggal' => '2026-10-11',
+            'is_active' => true,
+        ]);
+
+        $session = EventSession::create([
+            'event_id' => $event->id,
+            'nama' => 'Session A',
+            'harga' => 100000,
+            'kuota' => 10,
+        ]);
+
+        $invoice = Invoice::create([
+            'event_id' => $event->id,
+            'nomor' => 1,
+            'kode' => 'EVT-0001',
+            'nama_peserta' => 'Test User',
+            'total' => 100000,
+            'status' => 'belum_lunas',
+        ]);
+
+        InvoiceItem::create([
+            'invoice_id' => $invoice->id,
+            'event_session_id' => $session->id,
+            'qty' => 1,
+            'harga' => 100000,
+            'subtotal' => 100000,
+        ]);
+
+        $invoice->load(['items.session']);
+
+        $templateData = [
+            'pemisah' => '---',
+            'bagian' => [
+                'pemesan' => ['aktif' => true, 'teks' => 'Nama: {nama_pemesan}'],
+                'total_pembayaran' => ['aktif' => true, 'teks' => "Total: {total}\nStatus: {status_ikon} {status}"],
+            ],
+        ];
+
+        $renderedBelumLunas = $this->renderer->render($templateData, $event, $invoice);
+
+        $invoice->update(['status' => 'lunas']);
+        $invoice->refresh();
+
+        $renderedLunas = $this->renderer->render($templateData, $event, $invoice);
+
+        $this->assertStringContainsString('Status: ⏳ BELUM LUNAS', $renderedBelumLunas);
+        $this->assertStringContainsString('Status: ✅ LUNAS', $renderedLunas);
+
+        $this->assertStringContainsString('Nama: Test User', $renderedBelumLunas);
+        $this->assertStringContainsString('Nama: Test User', $renderedLunas);
+
+        $this->assertStringContainsString('Total: Rp100.000', $renderedBelumLunas);
+        $this->assertStringContainsString('Total: Rp100.000', $renderedLunas);
+    }
 }

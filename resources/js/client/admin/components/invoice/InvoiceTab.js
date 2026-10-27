@@ -62,7 +62,15 @@ const InvoiceTab = ({ event }) => {
     try {
       const newStatus = invoice.status === 'lunas' ? 'belum_lunas' : 'lunas';
       await HTTP.patch(`/invoices/${invoice.id}/status`, { status: newStatus });
-      message.success(`Invoice ditandai ${newStatus === 'lunas' ? 'lunas' : 'belum lunas'}`);
+      
+      if (newStatus === 'lunas') {
+        message.success('Invoice ditandai lunas');
+        setSelectedInvoice(invoice);
+        setViewVisible(true);
+      } else {
+        message.success('Invoice ditandai belum lunas');
+      }
+      
       fetchInvoices();
     } catch (error) {
       message.error('Gagal mengubah status');

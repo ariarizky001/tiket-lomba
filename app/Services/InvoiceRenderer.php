@@ -51,6 +51,7 @@ class InvoiceRenderer
         $tanggalInvoice = $this->formatIndonesianDate($createdAt);
 
         $statusStr = strtoupper($statusVal) === 'LUNAS' ? 'LUNAS' : 'BELUM LUNAS';
+        $statusIkon = strtoupper($statusVal) === 'LUNAS' ? '✅' : '⏳';
 
         $totalAngka = $this->formatRupiahAngka($totalVal);
         $totalRp = 'Rp' . $totalAngka;
@@ -68,6 +69,7 @@ class InvoiceRenderer
             '{total}' => $totalRp,
             '{total_angka}' => $totalAngka,
             '{status}' => $statusStr,
+            '{status_ikon}' => $statusIkon,
         ];
 
         // Process items for kelas_pesanan

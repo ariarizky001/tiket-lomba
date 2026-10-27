@@ -9,7 +9,7 @@ const PlaceholderHelp = ({ activeSectionKey, onInsert }) => {
     umum: [
       '{nama_event}', '{nama_event_besar}', '{tanggal_event}', '{tanggal_event_besar}',
       '{lokasi_event}', '{nama_pemesan}', '{nomor_urut}', '{kode_invoice}',
-      '{tanggal_invoice}', '{total}', '{total_angka}', '{status}',
+      '{tanggal_invoice}', '{total}', '{total_angka}', '{status}', '{status_ikon}',
     ],
     baris: [
       '{no}', '{nama_sesi}', '{harga}', '{harga_angka}', '{qty}', '{subtotal}', '{subtotal_angka}',

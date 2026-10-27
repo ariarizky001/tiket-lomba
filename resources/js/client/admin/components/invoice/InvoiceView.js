@@ -5,6 +5,7 @@ import HTTP from '../../../../common/helpers/HTTP';
 const InvoiceView = ({ invoice, event, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [teks, setTeks] = useState('');
+  const [currentInvoice, setCurrentInvoice] = useState(invoice);
 
   useEffect(() => {
     if (invoice && invoice.id) {
@@ -15,6 +16,9 @@ const InvoiceView = ({ invoice, event, onClose }) => {
   const fetchInvoiceText = async () => {
     setLoading(true);
     try {
+      const invoiceRes = await HTTP.get(`/invoices/${invoice.id}`);
+      setCurrentInvoice(invoiceRes.data);
+      
       const res = await HTTP.get(`/invoices/${invoice.id}/teks`);
       setTeks(res.data.teks);
     } catch (err) {
@@ -25,7 +29,7 @@ const InvoiceView = ({ invoice, event, onClose }) => {
   };
 
   const getStatusTag = () => {
-    if (invoice.status === 'lunas') {
+    if (currentInvoice.status === 'lunas') {
       return <Tag color="success">LUNAS</Tag>;
     }
     return <Tag color="error">BELUM LUNAS</Tag>;

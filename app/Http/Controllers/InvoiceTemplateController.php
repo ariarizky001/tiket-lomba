@@ -34,6 +34,7 @@ class InvoiceTemplateController extends Controller
                 '{total}',
                 '{total_angka}',
                 '{status}',
+                '{status_ikon}',
             ],
             'baris' => [
                 '{no}',
@@ -166,7 +167,8 @@ class InvoiceTemplateController extends Controller
 
         $teks = $this->renderer->render($templateData, $event, $invoice);
 
-        return response()->json(['teks' => $teks]);
+        return response()->json(['teks' => $teks])
+            ->header('Cache-Control', 'no-store');
     }
 
     private function validateTemplateRequest(Request $request): void

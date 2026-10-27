@@ -385,4 +385,142 @@ class InvoiceTemplateTest extends TestCase
         $stored = InvoiceTemplate::where('event_id', $this->event->id)->first();
         $this->assertStringContainsString('🌟', $stored->bagian['salam_pembuka']['teks']);
     }
+
+    /** @test */
+    public function get_invoice_teks_has_cache_control_no_store_header()
+    {
+        Sanctum::actingAs($this->user);
+
+        $session = EventSession::create([
+            'event_id' => $this->event->id,
+            'nama' => 'Test Session',
+            'harga' => 100000,
+            'kuota' => 10,
+        ]);
+
+        $invoice = Invoice::create([
+            'event_id' => $this->event->id,
+            'nomor' => 1,
+            'kode' => 'SHC-0001',
+            'nama_peserta' => 'Test User',
+            'total' => 100000,
+            'status' => 'belum_lunas',
+        ]);
+
+        InvoiceItem::create([
+            'invoice_id' => $invoice->id,
+            'event_session_id' => $session->id,
+            'qty' => 1,
+            'harga' => 100000,
+            'subtotal' => 100000,
+        ]);
+
+        $response = $this->getJson("/api/invoices/{$invoice->id}/teks");
+
+        $response->assertStatus(200);
+        $cacheControl = $response->headers->get('Cache-Control');
+        $this->assertStringContainsString('no-store', $cacheControl);
+    }
+
+    /** @test */
+    public function status_changes_from_belum_lunas_to_lunas_and_back()
+    {
+        Sanctum::actingAs($this->user);
+
+        $session = EventSession::create([
+            'event_id' => $this->event->id,
+            'nama' => 'Test Session',
+            'harga' => 100000,
+            'kuota' => 10,
+        ]);
+
+        $invoice = Invoice::create([
+            'event_id' => $this->event->id,
+            'nomor' => 1,
+            'kode' => 'SHC-0001',
+            'nama_peserta' => 'Test User',
+            'total' => 100000,
+            'status' => 'belum_lunas',
+        ]);
+
+        InvoiceItem::create([
+            'invoice_id' => $invoice->id,
+            'event_session_id' => $session->id,
+            'qty' => 1,
+            'harga' => 100000,
+            'subtotal' => 100000,
+        ]);
+
+        InvoiceTemplate::create([
+            'event_id' => $this->event->id,
+            'pemisah' => '---',
+            'bagian' => [
+                'total_pembayaran' => ['aktif' => true, 'teks' => "Status: {status_ikon} {status}"],
+            ],
+        ]);
+
+        $response = $this->getJson("/api/invoices/{$invoice->id}/teks");
+        $response->assertStatus(200);
+        $this->assertStringContainsString('Status: ⏳ BELUM LUNAS', $response['teks']);
+
+        $this->patchJson("/api/invoices/{$invoice->id}/status", ['status' => 'lunas']);
+
+        $response = $this->getJson("/api/invoices/{$invoice->id}/teks");
+        $response->assertStatus(200);
+        $this->assertStringContainsString('Status: ✅ LUNAS', $response['teks']);
+
+        $this->patchJson("/api/invoices/{$invoice->id}/status", ['status' => 'belum_lunas']);
+
+        $response = $this->getJson("/api/invoices/{$invoice->id}/teks");
+        $response->assertStatus(200);
+        $this->assertStringContainsString('Status: ⏳ BELUM LUNAS', $response['teks']);
+    }
+
+    /** @test */
+    public function default_template_contains_status_placeholder()
+    {
+        $defaultTemplate = config('invoice_template');
+        
+        $this->assertArrayHasKey('total_pembayaran', $defaultTemplate['bagian']);
+        $this->assertStringContainsString('{status}', $defaultTemplate['bagian']['total_pembayaran']['teks']);
+        $this->assertStringContainsString('{status_ikon}', $defaultTemplate['bagian']['total_pembayaran']['teks']);
+    }
+
+    /** @test */
+    public function no_new_invoice_record_after_status_change()
+    {
+        Sanctum::actingAs($this->user);
+
+        $session = EventSession::create([
+            'event_id' => $this->event->id,
+            'nama' => 'Test Session',
+            'harga' => 100000,
+            'kuota' => 10,
+        ]);
+
+        $invoice = Invoice::create([
+            'event_id' => $this->event->id,
+            'nomor' => 1,
+            'kode' => 'SHC-0001',
+            'nama_peserta' => 'Test User',
+            'total' => 100000,
+            'status' => 'belum_lunas',
+        ]);
+
+        InvoiceItem::create([
+            'invoice_id' => $invoice->id,
+            'event_session_id' => $session->id,
+            'qty' => 1,
+            'harga' => 100000,
+            'subtotal' => 100000,
+        ]);
+
+        $countBefore = Invoice::count();
+
+        $this->patchJson("/api/invoices/{$invoice->id}/status", ['status' => 'lunas']);
+
+        $countAfter = Invoice::count();
+
+        $this->assertEquals($countBefore, $countAfter);
+    }
 }

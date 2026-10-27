@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Modal, Form, Input, Button, Collapse, Switch, Tag, Popconfirm, message, Spin, Row, Col } from 'antd';
+import { Modal, Form, Input, Button, Collapse, Switch, Tag, Popconfirm, message, Spin, Row, Col, Alert } from 'antd';
 import HTTP from '../../../../common/helpers/HTTP';
 import PlaceholderHelp from './PlaceholderHelp';
 
@@ -96,6 +96,22 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
                         JSON.stringify({ pemisah: serverTemplate.pemisah, bagian: serverTemplate.bagian });
     setIsDirty(isDifferent);
   }, [template, serverTemplate]);
+
+  // Check if template contains status placeholder
+  const hasStatusPlaceholder = () => {
+    if (!template || !template.bagian) return false;
+    
+    for (const key of SECTION_KEYS) {
+      const section = template.bagian[key];
+      if (section && section.aktif) {
+        const teks = section.teks || '';
+        if (teks.includes('{status}') || teks.includes('{status_ikon}')) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
 
   const handlePemisahChange = (e) => {
     setTemplate(prev => ({ ...prev, pemisah: e.target.value }));
@@ -234,6 +250,15 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
             placeholder="━━━━━━━━━━━━━━━━━━"
           />
         </Form.Item>
+
+        {!hasStatusPlaceholder() && (
+          <Alert
+            message="Template belum menampilkan status LUNAS/BELUM LUNAS. Sisipkan placeholder {status}."
+            type="warning"
+            showIcon
+            style={{ marginBottom: 16 }}
+          />
+        )}
 
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
