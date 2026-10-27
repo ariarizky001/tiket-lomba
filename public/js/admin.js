@@ -2363,14 +2363,7 @@ var InvoiceTab = function InvoiceTab(_ref) {
       },
       onPrint: handlePrint
     }), templateVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_InvoiceTemplateModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      invoiceJudul: event.invoice_judul,
-      invoiceCatatan: event.invoice_catatan,
-      onSave: function onSave(values) {
-        _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].put("/events/".concat(event.id, "/invoice-template"), values).then(function (res) {
-          antd__WEBPACK_IMPORTED_MODULE_9__["default"].success('Pengaturan invoice disimpan');
-          setTemplateVisible(false);
-        });
-      },
+      event: event,
       onCancel: function onCancel() {
         return setTemplateVisible(false);
       }
@@ -2393,11 +2386,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/collapse/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/row/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/col/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/switch/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
+/* harmony import */ var _PlaceholderHelp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PlaceholderHelp */ "./resources/js/client/admin/components/invoice/PlaceholderHelp.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -2411,93 +2420,532 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+
+var Panel = antd__WEBPACK_IMPORTED_MODULE_4__["default"].Panel;
+var TextArea = antd__WEBPACK_IMPORTED_MODULE_5__["default"].TextArea;
+var SECTION_TITLES = {
+  salam_pembuka: '1. Salam Pembuka',
+  nama_event: '2. Nama Event',
+  pemesan: '3. Nama Pemesan & No Urut',
+  kelas_pesanan: '4. Kelas yang Dipesan',
+  total_pembayaran: '5. Total Pembayaran',
+  ketentuan_pembayaran: '6. Ketentuan Pembayaran',
+  penutup: '7. Penutup',
+  iklan: '8. Advertisement'
+};
+var SECTION_KEYS = ['salam_pembuka', 'nama_event', 'pemesan', 'kelas_pesanan', 'total_pembayaran', 'ketentuan_pembayaran', 'penutup', 'iklan'];
 var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
-  var invoiceJudul = _ref.invoiceJudul,
-    invoiceCatatan = _ref.invoiceCatatan,
-    onSave = _ref.onSave,
+  var event = _ref.event,
     onCancel = _ref.onCancel;
-  var _Form$useForm = antd__WEBPACK_IMPORTED_MODULE_2__["default"].useForm(),
-    _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
-    form = _Form$useForm2[0];
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     loading = _useState2[0],
     setLoading = _useState2[1];
-  var handleSubmit = /*#__PURE__*/function () {
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    previewLoading = _useState4[0],
+    setPreviewLoading = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    template = _useState6[0],
+    setTemplate = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    serverTemplate = _useState8[0],
+    setServerTemplate = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState0 = _slicedToArray(_useState9, 2),
+    previewText = _useState0[0],
+    setPreviewText = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    isDirty = _useState10[0],
+    setIsDirty = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    activeInputRef = _useState12[0],
+    setActiveInputRef = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    activeSectionKey = _useState14[0],
+    setActiveSectionKey = _useState14[1];
+
+  // Load existing template or default on mount
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    fetchTemplate();
+  }, [event.id]);
+  var fetchTemplate = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-      var values;
+      var res, _t;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
             _context.p = 0;
             _context.n = 1;
-            return form.validateFields();
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(event.id, "/invoice-template"));
           case 1:
-            values = _context.v;
-            setLoading(true);
-            onSave(values);
+            res = _context.v;
+            setTemplate(res.data);
+            setServerTemplate(JSON.parse(JSON.stringify(res.data)));
+            setIsDirty(false);
+            _context.n = 3;
+            break;
           case 2:
             _context.p = 2;
-            setLoading(false);
-            return _context.f(2);
+            _t = _context.v;
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal memuat template invoice');
           case 3:
             return _context.a(2);
         }
-      }, _callee, null, [[0,, 2, 3]]);
+      }, _callee, null, [[0, 2]]);
     }));
-    return function handleSubmit() {
+    return function fetchTemplate() {
       return _ref2.apply(this, arguments);
     };
   }();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Pengaturan Invoice",
+
+  // Debounced preview generator
+  var previewTimer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var fetchPreview = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(currentData) {
+      var res, _t2;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.p = _context2.n) {
+          case 0:
+            if (currentData) {
+              _context2.n = 1;
+              break;
+            }
+            return _context2.a(2);
+          case 1:
+            setPreviewLoading(true);
+            _context2.p = 2;
+            _context2.n = 3;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].post("/events/".concat(event.id, "/invoice-template/preview"), {
+              pemisah: currentData.pemisah,
+              bagian: currentData.bagian
+            });
+          case 3:
+            res = _context2.v;
+            setPreviewText(res.data.teks);
+            _context2.n = 5;
+            break;
+          case 4:
+            _context2.p = 4;
+            _t2 = _context2.v;
+          case 5:
+            _context2.p = 5;
+            setPreviewLoading(false);
+            return _context2.f(5);
+          case 6:
+            return _context2.a(2);
+        }
+      }, _callee2, null, [[2, 4, 5, 6]]);
+    }));
+    return function (_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }(), [event.id]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!template) return;
+    if (previewTimer.current) {
+      clearTimeout(previewTimer.current);
+    }
+    previewTimer.current = setTimeout(function () {
+      fetchPreview(template);
+    }, 500);
+    return function () {
+      if (previewTimer.current) clearTimeout(previewTimer.current);
+    };
+  }, [template, fetchPreview]);
+
+  // Check dirtiness
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!template || !serverTemplate) return;
+    var isDifferent = JSON.stringify({
+      pemisah: template.pemisah,
+      bagian: template.bagian
+    }) !== JSON.stringify({
+      pemisah: serverTemplate.pemisah,
+      bagian: serverTemplate.bagian
+    });
+    setIsDirty(isDifferent);
+  }, [template, serverTemplate]);
+  var handlePemisahChange = function handlePemisahChange(e) {
+    setTemplate(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        pemisah: e.target.value
+      });
+    });
+  };
+  var handleSectionActiveToggle = function handleSectionActiveToggle(key, e) {
+    e.stopPropagation();
+    setTemplate(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        bagian: _objectSpread(_objectSpread({}, prev.bagian), {}, _defineProperty({}, key, _objectSpread(_objectSpread({}, prev.bagian[key]), {}, {
+          aktif: !prev.bagian[key].aktif
+        })))
+      });
+    });
+  };
+  var handleSectionTextChange = function handleSectionTextChange(key, field, value) {
+    setTemplate(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        bagian: _objectSpread(_objectSpread({}, prev.bagian), {}, _defineProperty({}, key, _objectSpread(_objectSpread({}, prev.bagian[key]), {}, _defineProperty({}, field, value))))
+      });
+    });
+  };
+  var handleSave = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var res, errors, msg, _t3;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.p = _context3.n) {
+          case 0:
+            setLoading(true);
+            _context3.p = 1;
+            _context3.n = 2;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].put("/events/".concat(event.id, "/invoice-template"), {
+              pemisah: template.pemisah,
+              bagian: template.bagian
+            });
+          case 2:
+            res = _context3.v;
+            setTemplate(res.data);
+            setServerTemplate(JSON.parse(JSON.stringify(res.data)));
+            setIsDirty(false);
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Template invoice berhasil disimpan');
+            _context3.n = 4;
+            break;
+          case 3:
+            _context3.p = 3;
+            _t3 = _context3.v;
+            if (_t3.response && _t3.response.status === 422) {
+              errors = _t3.response.data.errors;
+              msg = errors ? Object.values(errors).flat().join(', ') : 'Validasi gagal';
+              antd__WEBPACK_IMPORTED_MODULE_6__["default"].error(msg);
+            } else {
+              antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal menyimpan template invoice');
+            }
+          case 4:
+            _context3.p = 4;
+            setLoading(false);
+            return _context3.f(4);
+          case 5:
+            return _context3.a(2);
+        }
+      }, _callee3, null, [[1, 3, 4, 5]]);
+    }));
+    return function handleSave() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+  var handleReset = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var res, defaultRes, _t4;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
+          case 0:
+            _context4.p = 0;
+            _context4.n = 1;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(event.id, "/invoice-template"));
+          case 1:
+            res = _context4.v;
+            _context4.n = 2;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(event.id, "/invoice-template?default=1"));
+          case 2:
+            defaultRes = _context4.v;
+            // Or fallback reset to server default
+            if (res.data.is_default) {
+              setTemplate(res.data);
+            } else {
+              // Fetch default config template if present, or fallback to state
+              setTemplate({
+                pemisah: '━━━━━━━━━━━━━━━━━━',
+                bagian: {
+                  salam_pembuka: {
+                    aktif: true,
+                    teks: "Assalamu’alaikum Wr. Wb.\nShalom | Salam Sejahtera\n\n🌟 SUGENG RAWUH, SEDULUR NYAWIJI 🌟\n\nDengan hormat, kami sampaikan Invoice Pemesanan Tiket Event."
+                  },
+                  nama_event: {
+                    aktif: true,
+                    teks: "🎪 *{nama_event_besar}*\n📅 {tanggal_event_besar}\n⏰ START NAIK PUKUL 10.00 WIB"
+                  },
+                  pemesan: {
+                    aktif: true,
+                    teks: "👤 Nama     : {nama_pemesan}\n🔢 No. Urut : {nomor_urut}"
+                  },
+                  kelas_pesanan: {
+                    aktif: true,
+                    teks: "🎟️ KELAS PESANAN",
+                    format_baris: "{no}. {nama_sesi} — {harga} = {qty}"
+                  },
+                  total_pembayaran: {
+                    aktif: true,
+                    teks: "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}"
+                  },
+                  ketentuan_pembayaran: {
+                    aktif: true,
+                    teks: "⚠️ KETENTUAN PEMBAYARAN\nPembayaran maksimal 1 × 24 jam setelah invoice diterima.\n\n💳 TRANSFER PEMBAYARAN\n🏦 BCA — 1234567890\n👤 A/N Nama Pemilik\n📲 Konfirmasi: 0812-0000-0000"
+                  },
+                  penutup: {
+                    aktif: true,
+                    teks: "🤝 SATU LANGKAH • SATU CERITA • SATU KELUARGA\n\nMaturnuwun & Salam Nyawiji. ❤️"
+                  },
+                  iklan: {
+                    aktif: false,
+                    teks: ""
+                  }
+                }
+              });
+            }
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].info('Editor telah direset ke template bawaan (belum disimpan)');
+            _context4.n = 4;
+            break;
+          case 3:
+            _context4.p = 3;
+            _t4 = _context4.v;
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal reset template');
+          case 4:
+            return _context4.a(2);
+        }
+      }, _callee4, null, [[0, 3]]);
+    }));
+    return function handleReset() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+  var handleInsertPlaceholder = function handleInsertPlaceholder(ph) {
+    if (!activeInputRef || !activeInputRef.element) {
+      return;
+    }
+    var element = activeInputRef.element,
+      sectionKey = activeInputRef.sectionKey,
+      fieldName = activeInputRef.fieldName;
+    var start = element.selectionStart;
+    var end = element.selectionEnd;
+    var currentVal = template.bagian[sectionKey][fieldName] || '';
+    var newVal = currentVal.substring(0, start) + ph + currentVal.substring(end);
+    handleSectionTextChange(sectionKey, fieldName, newVal);
+    setTimeout(function () {
+      element.focus();
+      element.setSelectionRange(start + ph.length, start + ph.length);
+    }, 50);
+  };
+  if (!template) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      open: true,
+      footer: null,
+      onCancel: onCancel,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        style: {
+          display: 'block',
+          margin: '40px auto'
+        }
+      })
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    title: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+        children: "Pengaturan Invoice"
+      }), isDirty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        color: "warning",
+        children: "Ada perubahan belum disimpan"
+      })]
+    }),
     open: true,
     onCancel: onCancel,
     footer: null,
-    width: 500,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      form: form,
+    width: 960,
+    style: {
+      top: 20
+    },
+    bodyStyle: {
+      padding: '16px 24px'
+    },
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
       layout: "vertical",
-      initialValues: {
-        invoice_judul: invoiceJudul || '',
-        invoice_catatan: invoiceCatatan || ''
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-        label: "Judul Invoice",
-        name: "invoice_judul",
-        rules: [{
-          max: 100,
-          message: 'Judul maksimal 100 karakter'
-        }],
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          placeholder: "Default: INVOICE"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-        label: "Catatan",
-        name: "invoice_catatan",
-        rules: [{
-          max: 1000,
-          message: 'Catatan maksimal 1000 karakter'
-        }],
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"].TextArea, {
-          rows: 4,
-          placeholder: "Opsional"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Item, {
+        label: "Garis Pemisah",
         style: {
-          textAlign: 'right'
+          marginBottom: 16
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          value: template.pemisah,
+          onChange: handlePemisahChange,
+          maxLength: 50,
+          placeholder: "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        gutter: [16, 16],
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          xs: 24,
+          md: 12,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            accordion: true,
+            onChange: function onChange(key) {
+              return setActiveSectionKey(key);
+            },
+            children: SECTION_KEYS.map(function (key) {
+              var section = template.bagian[key] || {
+                aktif: false,
+                teks: ''
+              };
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(Panel, {
+                header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  style: {
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '100%',
+                    paddingRight: 8
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: SECTION_TITLES[key]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+                    checked: section.aktif,
+                    onChange: function onChange(checked, e) {
+                      return handleSectionActiveToggle(key, e);
+                    }
+                  })]
+                }),
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Item, {
+                  label: "Teks Bagian",
+                  style: {
+                    marginBottom: 8
+                  },
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(TextArea, {
+                    rows: 3,
+                    value: section.teks,
+                    onChange: function onChange(e) {
+                      return handleSectionTextChange(key, 'teks', e.target.value);
+                    },
+                    onFocus: function onFocus(e) {
+                      return setActiveInputRef({
+                        element: e.target,
+                        sectionKey: key,
+                        fieldName: 'teks'
+                      });
+                    },
+                    maxLength: 2000,
+                    showCount: true,
+                    autoSize: {
+                      minRows: 3,
+                      maxRows: 12
+                    }
+                  })
+                }), key === 'kelas_pesanan' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Item, {
+                  label: "Format Baris",
+                  extra: "Dipakai untuk tiap sesi yang dipesan",
+                  style: {
+                    marginBottom: 8
+                  },
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                    value: section.format_baris,
+                    onChange: function onChange(e) {
+                      return handleSectionTextChange(key, 'format_baris', e.target.value);
+                    },
+                    onFocus: function onFocus(e) {
+                      return setActiveInputRef({
+                        element: e.target,
+                        sectionKey: key,
+                        fieldName: 'format_baris'
+                      });
+                    },
+                    maxLength: 255,
+                    placeholder: "{no}. {nama_sesi} \u2014 {harga} = {qty}"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  style: {
+                    marginTop: 12
+                  },
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_PlaceholderHelp__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                    activeSectionKey: key,
+                    onInsert: handleInsertPlaceholder
+                  })
+                })]
+              }, key);
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          xs: 24,
+          md: 12,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            style: {
+              marginBottom: 8,
+              fontWeight: 'bold'
+            },
+            children: "Pratinjau Live:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            style: {
+              position: 'relative'
+            },
+            children: [previewLoading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              style: {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'rgba(255,255,255,0.7)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              },
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
+              style: {
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+                fontSize: 13,
+                fontFamily: 'monospace',
+                background: '#fff',
+                border: '1px solid #d9d9d9',
+                borderRadius: 6,
+                padding: 12,
+                maxHeight: '70vh',
+                overflowY: 'auto',
+                minHeight: 300,
+                margin: 0
+              },
+              children: previewText || 'Memuat pratinjau...'
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        style: {
+          textAlign: 'right',
+          marginTop: 16
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          title: "Reset editor ke template bawaan?",
+          onConfirm: handleReset,
+          okText: "Ya",
+          cancelText: "Batal",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+            style: {
+              marginRight: 8
+            },
+            children: "Reset ke Bawaan"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
           style: {
             marginRight: 8
           },
           onClick: onCancel,
           children: "Batal"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
           type: "primary",
-          onClick: handleSubmit,
+          onClick: handleSave,
           loading: loading,
-          children: "Simpan"
+          children: "Simpan Template"
         })]
       })]
     })
@@ -2519,15 +2967,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/helpers/Utils */ "./resources/js/client/common/helpers/Utils.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
@@ -2535,238 +2991,255 @@ __webpack_require__.r(__webpack_exports__);
 var InvoiceView = function InvoiceView(_ref) {
   var invoice = _ref.invoice,
     event = _ref.event,
-    onClose = _ref.onClose,
-    onPrint = _ref.onPrint,
-    onCopy = _ref.onCopy;
-  var rupiah = new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0
-  });
+    onClose = _ref.onClose;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState2 = _slicedToArray(_useState, 2),
+    loading = _useState2[0],
+    setLoading = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    teks = _useState4[0],
+    setTeks = _useState4[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (invoice && invoice.id) {
+      fetchInvoiceText();
+    }
+  }, [invoice]);
+  var fetchInvoiceText = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var res, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            setLoading(true);
+            _context.p = 1;
+            _context.n = 2;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/invoices/".concat(invoice.id, "/teks"));
+          case 2:
+            res = _context.v;
+            setTeks(res.data.teks);
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            antd__WEBPACK_IMPORTED_MODULE_3__["default"].error('Gagal memuat teks invoice');
+          case 4:
+            _context.p = 4;
+            setLoading(false);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }));
+    return function fetchInvoiceText() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
   var getStatusTag = function getStatusTag() {
     if (invoice.status === 'lunas') {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
         color: "success",
-        children: "Lunas"
+        children: "LUNAS"
       });
     }
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
       color: "error",
-      children: "Belum Lunas"
+      children: "BELUM LUNAS"
     });
-  };
-  var formatTitle = function formatTitle() {
-    return invoice.invoice_judul || 'INVOICE';
-  };
-  var formatTitleEvent = function formatTitleEvent() {
-    return (event === null || event === void 0 ? void 0 : event.nama) || '';
-  };
-  var formatInvoiceDate = function formatInvoiceDate() {
-    return dayjs__WEBPACK_IMPORTED_MODULE_1___default()(invoice.created_at).format('DD/MM/YYYY HH:mm');
-  };
-  var formatPaidDate = function formatPaidDate() {
-    return invoice.paid_at ? dayjs__WEBPACK_IMPORTED_MODULE_1___default()(invoice.paid_at).format('DD/MM/YYYY HH:mm') : '-';
-  };
-  var formatNamaPeserta = function formatNamaPeserta() {
-    return invoice.nama_peserta || '';
-  };
-  var handlePrint = function handlePrint() {
-    onPrint();
   };
   var handleCopy = function handleCopy() {
-    var lines = [];
-    lines.push("*".concat(formatTitle(), " ").concat(invoice.kode, "*"));
-    lines.push("Event: ".concat(formatTitleEvent()));
-    lines.push("Nama: ".concat(formatNamaPeserta()));
-    lines.push('');
-    invoice.items.forEach(function (item) {
-      lines.push("".concat((0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.sessionName)(item), " x").concat(item.qty, " = ").concat(rupiah.format(item.subtotal)));
-    });
-    lines.push("*Total: ".concat(rupiah.format(invoice.total), "*"));
-    lines.push("Status: ".concat(invoice.status === 'lunas' ? 'LUNAS' : 'BELUM LUNAS'));
-    lines.push('');
-    if (invoice.invoice_catatan) {
-      lines.push(invoice.invoice_catatan);
-    }
-    var text = lines.join('\n');
-    navigator.clipboard.writeText(text).then(function () {
-      antd__WEBPACK_IMPORTED_MODULE_5__["default"].success('Tersalin');
+    if (!teks) return;
+    navigator.clipboard.writeText(teks).then(function () {
+      antd__WEBPACK_IMPORTED_MODULE_3__["default"].success('Tersalin');
+    })["catch"](function () {
+      antd__WEBPACK_IMPORTED_MODULE_3__["default"].error('Gagal menyalin teks');
     });
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    title: "".concat(formatTitle(), " ").concat(invoice.kode),
-    open: true,
-    onCancel: onClose,
-    footer: null,
-    width: 600,
-    bodyStyle: {
-      padding: 24
-    },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      style: {
-        marginBottom: 24
+  var handlePrint = function handlePrint() {
+    window.print();
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("style", {
+      children: "\n        @media print {\n          body * {\n            visibility: hidden;\n          }\n          #printable-invoice-content, #printable-invoice-content * {\n            visibility: visible;\n          }\n          #printable-invoice-content {\n            position: absolute;\n            left: 0;\n            top: 0;\n            width: 100%;\n            padding: 16px;\n            font-size: 14px;\n            border: none !important;\n          }\n          .ant-modal-close, .ant-modal-footer, .invoice-action-buttons {\n            display: none !important;\n          }\n        }\n      "
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      title: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+          children: ["Invoice ", invoice.kode]
+        }), getStatusTag()]
+      }),
+      open: true,
+      onCancel: onClose,
+      footer: null,
+      width: 600,
+      bodyStyle: {
+        padding: 24
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+      children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
         style: {
-          margin: '8px 0'
-        },
-        children: ["Event: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
-          children: formatTitleEvent()
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-        style: {
-          margin: '8px 0'
-        },
-        children: ["Tanggal: ", formatInvoiceDate()]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-        style: {
-          margin: '8px 0'
-        },
-        children: ["Nama: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
-          children: formatNamaPeserta()
-        })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
-      style: {
-        width: '100%',
-        marginBottom: 16,
-        borderCollapse: 'collapse'
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+          display: 'block',
+          margin: '40px auto'
+        }
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          id: "printable-invoice-content",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
             style: {
-              border: '1px solid #ddd',
-              padding: 8,
-              textAlign: 'left'
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              fontSize: 13,
+              fontFamily: 'monospace',
+              background: '#fff',
+              border: '1px solid #d9d9d9',
+              borderRadius: 6,
+              padding: 16,
+              minHeight: 200,
+              margin: 0
             },
-            children: "Sesi"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+            children: teks
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "invoice-action-buttons",
+          style: {
+            display: 'flex',
+            gap: 12,
+            marginTop: 24
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
             style: {
-              border: '1px solid #ddd',
-              padding: 8,
-              textAlign: 'center'
+              flex: 1
             },
-            children: "Qty"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+            onClick: handlePrint,
+            children: "Cetak"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
             style: {
-              border: '1px solid #ddd',
-              padding: 8,
-              textAlign: 'right'
+              flex: 1
             },
-            children: "Harga"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+            onClick: handleCopy,
+            type: "primary",
+            children: "Salin Teks"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
             style: {
-              border: '1px solid #ddd',
-              padding: 8,
-              textAlign: 'right'
+              flex: 1
             },
-            children: "Subtotal"
+            onClick: onClose,
+            children: "Tutup"
           })]
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
-        children: invoice.items.map(function (item) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                border: '1px solid #ddd',
-                padding: 8
-              },
-              children: (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.sessionName)(item)
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                border: '1px solid #ddd',
-                padding: 8,
-                textAlign: 'center'
-              },
-              children: item.qty
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                border: '1px solid #ddd',
-                padding: 8,
-                textAlign: 'right'
-              },
-              children: rupiah.format(item.harga)
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              style: {
-                border: '1px solid #ddd',
-                padding: 8,
-                textAlign: 'right'
-              },
-              children: rupiah.format(item.subtotal)
-            })]
-          }, item.id);
-        })
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      style: {
-        textAlign: 'right',
-        marginBottom: 16
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-        style: {
-          margin: 0,
-          fontSize: 16,
-          fontWeight: 'bold'
-        },
-        children: ["Total: ", rupiah.format(invoice.total)]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-        style: {
-          margin: '8px 0 0 0'
-        },
-        children: getStatusTag()
-      }), invoice.status === 'lunas' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-        style: {
-          margin: '4px 0 0 0',
-          color: '#52c41a'
-        },
-        children: ["Bayar: ", formatPaidDate()]
-      })]
-    }), invoice.invoice_catatan && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      style: {
-        marginTop: 16,
-        padding: 12,
-        backgroundColor: '#f5f5f5',
-        borderRadius: 4
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-        style: {
-          margin: 0,
-          fontSize: 14,
-          color: '#666'
-        },
-        children: invoice.invoice_catatan
+        })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      style: {
-        display: 'flex',
-        gap: 12,
-        marginTop: 24
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        style: {
-          flex: 1
-        },
-        onClick: handlePrint,
-        children: "Cetak"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        style: {
-          flex: 1
-        },
-        onClick: handleCopy,
-        type: "primary",
-        children: "Salin WhatsApp"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        style: {
-          flex: 1
-        },
-        onClick: onClose,
-        children: "Tutup"
-      })]
     })]
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InvoiceView);
+
+/***/ }),
+
+/***/ "./resources/js/client/admin/components/invoice/PlaceholderHelp.js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/client/admin/components/invoice/PlaceholderHelp.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/typography/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/space/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/InfoCircleOutlined.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var Text = antd__WEBPACK_IMPORTED_MODULE_2__["default"].Text;
+var PlaceholderHelp = function PlaceholderHelp(_ref) {
+  var activeSectionKey = _ref.activeSectionKey,
+    onInsert = _ref.onInsert;
+  var placeholders = {
+    umum: ['{nama_event}', '{nama_event_besar}', '{tanggal_event}', '{tanggal_event_besar}', '{lokasi_event}', '{nama_pemesan}', '{nomor_urut}', '{kode_invoice}', '{tanggal_invoice}', '{total}', '{total_angka}', '{status}'],
+    baris: ['{no}', '{nama_sesi}', '{harga}', '{harga_angka}', '{qty}', '{subtotal}', '{subtotal_angka}']
+  };
+  var isBarisActive = activeSectionKey === 'kelas_pesanan';
+  var handleClick = function handleClick(placeholder) {
+    if (onInsert) {
+      onInsert(placeholder);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      direction: "vertical",
+      size: 8,
+      style: {
+        width: '100%'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Text, {
+          strong: true,
+          children: "Placeholder Umum"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Text, {
+          type: "secondary",
+          style: {
+            fontSize: 12,
+            marginLeft: 8
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {}), " Dapat digunakan di semua bagian"]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        wrap: true,
+        children: placeholders.umum.map(function (ph) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            color: "blue",
+            onClick: function onClick() {
+              return handleClick(ph);
+            },
+            style: {
+              cursor: 'pointer'
+            },
+            children: ph
+          }, ph);
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Text, {
+          strong: true,
+          children: "Placeholder Khusus Baris"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Text, {
+          type: "secondary",
+          style: {
+            fontSize: 12,
+            marginLeft: 8
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {}), " Hanya tersedia untuk Format Baris"]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        wrap: true,
+        children: placeholders.baris.map(function (ph) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            color: isBarisActive ? "green" : "default",
+            onClick: isBarisActive ? function () {
+              return handleClick(ph);
+            } : undefined,
+            style: {
+              cursor: isBarisActive ? 'pointer' : 'not-allowed',
+              opacity: isBarisActive ? 1 : 0.5
+            },
+            children: ph
+          }, ph);
+        })
+      })]
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlaceholderHelp);
 
 /***/ }),
 
@@ -2919,6 +3392,220 @@ var RekapBoard = function RekapBoard(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/client/admin/components/rekap/RekapDashboard.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/client/admin/components/rekap/RekapDashboard.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
+/* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
+/* harmony import */ var _SessionTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SessionTable */ "./resources/js/client/admin/components/rekap/SessionTable.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+var COLUMNS = 7;
+var RekapDashboard = function RekapDashboard() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    data = _useState2[0],
+    setData = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    error = _useState6[0],
+    setError = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(window.innerHeight),
+    _useState8 = _slicedToArray(_useState7, 2),
+    viewportHeight = _useState8[0],
+    setViewportHeight = _useState8[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var handleResize = function handleResize() {
+      return setViewportHeight(window.innerHeight);
+    };
+    window.addEventListener('resize', handleResize);
+    loadData();
+    return function () {
+      return window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  var loadData = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var eventId, response, _err$response, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            setLoading(true);
+            setError(null);
+            _context.p = 1;
+            eventId = window.location.pathname.split('/')[3];
+            _context.n = 2;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(eventId, "/rekap-peserta"));
+          case 2:
+            response = _context.v;
+            setData(response.data);
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            console.error('Error loading rekap peserta:', _t);
+            setError(((_err$response = _t.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.message) || _t.message || 'Gagal memuat data rekap peserta');
+          case 4:
+            _context.p = 4;
+            setLoading(false);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }));
+    return function loadData() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  var sizing = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    if (!data || !data.sesi || data.sesi.length === 0) {
+      return null;
+    }
+    var sesi = data.sesi;
+    var sessionCount = sesi.length;
+    var maxKuota = Math.max.apply(Math, _toConsumableArray(sesi.map(function (s) {
+      return s.kuota;
+    })).concat([24]));
+    var rowsPerColumn = Math.ceil(sessionCount / COLUMNS);
+    var totalTableRows = maxKuota + 3;
+    var totalContentRows = totalTableRows * rowsPerColumn;
+    var availableHeight = viewportHeight - 16;
+    var rowHeight = Math.max(14, Math.floor(availableHeight / totalContentRows));
+    var fontSize = Math.max(8, Math.floor(rowHeight * 0.55));
+    var headerFontSize = Math.max(9, fontSize + 1);
+    var cellPaddingV = Math.max(1, Math.floor(rowHeight * 0.15));
+    var cellPaddingH = Math.max(2, Math.floor(rowHeight * 0.25));
+    return {
+      rowHeight: rowHeight,
+      fontSize: fontSize,
+      headerFontSize: headerFontSize,
+      cellPaddingV: cellPaddingV,
+      cellPaddingH: cellPaddingH,
+      rowsPerColumn: rowsPerColumn,
+      maxKuota: maxKuota
+    };
+  }, [data, viewportHeight]);
+  if (loading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "rekap-dashboard-page",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        size: "large",
+        style: {
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }
+      })
+    });
+  }
+  if (error) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "rekap-dashboard-page",
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        image: antd__WEBPACK_IMPORTED_MODULE_5__["default"].PRESENTED_IMAGE_SIMPLE,
+        description: error
+      })
+    });
+  }
+  if (!data || !data.sesi || data.sesi.length === 0) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "rekap-dashboard-page",
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        image: antd__WEBPACK_IMPORTED_MODULE_5__["default"].PRESENTED_IMAGE_SIMPLE,
+        description: "Belum ada sesi untuk event ini"
+      })
+    });
+  }
+  var event = data.event,
+    sesi = data.sesi;
+  if (!sizing) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "rekap-dashboard-page",
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        image: antd__WEBPACK_IMPORTED_MODULE_5__["default"].PRESENTED_IMAGE_SIMPLE,
+        description: "Data tidak valid"
+      })
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    className: "rekap-dashboard-page",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "rekap-dashboard-grid",
+      style: {
+        gridTemplateColumns: "repeat(".concat(COLUMNS, ", 1fr)")
+      },
+      children: sesi.map(function (s) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SessionTable__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          sesi: s,
+          isDashboard: true,
+          rowHeight: sizing.rowHeight,
+          fontSize: sizing.fontSize,
+          headerFontSize: sizing.headerFontSize,
+          cellPaddingV: sizing.cellPaddingV,
+          cellPaddingH: sizing.cellPaddingH
+        }, s.id);
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RekapDashboard);
+
+/***/ }),
+
 /***/ "./resources/js/client/admin/components/rekap/RekapPeserta.js":
 /*!********************************************************************!*\
   !*** ./resources/js/client/admin/components/rekap/RekapPeserta.js ***!
@@ -3012,7 +3699,7 @@ var RekapPeserta = function RekapPeserta(_ref) {
     };
   }();
   var handleOpenFullscreen = function handleOpenFullscreen() {
-    window.open("/admin/events/".concat(eventId, "/rekap-display"), '_blank', 'noopener,noreferrer');
+    window.open("/admin/events/".concat(eventId, "/rekap-dashboard"), '_blank', 'noopener,noreferrer');
   };
   if (loading) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -3107,12 +3794,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var SessionTable = function SessionTable(_ref) {
   var sesi = _ref.sesi,
-    eventId = _ref.eventId;
+    eventId = _ref.eventId,
+    _ref$isDashboard = _ref.isDashboard,
+    isDashboard = _ref$isDashboard === void 0 ? false : _ref$isDashboard,
+    _ref$rowHeight = _ref.rowHeight,
+    rowHeight = _ref$rowHeight === void 0 ? 22 : _ref$rowHeight,
+    _ref$fontSize = _ref.fontSize,
+    fontSize = _ref$fontSize === void 0 ? 12 : _ref$fontSize,
+    _ref$headerFontSize = _ref.headerFontSize,
+    headerFontSize = _ref$headerFontSize === void 0 ? 12 : _ref$headerFontSize,
+    _ref$cellPaddingV = _ref.cellPaddingV,
+    cellPaddingV = _ref$cellPaddingV === void 0 ? 2 : _ref$cellPaddingV,
+    _ref$cellPaddingH = _ref.cellPaddingH,
+    cellPaddingH = _ref$cellPaddingH === void 0 ? 6 : _ref$cellPaddingH;
   var nama = sesi.nama,
     harga = sesi.harga,
     kuota = sesi.kuota,
     peserta = sesi.peserta,
-    sessionId = sesi.id;
+    sessionId = sesi.id,
+    urutan = sesi.urutan;
 
   // Build rows from peserta data
   var rows = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
@@ -3142,14 +3842,33 @@ var SessionTable = function SessionTable(_ref) {
     }
     return rows;
   }, [peserta, kuota]);
+  var tableStyle = {
+    fontSize: "".concat(fontSize, "px"),
+    lineHeight: 1.15
+  };
+  var headerRowStyle = {
+    height: "".concat(rowHeight, "px")
+  };
+  var cellStyle = {
+    padding: "".concat(cellPaddingV, "px ").concat(cellPaddingH, "px"),
+    fontSize: "".concat(fontSize, "px"),
+    height: "".concat(rowHeight, "px")
+  };
+  var headerCellStyle = {
+    padding: "".concat(cellPaddingV, "px ").concat(cellPaddingH, "px"),
+    fontSize: "".concat(headerFontSize, "px"),
+    height: "".concat(rowHeight, "px")
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-    className: "rekap-table-wrapper",
+    className: "rekap-table-wrapper rekap-dashboard-table",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
       className: "rekap-table",
+      style: tableStyle,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("colgroup", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("col", {
           style: {
-            width: '30px'
+            width: '30px',
+            minWidth: '30px'
           }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("col", {
           style: {
@@ -3159,15 +3878,27 @@ var SessionTable = function SessionTable(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("thead", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
           className: "rekap-header-row-1",
+          style: headerRowStyle,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
             colSpan: "2",
             className: "rekap-session-name",
             title: nama,
+            style: headerCellStyle,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "flex items-center justify-between",
+              style: {
+                padding: '0 4px',
+                height: '100%'
+              },
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-                children: ["Sesi ", sesi.urutan, " ", nama]
-              }), eventId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_spreadsheet_SendToSheetButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                style: {
+                  fontSize: "".concat(headerFontSize, "px"),
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                },
+                children: ["Sesi ", urutan, " ", nama]
+              }), !isDashboard && eventId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_spreadsheet_SendToSheetButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
                 eventId: eventId,
                 sessionId: sessionId,
                 sessionName: nama
@@ -3176,18 +3907,23 @@ var SessionTable = function SessionTable(_ref) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
           className: "rekap-header-row-2",
+          style: headerRowStyle,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
             colSpan: "2",
             className: "rekap-session-price",
+            style: headerCellStyle,
             children: (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatAngka)(harga)
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
           className: "rekap-header-row-3",
+          style: headerRowStyle,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
             className: "rekap-col-no",
+            style: headerCellStyle,
             children: "No"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
             className: "rekap-col-nama",
+            style: headerCellStyle,
             children: "Nama"
           })]
         })]
@@ -3195,11 +3931,14 @@ var SessionTable = function SessionTable(_ref) {
         children: rows.map(function (row, idx) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
             className: idx % 2 === 0 ? 'rekap-row-even' : 'rekap-row-odd',
+            style: headerRowStyle,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
               className: "rekap-cell-no",
+              style: cellStyle,
               children: row.no
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
               className: "rekap-cell-nama",
+              style: cellStyle,
               children: row.nama ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                 className: "rekap-nama ".concat(row.status === 'lunas' ? 'rekap-lunas' : row.status === 'belum_lunas' ? 'rekap-belum-lunas' : ''),
                 title: row.nama,
@@ -5429,16 +6168,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
 /* harmony import */ var _redux_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/auth */ "./resources/js/client/admin/redux/auth.js");
 /* harmony import */ var _components_auth_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/auth/Login */ "./resources/js/client/admin/components/auth/Login.js");
 /* harmony import */ var _components_layout_AppLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/layout/AppLayout */ "./resources/js/client/admin/components/layout/AppLayout.js");
 /* harmony import */ var _components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/dashboard/Dashboard */ "./resources/js/client/admin/components/dashboard/Dashboard.js");
 /* harmony import */ var _components_event_EventList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/event/EventList */ "./resources/js/client/admin/components/event/EventList.js");
 /* harmony import */ var _components_event_EventRoom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/event/EventRoom */ "./resources/js/client/admin/components/event/EventRoom.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_rekap_RekapDashboard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/rekap/RekapDashboard */ "./resources/js/client/admin/components/rekap/RekapDashboard.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -5461,34 +6202,37 @@ var App = function App() {
     dispatch((0,_redux_auth__WEBPACK_IMPORTED_MODULE_2__.initAuth)());
   }, [dispatch]);
   if (!ready) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {});
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
     basename: "/admin",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/login",
-        children: user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Redirect, {
+        children: user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Redirect, {
           to: "/"
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_auth_Login__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_auth_Login__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+        path: "/events/:id/rekap-dashboard",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_rekap_RekapDashboard__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/",
-        children: !user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Redirect, {
+        children: !user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Redirect, {
           to: "/login"
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_layout_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_layout_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
           location: window.location,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
               exact: true,
               path: "/",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_5__["default"], {})
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
               exact: true,
               path: "/events",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_event_EventList__WEBPACK_IMPORTED_MODULE_6__["default"], {})
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_event_EventList__WEBPACK_IMPORTED_MODULE_6__["default"], {})
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
               path: "/events/:id",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_event_EventRoom__WEBPACK_IMPORTED_MODULE_7__["default"], {})
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_event_EventRoom__WEBPACK_IMPORTED_MODULE_7__["default"], {})
             })]
           })
         })

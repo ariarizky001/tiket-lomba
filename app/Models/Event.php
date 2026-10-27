@@ -37,6 +37,11 @@ class Event extends Model
         return $this->hasOne(EventSpreadsheet::class, 'event_id');
     }
 
+    public function invoiceTemplate()
+    {
+        return $this->hasOne(InvoiceTemplate::class, 'event_id');
+    }
+
     public function sheetRangeMappings()
     {
         return $this->hasMany(SheetRangeMapping::class, 'event_id');

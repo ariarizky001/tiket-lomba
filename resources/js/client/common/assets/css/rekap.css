@@ -337,3 +337,52 @@
     grid-template-columns: repeat(5, 1fr) !important;
   }
 }
+
+/* Dashboard Fullscreen Page */
+.rekap-dashboard-page {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* 7-Column Grid */
+.rekap-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+  padding: 4px;
+  height: calc(100vh - 8px);
+  box-sizing: border-box;
+}
+
+/* Table fills grid cell */
+.rekap-dashboard-table {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override table for dashboard */
+.rekap-dashboard-table .rekap-table {
+  height: 100%;
+  min-height: 100%;
+}
+
+/* Print support for dashboard */
+@media print {
+  .rekap-dashboard-page {
+    height: auto;
+    overflow: visible;
+  }
+  .rekap-dashboard-grid {
+    display: block;
+    page-break-inside: avoid;
+  }
+  .rekap-dashboard-table {
+    page-break-inside: avoid;
+    margin-bottom: 12px;
+  }
+}

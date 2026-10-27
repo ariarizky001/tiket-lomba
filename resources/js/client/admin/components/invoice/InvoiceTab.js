@@ -232,14 +232,7 @@ const InvoiceTab = ({ event }) => {
 
       {templateVisible && (
         <InvoiceTemplateModal
-          invoiceJudul={event.invoice_judul}
-          invoiceCatatan={event.invoice_catatan}
-          onSave={(values) => {
-            HTTP.put(`/events/${event.id}/invoice-template`, values).then((res) => {
-              message.success('Pengaturan invoice disimpan');
-              setTemplateVisible(false);
-            });
-          }}
+          event={event}
           onCancel={() => setTemplateVisible(false)}
         />
       )}

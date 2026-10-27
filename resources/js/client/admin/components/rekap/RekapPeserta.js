@@ -31,7 +31,7 @@ const RekapPeserta = ({ eventId }) => {
   };
 
   const handleOpenFullscreen = () => {
-    window.open(`/admin/events/${eventId}/rekap-display`, '_blank', 'noopener,noreferrer');
+    window.open(`/admin/events/${eventId}/rekap-dashboard`, '_blank', 'noopener,noreferrer');
   };
 
   if (loading) {

@@ -240,23 +240,4 @@ class InvoiceController extends Controller
         $invoice->delete();
         return response()->json(null, 204);
     }
-
-    public function updateTemplate(Request $request, Event $event)
-    {
-        $validator = Validator::make($request->all(), [
-            'invoice_judul' => 'nullable|string|max:100',
-            'invoice_catatan' => 'nullable|string|max:1000',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $event->update([
-            'invoice_judul' => $request->invoice_judul,
-            'invoice_catatan' => $request->invoice_catatan,
-        ]);
-
-        return response()->json($event);
-    }
 }

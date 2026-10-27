@@ -8,6 +8,7 @@ import AppLayout from '../components/layout/AppLayout';
 import Dashboard from '../components/dashboard/Dashboard';
 import EventList from '../components/event/EventList';
 import EventRoom from '../components/event/EventRoom';
+import RekapDashboard from '../components/rekap/RekapDashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const App = () => {
       <Switch>
         <Route path="/login">
           {user ? <Redirect to="/" /> : <Login />}
+        </Route>
+        <Route path="/events/:id/rekap-dashboard">
+          <RekapDashboard />
         </Route>
         <Route path="/">
           {!user ? (
