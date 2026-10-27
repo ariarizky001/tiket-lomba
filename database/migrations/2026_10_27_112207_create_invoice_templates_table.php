@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('event_id')->unique()->constrained()->cascadeOnDelete();
             $table->string('pemisah', 50)->default('━━━━━━━━━━━━━━━━━━');
-            $table->json('bagian');
+            $table->json('bagian')->nullable();
             $table->timestamps();
         });
     }

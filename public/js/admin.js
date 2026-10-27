@@ -2139,7 +2139,13 @@ var InvoiceTab = function InvoiceTab(_ref) {
               status: newStatus
             });
           case 1:
-            antd__WEBPACK_IMPORTED_MODULE_9__["default"].success("Invoice ditandai ".concat(newStatus === 'lunas' ? 'lunas' : 'belum lunas'));
+            if (newStatus === 'lunas') {
+              antd__WEBPACK_IMPORTED_MODULE_9__["default"].success('Invoice ditandai lunas');
+              setSelectedInvoice(invoice);
+              setViewVisible(true);
+            } else {
+              antd__WEBPACK_IMPORTED_MODULE_9__["default"].success('Invoice ditandai belum lunas');
+            }
             fetchInvoices();
             _context2.n = 3;
             break;
@@ -2388,16 +2394,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/collapse/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/row/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/col/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/switch/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tabs/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/alert/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/row/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/col/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/switch/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
 /* harmony import */ var _PlaceholderHelp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PlaceholderHelp */ "./resources/js/client/admin/components/invoice/PlaceholderHelp.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -2424,6 +2432,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 var Panel = antd__WEBPACK_IMPORTED_MODULE_4__["default"].Panel;
 var TextArea = antd__WEBPACK_IMPORTED_MODULE_5__["default"].TextArea;
+var TabPane = antd__WEBPACK_IMPORTED_MODULE_6__["default"].TabPane;
 var SECTION_TITLES = {
   salam_pembuka: '1. Salam Pembuka',
   nama_event: '2. Nama Event',
@@ -2470,8 +2479,10 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
     _useState14 = _slicedToArray(_useState13, 2),
     activeSectionKey = _useState14[0],
     setActiveSectionKey = _useState14[1];
-
-  // Load existing template or default on mount
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('belum_lunas'),
+    _useState16 = _slicedToArray(_useState15, 2),
+    activeTab = _useState16[0],
+    setActiveTab = _useState16[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetchTemplate();
   }, [event.id]);
@@ -2494,7 +2505,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
           case 2:
             _context.p = 2;
             _t = _context.v;
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal memuat template invoice');
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal memuat template invoice');
           case 3:
             return _context.a(2);
         }
@@ -2504,11 +2515,9 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
       return _ref2.apply(this, arguments);
     };
   }();
-
-  // Debounced preview generator
   var previewTimer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var fetchPreview = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(currentData) {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(currentData, tabStatus) {
       var res, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
@@ -2524,7 +2533,9 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
             _context2.n = 3;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].post("/events/".concat(event.id, "/invoice-template/preview"), {
               pemisah: currentData.pemisah,
-              bagian: currentData.bagian
+              bagian_belum_lunas: currentData.bagian_belum_lunas,
+              bagian_lunas: currentData.bagian_lunas,
+              preview_status: tabStatus
             });
           case 3:
             res = _context2.v;
@@ -2543,7 +2554,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
         }
       }, _callee2, null, [[2, 4, 5, 6]]);
     }));
-    return function (_x) {
+    return function (_x, _x2) {
       return _ref3.apply(this, arguments);
     };
   }(), [event.id]);
@@ -2553,25 +2564,39 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
       clearTimeout(previewTimer.current);
     }
     previewTimer.current = setTimeout(function () {
-      fetchPreview(template);
+      fetchPreview(template, activeTab);
     }, 500);
     return function () {
       if (previewTimer.current) clearTimeout(previewTimer.current);
     };
-  }, [template, fetchPreview]);
-
-  // Check dirtiness
+  }, [template, activeTab, fetchPreview]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!template || !serverTemplate) return;
     var isDifferent = JSON.stringify({
       pemisah: template.pemisah,
-      bagian: template.bagian
+      bagian_belum_lunas: template.bagian_belum_lunas,
+      bagian_lunas: template.bagian_lunas
     }) !== JSON.stringify({
       pemisah: serverTemplate.pemisah,
-      bagian: serverTemplate.bagian
+      bagian_belum_lunas: serverTemplate.bagian_belum_lunas,
+      bagian_lunas: serverTemplate.bagian_lunas
     });
     setIsDirty(isDifferent);
   }, [template, serverTemplate]);
+  var hasStatusPlaceholder = function hasStatusPlaceholder(bagianKey) {
+    if (!template || !template[bagianKey]) return false;
+    for (var _i = 0, _SECTION_KEYS = SECTION_KEYS; _i < _SECTION_KEYS.length; _i++) {
+      var key = _SECTION_KEYS[_i];
+      var section = template[bagianKey][key];
+      if (section && section.aktif) {
+        var teks = section.teks || '';
+        if (teks.includes('{status}') || teks.includes('{status_ikon}')) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
   var handlePemisahChange = function handlePemisahChange(e) {
     setTemplate(function (prev) {
       return _objectSpread(_objectSpread({}, prev), {}, {
@@ -2579,21 +2604,17 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
       });
     });
   };
-  var handleSectionActiveToggle = function handleSectionActiveToggle(key, e) {
+  var handleSectionActiveToggle = function handleSectionActiveToggle(key, bagianKey, e) {
     e.stopPropagation();
     setTemplate(function (prev) {
-      return _objectSpread(_objectSpread({}, prev), {}, {
-        bagian: _objectSpread(_objectSpread({}, prev.bagian), {}, _defineProperty({}, key, _objectSpread(_objectSpread({}, prev.bagian[key]), {}, {
-          aktif: !prev.bagian[key].aktif
-        })))
-      });
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, bagianKey, _objectSpread(_objectSpread({}, prev[bagianKey]), {}, _defineProperty({}, key, _objectSpread(_objectSpread({}, prev[bagianKey][key]), {}, {
+        aktif: !prev[bagianKey][key].aktif
+      })))));
     });
   };
-  var handleSectionTextChange = function handleSectionTextChange(key, field, value) {
+  var handleSectionTextChange = function handleSectionTextChange(key, bagianKey, field, value) {
     setTemplate(function (prev) {
-      return _objectSpread(_objectSpread({}, prev), {}, {
-        bagian: _objectSpread(_objectSpread({}, prev.bagian), {}, _defineProperty({}, key, _objectSpread(_objectSpread({}, prev.bagian[key]), {}, _defineProperty({}, field, value))))
-      });
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, bagianKey, _objectSpread(_objectSpread({}, prev[bagianKey]), {}, _defineProperty({}, key, _objectSpread(_objectSpread({}, prev[bagianKey][key]), {}, _defineProperty({}, field, value))))));
     });
   };
   var handleSave = /*#__PURE__*/function () {
@@ -2607,14 +2628,15 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
             _context3.n = 2;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].put("/events/".concat(event.id, "/invoice-template"), {
               pemisah: template.pemisah,
-              bagian: template.bagian
+              bagian_belum_lunas: template.bagian_belum_lunas,
+              bagian_lunas: template.bagian_lunas
             });
           case 2:
             res = _context3.v;
             setTemplate(res.data);
             setServerTemplate(JSON.parse(JSON.stringify(res.data)));
             setIsDirty(false);
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Template invoice berhasil disimpan');
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Template invoice berhasil disimpan');
             _context3.n = 4;
             break;
           case 3:
@@ -2623,9 +2645,9 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
             if (_t3.response && _t3.response.status === 422) {
               errors = _t3.response.data.errors;
               msg = errors ? Object.values(errors).flat().join(', ') : 'Validasi gagal';
-              antd__WEBPACK_IMPORTED_MODULE_6__["default"].error(msg);
+              antd__WEBPACK_IMPORTED_MODULE_7__["default"].error(msg);
             } else {
-              antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal menyimpan template invoice');
+              antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal menyimpan template invoice');
             }
           case 4:
             _context3.p = 4;
@@ -2642,7 +2664,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
   }();
   var handleReset = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
-      var res, defaultRes, _t4;
+      var res, defaultConfig, _t4;
       return _regenerator().w(function (_context4) {
         while (1) switch (_context4.p = _context4.n) {
           case 0:
@@ -2651,21 +2673,15 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(event.id, "/invoice-template"));
           case 1:
             res = _context4.v;
-            _context4.n = 2;
-            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(event.id, "/invoice-template?default=1"));
-          case 2:
-            defaultRes = _context4.v;
-            // Or fallback reset to server default
             if (res.data.is_default) {
               setTemplate(res.data);
             } else {
-              // Fetch default config template if present, or fallback to state
-              setTemplate({
+              defaultConfig = {
                 pemisah: '━━━━━━━━━━━━━━━━━━',
-                bagian: {
+                bagian_belum_lunas: {
                   salam_pembuka: {
                     aktif: true,
-                    teks: "Assalamu’alaikum Wr. Wb.\nShalom | Salam Sejahtera\n\n🌟 SUGENG RAWUH, SEDULUR NYAWIJI 🌟\n\nDengan hormat, kami sampaikan Invoice Pemesanan Tiket Event."
+                    teks: "Assalamu'alaikum Wr. Wb.\nShalom | Salam Sejahtera\n\n🌟 SUGENG RAWUH, SEDULUR NYAWIJI 🌟\n\nDengan hormat, kami sampaikan Invoice Pemesanan Tiket Event."
                   },
                   nama_event: {
                     aktif: true,
@@ -2682,7 +2698,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                   },
                   total_pembayaran: {
                     aktif: true,
-                    teks: "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}"
+                    teks: "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}\n📌 STATUS : {status_ikon} {status}"
                   },
                   ketentuan_pembayaran: {
                     aktif: true,
@@ -2696,20 +2712,56 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                     aktif: false,
                     teks: ""
                   }
+                },
+                bagian_lunas: {
+                  salam_pembuka: {
+                    aktif: true,
+                    teks: "Assalamu'alaikum Wr. Wb.\nShalom | Salam Sejahtera\n\n🌟 SUGENG RAWUH, SEDULUR NYAWIJI 🌟\n\nDengan hormat, kami sampaikan Invoice Pemesanan Tiket Event."
+                  },
+                  nama_event: {
+                    aktif: true,
+                    teks: "🎪 *{nama_event_besar}*\n📅 {tanggal_event_besar}\n⏰ START NAIK PUKUL 10.00 WIB"
+                  },
+                  pemesan: {
+                    aktif: true,
+                    teks: "👤 Nama     : {nama_pemesan}\n🔢 No. Urut : {nomor_urut}"
+                  },
+                  kelas_pesanan: {
+                    aktif: true,
+                    teks: "🎟️ KELAS PESANAN",
+                    format_baris: "{no}. {nama_sesi} — {harga} = {qty}"
+                  },
+                  total_pembayaran: {
+                    aktif: true,
+                    teks: "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}\n📌 STATUS : {status_ikon} {status}"
+                  },
+                  ketentuan_pembayaran: {
+                    aktif: false,
+                    teks: "⚠️ KETENTUAN PEMBAYARAN\nPembayaran maksimal 1 × 24 jam setelah invoice diterima.\n\n💳 TRANSFER PEMBAYARAN\n🏦 BCA — 1234567890\n👤 A/N Nama Pemilik\n📲 Konfirmasi: 0812-0000-0000"
+                  },
+                  penutup: {
+                    aktif: true,
+                    teks: "🤝 SATU LANGKAH • SATU CERITA • SATU KELUARGA\n\nMaturnuwun & Salam Nyawiji. ❤️"
+                  },
+                  iklan: {
+                    aktif: false,
+                    teks: ""
+                  }
                 }
-              });
+              };
+              setTemplate(defaultConfig);
             }
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].info('Editor telah direset ke template bawaan (belum disimpan)');
-            _context4.n = 4;
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].info('Editor telah direset ke template bawaan (belum disimpan)');
+            _context4.n = 3;
             break;
-          case 3:
-            _context4.p = 3;
+          case 2:
+            _context4.p = 2;
             _t4 = _context4.v;
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal reset template');
-          case 4:
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal reset template');
+          case 3:
             return _context4.a(2);
         }
-      }, _callee4, null, [[0, 3]]);
+      }, _callee4, null, [[0, 2]]);
     }));
     return function handleReset() {
       return _ref5.apply(this, arguments);
@@ -2720,24 +2772,42 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
       return;
     }
     var element = activeInputRef.element,
+      bagianKey = activeInputRef.bagianKey,
       sectionKey = activeInputRef.sectionKey,
       fieldName = activeInputRef.fieldName;
     var start = element.selectionStart;
     var end = element.selectionEnd;
-    var currentVal = template.bagian[sectionKey][fieldName] || '';
+    var currentVal = template[bagianKey][sectionKey][fieldName] || '';
     var newVal = currentVal.substring(0, start) + ph + currentVal.substring(end);
-    handleSectionTextChange(sectionKey, fieldName, newVal);
+    handleSectionTextChange(sectionKey, bagianKey, fieldName, newVal);
     setTimeout(function () {
       element.focus();
       element.setSelectionRange(start + ph.length, start + ph.length);
     }, 50);
   };
+  var handleCopyFromOther = function handleCopyFromOther() {
+    if (activeTab === 'lunas') {
+      setTemplate(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          bagian_lunas: JSON.parse(JSON.stringify(prev.bagian_belum_lunas))
+        });
+      });
+      antd__WEBPACK_IMPORTED_MODULE_7__["default"].info('Disalin dari template Belum Lunas');
+    } else {
+      setTemplate(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          bagian_belum_lunas: JSON.parse(JSON.stringify(prev.bagian_lunas))
+        });
+      });
+      antd__WEBPACK_IMPORTED_MODULE_7__["default"].info('Disalin dari template Lunas');
+    }
+  };
   if (!template) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
       open: true,
       footer: null,
       onCancel: onCancel,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
         style: {
           display: 'block',
           margin: '40px auto'
@@ -2745,7 +2815,8 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
       })
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  var bagianKey = activeTab === 'belum_lunas' ? 'bagian_belum_lunas' : 'bagian_lunas';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
     title: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       style: {
         display: 'flex',
@@ -2754,7 +2825,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
       },
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         children: "Pengaturan Invoice"
-      }), isDirty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }), isDirty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
         color: "warning",
         children: "Ada perubahan belum disimpan"
       })]
@@ -2769,9 +2840,9 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
     bodyStyle: {
       padding: '16px 24px'
     },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
       layout: "vertical",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Item, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Item, {
         label: "Garis Pemisah",
         style: {
           marginBottom: 16
@@ -2782,9 +2853,24 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
           maxLength: 50,
           placeholder: "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }), !hasStatusPlaceholder(bagianKey) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: "Template belum menampilkan status LUNAS/BELUM LUNAS. Sisipkan placeholder {status}.",
+        type: "warning",
+        showIcon: true,
+        style: {
+          marginBottom: 16
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        activeKey: activeTab,
+        onChange: setActiveTab,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(TabPane, {
+          tab: "Invoice Belum Lunas"
+        }, "belum_lunas"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(TabPane, {
+          tab: "Invoice Lunas"
+        }, "lunas")]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
         gutter: [16, 16],
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
           xs: 24,
           md: 12,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2793,7 +2879,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
               return setActiveSectionKey(key);
             },
             children: SECTION_KEYS.map(function (key) {
-              var section = template.bagian[key] || {
+              var section = template[bagianKey][key] || {
                 aktif: false,
                 teks: ''
               };
@@ -2808,14 +2894,14 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                   },
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                     children: SECTION_TITLES[key]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
                     checked: section.aktif,
                     onChange: function onChange(checked, e) {
-                      return handleSectionActiveToggle(key, e);
+                      return handleSectionActiveToggle(key, bagianKey, e);
                     }
                   })]
                 }),
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Item, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Item, {
                   label: "Teks Bagian",
                   style: {
                     marginBottom: 8
@@ -2824,11 +2910,12 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                     rows: 3,
                     value: section.teks,
                     onChange: function onChange(e) {
-                      return handleSectionTextChange(key, 'teks', e.target.value);
+                      return handleSectionTextChange(key, bagianKey, 'teks', e.target.value);
                     },
                     onFocus: function onFocus(e) {
                       return setActiveInputRef({
                         element: e.target,
+                        bagianKey: bagianKey,
                         sectionKey: key,
                         fieldName: 'teks'
                       });
@@ -2840,7 +2927,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                       maxRows: 12
                     }
                   })
-                }), key === 'kelas_pesanan' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Item, {
+                }), key === 'kelas_pesanan' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Item, {
                   label: "Format Baris",
                   extra: "Dipakai untuk tiap sesi yang dipesan",
                   style: {
@@ -2849,11 +2936,12 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
                     value: section.format_baris,
                     onChange: function onChange(e) {
-                      return handleSectionTextChange(key, 'format_baris', e.target.value);
+                      return handleSectionTextChange(key, bagianKey, 'format_baris', e.target.value);
                     },
                     onFocus: function onFocus(e) {
                       return setActiveInputRef({
                         element: e.target,
+                        bagianKey: bagianKey,
                         sectionKey: key,
                         fieldName: 'format_baris'
                       });
@@ -2873,15 +2961,15 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
               }, key);
             })
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
           xs: 24,
           md: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             style: {
               marginBottom: 8,
               fontWeight: 'bold'
             },
-            children: "Pratinjau Live:"
+            children: ["Pratinjau ", activeTab === 'lunas' ? 'Lunas' : 'Belum Lunas', ":"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             style: {
               position: 'relative'
@@ -2899,7 +2987,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                 justifyContent: 'center',
                 zIndex: 10
               },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {})
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("pre", {
               style: {
                 whiteSpace: 'pre-wrap',
@@ -2924,24 +3012,30 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
           textAlign: 'right',
           marginTop: 16
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
+          style: {
+            marginRight: 8
+          },
+          onClick: handleCopyFromOther,
+          children: ["Salin dari ", activeTab === 'lunas' ? 'Belum Lunas' : 'Lunas']
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_17__["default"], {
           title: "Reset editor ke template bawaan?",
           onConfirm: handleReset,
           okText: "Ya",
           cancelText: "Batal",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
             style: {
               marginRight: 8
             },
             children: "Reset ke Bawaan"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
           style: {
             marginRight: 8
           },
           onClick: onCancel,
           children: "Batal"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
           type: "primary",
           onClick: handleSave,
           loading: loading,
@@ -3000,6 +3094,10 @@ var InvoiceView = function InvoiceView(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     teks = _useState4[0],
     setTeks = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(invoice),
+    _useState6 = _slicedToArray(_useState5, 2),
+    currentInvoice = _useState6[0],
+    setCurrentInvoice = _useState6[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (invoice && invoice.id) {
       fetchInvoiceText();
@@ -3007,38 +3105,43 @@ var InvoiceView = function InvoiceView(_ref) {
   }, [invoice]);
   var fetchInvoiceText = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-      var res, _t;
+      var invoiceRes, res, _t;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
             setLoading(true);
             _context.p = 1;
             _context.n = 2;
-            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/invoices/".concat(invoice.id, "/teks"));
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/invoices/".concat(invoice.id));
           case 2:
+            invoiceRes = _context.v;
+            setCurrentInvoice(invoiceRes.data);
+            _context.n = 3;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/invoices/".concat(invoice.id, "/teks"));
+          case 3:
             res = _context.v;
             setTeks(res.data.teks);
-            _context.n = 4;
+            _context.n = 5;
             break;
-          case 3:
-            _context.p = 3;
-            _t = _context.v;
-            antd__WEBPACK_IMPORTED_MODULE_3__["default"].error('Gagal memuat teks invoice');
           case 4:
             _context.p = 4;
-            setLoading(false);
-            return _context.f(4);
+            _t = _context.v;
+            antd__WEBPACK_IMPORTED_MODULE_3__["default"].error('Gagal memuat teks invoice');
           case 5:
+            _context.p = 5;
+            setLoading(false);
+            return _context.f(5);
+          case 6:
             return _context.a(2);
         }
-      }, _callee, null, [[1, 3, 4, 5]]);
+      }, _callee, null, [[1, 4, 5, 6]]);
     }));
     return function fetchInvoiceText() {
       return _ref2.apply(this, arguments);
     };
   }();
   var getStatusTag = function getStatusTag() {
-    if (invoice.status === 'lunas') {
+    if (currentInvoice.status === 'lunas') {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
         color: "success",
         children: "LUNAS"
@@ -3166,7 +3269,7 @@ var PlaceholderHelp = function PlaceholderHelp(_ref) {
   var activeSectionKey = _ref.activeSectionKey,
     onInsert = _ref.onInsert;
   var placeholders = {
-    umum: ['{nama_event}', '{nama_event_besar}', '{tanggal_event}', '{tanggal_event_besar}', '{lokasi_event}', '{nama_pemesan}', '{nomor_urut}', '{kode_invoice}', '{tanggal_invoice}', '{total}', '{total_angka}', '{status}'],
+    umum: ['{nama_event}', '{nama_event_besar}', '{tanggal_event}', '{tanggal_event_besar}', '{lokasi_event}', '{nama_pemesan}', '{nomor_urut}', '{kode_invoice}', '{tanggal_invoice}', '{total}', '{total_angka}', '{status}', '{status_ikon}'],
     baris: ['{no}', '{nama_sesi}', '{harga}', '{harga_angka}', '{qty}', '{subtotal}', '{subtotal_angka}']
   };
   var isBarisActive = activeSectionKey === 'kelas_pesanan';

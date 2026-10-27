@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Modal, Form, Input, Button, Collapse, Switch, Tag, Popconfirm, message, Spin, Row, Col, Alert } from 'antd';
+import { Modal, Form, Input, Button, Collapse, Switch, Tag, Popconfirm, message, Spin, Row, Col, Alert, Tabs } from 'antd';
 import HTTP from '../../../../common/helpers/HTTP';
 import PlaceholderHelp from './PlaceholderHelp';
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
+const { TabPane } = Tabs;
 
 const SECTION_TITLES = {
   salam_pembuka: '1. Salam Pembuka',
@@ -37,8 +38,8 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
   const [isDirty, setIsDirty] = useState(false);
   const [activeInputRef, setActiveInputRef] = useState(null);
   const [activeSectionKey, setActiveSectionKey] = useState(null);
+  const [activeTab, setActiveTab] = useState('belum_lunas');
 
-  // Load existing template or default on mount
   useEffect(() => {
     fetchTemplate();
   }, [event.id]);
@@ -54,20 +55,20 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
     }
   };
 
-  // Debounced preview generator
   const previewTimer = useRef(null);
 
-  const fetchPreview = useCallback(async (currentData) => {
+  const fetchPreview = useCallback(async (currentData, tabStatus) => {
     if (!currentData) return;
     setPreviewLoading(true);
     try {
       const res = await HTTP.post(`/events/${event.id}/invoice-template/preview`, {
         pemisah: currentData.pemisah,
-        bagian: currentData.bagian,
+        bagian_belum_lunas: currentData.bagian_belum_lunas,
+        bagian_lunas: currentData.bagian_lunas,
+        preview_status: tabStatus,
       });
       setPreviewText(res.data.teks);
     } catch (err) {
-      // preview error silence
     } finally {
       setPreviewLoading(false);
     }
@@ -81,28 +82,33 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
     }
 
     previewTimer.current = setTimeout(() => {
-      fetchPreview(template);
+      fetchPreview(template, activeTab);
     }, 500);
 
     return () => {
       if (previewTimer.current) clearTimeout(previewTimer.current);
     };
-  }, [template, fetchPreview]);
+  }, [template, activeTab, fetchPreview]);
 
-  // Check dirtiness
   useEffect(() => {
     if (!template || !serverTemplate) return;
-    const isDifferent = JSON.stringify({ pemisah: template.pemisah, bagian: template.bagian }) !==
-                        JSON.stringify({ pemisah: serverTemplate.pemisah, bagian: serverTemplate.bagian });
+    const isDifferent = JSON.stringify({ 
+      pemisah: template.pemisah, 
+      bagian_belum_lunas: template.bagian_belum_lunas,
+      bagian_lunas: template.bagian_lunas,
+    }) !== JSON.stringify({ 
+      pemisah: serverTemplate.pemisah, 
+      bagian_belum_lunas: serverTemplate.bagian_belum_lunas,
+      bagian_lunas: serverTemplate.bagian_lunas,
+    });
     setIsDirty(isDifferent);
   }, [template, serverTemplate]);
 
-  // Check if template contains status placeholder
-  const hasStatusPlaceholder = () => {
-    if (!template || !template.bagian) return false;
+  const hasStatusPlaceholder = (bagianKey) => {
+    if (!template || !template[bagianKey]) return false;
     
     for (const key of SECTION_KEYS) {
-      const section = template.bagian[key];
+      const section = template[bagianKey][key];
       if (section && section.aktif) {
         const teks = section.teks || '';
         if (teks.includes('{status}') || teks.includes('{status_ikon}')) {
@@ -117,27 +123,27 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
     setTemplate(prev => ({ ...prev, pemisah: e.target.value }));
   };
 
-  const handleSectionActiveToggle = (key, e) => {
+  const handleSectionActiveToggle = (key, bagianKey, e) => {
     e.stopPropagation();
     setTemplate(prev => ({
       ...prev,
-      bagian: {
-        ...prev.bagian,
+      [bagianKey]: {
+        ...prev[bagianKey],
         [key]: {
-          ...prev.bagian[key],
-          aktif: !prev.bagian[key].aktif,
+          ...prev[bagianKey][key],
+          aktif: !prev[bagianKey][key].aktif,
         },
       },
     }));
   };
 
-  const handleSectionTextChange = (key, field, value) => {
+  const handleSectionTextChange = (key, bagianKey, field, value) => {
     setTemplate(prev => ({
       ...prev,
-      bagian: {
-        ...prev.bagian,
+      [bagianKey]: {
+        ...prev[bagianKey],
         [key]: {
-          ...prev.bagian[key],
+          ...prev[bagianKey][key],
           [field]: value,
         },
       },
@@ -149,7 +155,8 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
     try {
       const res = await HTTP.put(`/events/${event.id}/invoice-template`, {
         pemisah: template.pemisah,
-        bagian: template.bagian,
+        bagian_belum_lunas: template.bagian_belum_lunas,
+        bagian_lunas: template.bagian_lunas,
       });
       setTemplate(res.data);
       setServerTemplate(JSON.parse(JSON.stringify(res.data)));
@@ -171,26 +178,33 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
   const handleReset = async () => {
     try {
       const res = await HTTP.get(`/events/${event.id}/invoice-template`);
-      // Get default template values from backend default
-      const defaultRes = await HTTP.get(`/events/${event.id}/invoice-template?default=1`);
-      // Or fallback reset to server default
       if (res.data.is_default) {
         setTemplate(res.data);
       } else {
-        // Fetch default config template if present, or fallback to state
-        setTemplate({
+        const defaultConfig = {
           pemisah: '━━━━━━━━━━━━━━━━━━',
-          bagian: {
-            salam_pembuka: { aktif: true, teks: "Assalamu’alaikum Wr. Wb.\nShalom | Salam Sejahtera\n\n🌟 SUGENG RAWUH, SEDULUR NYAWIJI 🌟\n\nDengan hormat, kami sampaikan Invoice Pemesanan Tiket Event." },
+          bagian_belum_lunas: {
+            salam_pembuka: { aktif: true, teks: "Assalamu'alaikum Wr. Wb.\nShalom | Salam Sejahtera\n\n🌟 SUGENG RAWUH, SEDULUR NYAWIJI 🌟\n\nDengan hormat, kami sampaikan Invoice Pemesanan Tiket Event." },
             nama_event: { aktif: true, teks: "🎪 *{nama_event_besar}*\n📅 {tanggal_event_besar}\n⏰ START NAIK PUKUL 10.00 WIB" },
             pemesan: { aktif: true, teks: "👤 Nama     : {nama_pemesan}\n🔢 No. Urut : {nomor_urut}" },
             kelas_pesanan: { aktif: true, teks: "🎟️ KELAS PESANAN", format_baris: "{no}. {nama_sesi} — {harga} = {qty}" },
-            total_pembayaran: { aktif: true, teks: "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}" },
+            total_pembayaran: { aktif: true, teks: "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}\n📌 STATUS : {status_ikon} {status}" },
             ketentuan_pembayaran: { aktif: true, teks: "⚠️ KETENTUAN PEMBAYARAN\nPembayaran maksimal 1 × 24 jam setelah invoice diterima.\n\n💳 TRANSFER PEMBAYARAN\n🏦 BCA — 1234567890\n👤 A/N Nama Pemilik\n📲 Konfirmasi: 0812-0000-0000" },
             penutup: { aktif: true, teks: "🤝 SATU LANGKAH • SATU CERITA • SATU KELUARGA\n\nMaturnuwun & Salam Nyawiji. ❤️" },
             iklan: { aktif: false, teks: "" },
           },
-        });
+          bagian_lunas: {
+            salam_pembuka: { aktif: true, teks: "Assalamu'alaikum Wr. Wb.\nShalom | Salam Sejahtera\n\n🌟 SUGENG RAWUH, SEDULUR NYAWIJI 🌟\n\nDengan hormat, kami sampaikan Invoice Pemesanan Tiket Event." },
+            nama_event: { aktif: true, teks: "🎪 *{nama_event_besar}*\n📅 {tanggal_event_besar}\n⏰ START NAIK PUKUL 10.00 WIB" },
+            pemesan: { aktif: true, teks: "👤 Nama     : {nama_pemesan}\n🔢 No. Urut : {nomor_urut}" },
+            kelas_pesanan: { aktif: true, teks: "🎟️ KELAS PESANAN", format_baris: "{no}. {nama_sesi} — {harga} = {qty}" },
+            total_pembayaran: { aktif: true, teks: "💰 TOTAL PEMBAYARAN\n👉 Rp {total_angka}\n📌 STATUS : {status_ikon} {status}" },
+            ketentuan_pembayaran: { aktif: false, teks: "⚠️ KETENTUAN PEMBAYARAN\nPembayaran maksimal 1 × 24 jam setelah invoice diterima.\n\n💳 TRANSFER PEMBAYARAN\n🏦 BCA — 1234567890\n👤 A/N Nama Pemilik\n📲 Konfirmasi: 0812-0000-0000" },
+            penutup: { aktif: true, teks: "🤝 SATU LANGKAH • SATU CERITA • SATU KELUARGA\n\nMaturnuwun & Salam Nyawiji. ❤️" },
+            iklan: { aktif: false, teks: "" },
+          },
+        };
+        setTemplate(defaultConfig);
       }
       message.info('Editor telah direset ke template bawaan (belum disimpan)');
     } catch (err) {
@@ -203,19 +217,35 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
       return;
     }
 
-    const { element, sectionKey, fieldName } = activeInputRef;
+    const { element, bagianKey, sectionKey, fieldName } = activeInputRef;
     const start = element.selectionStart;
     const end = element.selectionEnd;
-    const currentVal = template.bagian[sectionKey][fieldName] || '';
+    const currentVal = template[bagianKey][sectionKey][fieldName] || '';
 
     const newVal = currentVal.substring(0, start) + ph + currentVal.substring(end);
 
-    handleSectionTextChange(sectionKey, fieldName, newVal);
+    handleSectionTextChange(sectionKey, bagianKey, fieldName, newVal);
 
     setTimeout(() => {
       element.focus();
       element.setSelectionRange(start + ph.length, start + ph.length);
     }, 50);
+  };
+
+  const handleCopyFromOther = () => {
+    if (activeTab === 'lunas') {
+      setTemplate(prev => ({
+        ...prev,
+        bagian_lunas: JSON.parse(JSON.stringify(prev.bagian_belum_lunas))
+      }));
+      message.info('Disalin dari template Belum Lunas');
+    } else {
+      setTemplate(prev => ({
+        ...prev,
+        bagian_belum_lunas: JSON.parse(JSON.stringify(prev.bagian_lunas))
+      }));
+      message.info('Disalin dari template Lunas');
+    }
   };
 
   if (!template) {
@@ -225,6 +255,8 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
       </Modal>
     );
   }
+
+  const bagianKey = activeTab === 'belum_lunas' ? 'bagian_belum_lunas' : 'bagian_lunas';
 
   return (
     <Modal
@@ -251,7 +283,7 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
           />
         </Form.Item>
 
-        {!hasStatusPlaceholder() && (
+        {!hasStatusPlaceholder(bagianKey) && (
           <Alert
             message="Template belum menampilkan status LUNAS/BELUM LUNAS. Sisipkan placeholder {status}."
             type="warning"
@@ -260,11 +292,16 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
           />
         )}
 
+        <Tabs activeKey={activeTab} onChange={setActiveTab}>
+          <TabPane tab="Invoice Belum Lunas" key="belum_lunas" />
+          <TabPane tab="Invoice Lunas" key="lunas" />
+        </Tabs>
+
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Collapse accordion onChange={(key) => setActiveSectionKey(key)}>
               {SECTION_KEYS.map((key) => {
-                const section = template.bagian[key] || { aktif: false, teks: '' };
+                const section = template[bagianKey][key] || { aktif: false, teks: '' };
                 return (
                   <Panel
                     key={key}
@@ -273,7 +310,7 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
                         <span>{SECTION_TITLES[key]}</span>
                         <Switch
                           checked={section.aktif}
-                          onChange={(checked, e) => handleSectionActiveToggle(key, e)}
+                          onChange={(checked, e) => handleSectionActiveToggle(key, bagianKey, e)}
                         />
                       </div>
                     }
@@ -282,8 +319,8 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
                       <TextArea
                         rows={3}
                         value={section.teks}
-                        onChange={(e) => handleSectionTextChange(key, 'teks', e.target.value)}
-                        onFocus={(e) => setActiveInputRef({ element: e.target, sectionKey: key, fieldName: 'teks' })}
+                        onChange={(e) => handleSectionTextChange(key, bagianKey, 'teks', e.target.value)}
+                        onFocus={(e) => setActiveInputRef({ element: e.target, bagianKey, sectionKey: key, fieldName: 'teks' })}
                         maxLength={2000}
                         showCount
                         autoSize={{ minRows: 3, maxRows: 12 }}
@@ -298,8 +335,8 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
                       >
                         <Input
                           value={section.format_baris}
-                          onChange={(e) => handleSectionTextChange(key, 'format_baris', e.target.value)}
-                          onFocus={(e) => setActiveInputRef({ element: e.target, sectionKey: key, fieldName: 'format_baris' })}
+                          onChange={(e) => handleSectionTextChange(key, bagianKey, 'format_baris', e.target.value)}
+                          onFocus={(e) => setActiveInputRef({ element: e.target, bagianKey, sectionKey: key, fieldName: 'format_baris' })}
                           maxLength={255}
                           placeholder="{no}. {nama_sesi} — {harga} = {qty}"
                         />
@@ -319,7 +356,9 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
           </Col>
 
           <Col xs={24} md={12}>
-            <div style={{ marginBottom: 8, fontWeight: 'bold' }}>Pratinjau Live:</div>
+            <div style={{ marginBottom: 8, fontWeight: 'bold' }}>
+              Pratinjau {activeTab === 'lunas' ? 'Lunas' : 'Belum Lunas'}:
+            </div>
             <div style={{ position: 'relative' }}>
               {previewLoading && (
                 <div style={{
@@ -353,6 +392,9 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
         </Row>
 
         <div style={{ textAlign: 'right', marginTop: 16 }}>
+          <Button style={{ marginRight: 8 }} onClick={handleCopyFromOther}>
+            Salin dari {activeTab === 'lunas' ? 'Belum Lunas' : 'Lunas'}
+          </Button>
           <Popconfirm
             title="Reset editor ke template bawaan?"
             onConfirm={handleReset}

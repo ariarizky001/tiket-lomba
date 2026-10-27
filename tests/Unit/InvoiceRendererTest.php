@@ -481,4 +481,80 @@ class InvoiceRendererTest extends TestCase
         $this->assertStringContainsString('Total: Rp100.000', $renderedBelumLunas);
         $this->assertStringContainsString('Total: Rp100.000', $renderedLunas);
     }
+
+    /** @test */
+    public function it_renders_different_sections_for_belum_lunas_vs_lunas()
+    {
+        $event = Event::create([
+            'nama' => 'Event Testing',
+            'tanggal' => '2026-10-11',
+            'is_active' => true,
+        ]);
+
+        $invoiceBelumLunas = Invoice::create([
+            'event_id' => $event->id,
+            'nomor' => 1,
+            'kode' => 'EVT-0001',
+            'nama_peserta' => 'Test User',
+            'total' => 100000,
+            'status' => 'belum_lunas',
+        ]);
+
+        $invoiceLunas = Invoice::create([
+            'event_id' => $event->id,
+            'nomor' => 2,
+            'kode' => 'EVT-0002',
+            'nama_peserta' => 'Test User 2',
+            'total' => 100000,
+            'status' => 'lunas',
+        ]);
+
+        $templateData = [
+            'pemisah' => '---',
+            'bagian_belum_lunas' => [
+                'ketentuan_pembayaran' => ['aktif' => true, 'teks' => 'KETENTUAN BELUM LUNAS'],
+            ],
+            'bagian_lunas' => [
+                'ketentuan_pembayaran' => ['aktif' => false, 'teks' => 'KETENTUAN LUNAS'],
+            ],
+        ];
+
+        $renderedBelumLunas = $this->renderer->render($templateData, $event, $invoiceBelumLunas);
+        $renderedLunas = $this->renderer->render($templateData, $event, $invoiceLunas);
+
+        $this->assertStringContainsString('KETENTUAN BELUM LUNAS', $renderedBelumLunas);
+        $this->assertStringNotContainsString('KETENTUAN LUNAS', $renderedBelumLunas);
+
+        $this->assertStringNotContainsString('KETENTUAN BELUM LUNAS', $renderedLunas);
+        $this->assertStringNotContainsString('KETENTUAN LUNAS', $renderedLunas); // inactive
+    }
+
+    /** @test */
+    public function it_fallbacks_to_bagian_legacy_for_backward_compatibility()
+    {
+        $event = Event::create([
+            'nama' => 'Event Testing',
+            'tanggal' => '2026-10-11',
+            'is_active' => true,
+        ]);
+
+        $invoice = Invoice::create([
+            'event_id' => $event->id,
+            'nomor' => 1,
+            'kode' => 'EVT-0001',
+            'nama_peserta' => 'Test User',
+            'total' => 100000,
+            'status' => 'belum_lunas',
+        ]);
+
+        $templateData = [
+            'pemisah' => '---',
+            'bagian' => [
+                'pemesan' => ['aktif' => true, 'teks' => 'Nama: {nama_pemesan}'],
+            ],
+        ];
+
+        $rendered = $this->renderer->render($templateData, $event, $invoice);
+        $this->assertEquals('Nama: Test User', $rendered);
+    }
 }

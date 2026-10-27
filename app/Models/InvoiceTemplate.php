@@ -14,10 +14,14 @@ class InvoiceTemplate extends Model
         'event_id',
         'pemisah',
         'bagian',
+        'bagian_belum_lunas',
+        'bagian_lunas',
     ];
 
     protected $casts = [
         'bagian' => 'array',
+        'bagian_belum_lunas' => 'array',
+        'bagian_lunas' => 'array',
     ];
 
     public function event(): BelongsTo

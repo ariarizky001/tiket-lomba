@@ -33,17 +33,27 @@ class InvoiceRenderer
     public function render(array $templateData, Event $event, $invoice): string
     {
         $pemisah = $templateData['pemisah'] ?? '━━━━━━━━━━━━━━━━━━';
-        $bagian = $templateData['bagian'] ?? [];
 
         // Extract values/items depending on whether $invoice is Model or Array (mock)
         $isModel = $invoice instanceof Invoice;
+
+        $statusVal = $isModel ? $invoice->status : ($invoice['status'] ?? 'belum_lunas');
+
+        // PILIH BAGIAN BERDASARKAN STATUS INVOICE
+        if ($statusVal === 'lunas' && isset($templateData['bagian_lunas'])) {
+            $bagian = $templateData['bagian_lunas'];
+        } elseif ($statusVal === 'belum_lunas' && isset($templateData['bagian_belum_lunas'])) {
+            $bagian = $templateData['bagian_belum_lunas'];
+        } else {
+            // Fallback ke struktur lama (backward compatibility)
+            $bagian = $templateData['bagian'] ?? [];
+        }
 
         $namaPeserta = $isModel ? $invoice->nama_peserta : ($invoice['nama_peserta'] ?? '');
         $nomorUrut = $isModel ? (string)(int)$invoice->nomor : (string)(int)($invoice['nomor'] ?? 0);
         $kodeInvoice = $isModel ? $invoice->kode : ($invoice['kode'] ?? '');
         $createdAt = $isModel ? $invoice->created_at : ($invoice['created_at'] ?? now());
         $totalVal = $isModel ? $invoice->total : ($invoice['total'] ?? 0);
-        $statusVal = $isModel ? $invoice->status : ($invoice['status'] ?? 'belum_lunas');
 
         // Indonesian date formatting
         $tanggalEvent = $this->formatIndonesianDate($event->tanggal);

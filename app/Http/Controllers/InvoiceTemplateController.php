@@ -56,15 +56,34 @@ class InvoiceTemplateController extends Controller
             $default = config('invoice_template');
             return response()->json([
                 'pemisah' => $default['pemisah'],
-                'bagian' => $default['bagian'],
+                'bagian_belum_lunas' => $default['bagian_belum_lunas'],
+                'bagian_lunas' => $default['bagian_lunas'],
                 'is_default' => true,
                 'placeholder' => $this->getPlaceholders(),
             ]);
         }
 
+        // Auto-migrate jika masih pakai struktur lama
+        if ($template->bagian && !$template->bagian_belum_lunas) {
+            $bagianLama = $template->bagian;
+            
+            // Copy ke belum_lunas
+            $template->bagian_belum_lunas = $bagianLama;
+            
+            // Copy ke lunas, tapi matikan ketentuan_pembayaran
+            $bagianLunas = $bagianLama;
+            if (isset($bagianLunas['ketentuan_pembayaran'])) {
+                $bagianLunas['ketentuan_pembayaran']['aktif'] = false;
+            }
+            $template->bagian_lunas = $bagianLunas;
+            
+            $template->save();
+        }
+
         return response()->json([
             'pemisah' => $template->pemisah,
-            'bagian' => $template->bagian,
+            'bagian_belum_lunas' => $template->bagian_belum_lunas,
+            'bagian_lunas' => $template->bagian_lunas,
             'is_default' => false,
             'placeholder' => $this->getPlaceholders(),
         ]);
@@ -78,13 +97,15 @@ class InvoiceTemplateController extends Controller
             ['event_id' => $event->id],
             [
                 'pemisah' => $request->pemisah,
-                'bagian' => $request->bagian,
+                'bagian_belum_lunas' => $request->bagian_belum_lunas,
+                'bagian_lunas' => $request->bagian_lunas,
             ]
         );
 
         return response()->json([
             'pemisah' => $template->pemisah,
-            'bagian' => $template->bagian,
+            'bagian_belum_lunas' => $template->bagian_belum_lunas,
+            'bagian_lunas' => $template->bagian_lunas,
             'is_default' => false,
             'placeholder' => $this->getPlaceholders(),
         ]);
@@ -92,7 +113,7 @@ class InvoiceTemplateController extends Controller
 
     public function preview(Request $request, Event $event)
     {
-        $this->validateTemplateRequest($request);
+        $this->validatePreviewRequest($request);
 
         // Fetch first two sessions of event, or mock sessions
         $sessions = $event->sessions()->orderBy('id', 'asc')->take(2)->get();
@@ -130,19 +151,22 @@ class InvoiceTemplateController extends Controller
 
         $totalMock = array_sum(array_column($mockItems, 'subtotal'));
 
+        $previewStatus = $request->preview_status ?? 'belum_lunas';
+
         $mockInvoice = [
             'nama_peserta' => 'Rizal Medan',
             'nomor' => 277,
             'kode' => 'SHC-0277',
             'created_at' => now(),
             'total' => $totalMock,
-            'status' => 'belum_lunas',
+            'status' => $previewStatus,
             'items' => $mockItems,
         ];
 
         $templateData = [
             'pemisah' => $request->pemisah,
-            'bagian' => $request->bagian,
+            'bagian_belum_lunas' => $request->bagian_belum_lunas,
+            'bagian_lunas' => $request->bagian_lunas,
         ];
 
         $teks = $this->renderer->render($templateData, $event, $mockInvoice);
@@ -159,7 +183,8 @@ class InvoiceTemplateController extends Controller
         if ($template) {
             $templateData = [
                 'pemisah' => $template->pemisah,
-                'bagian' => $template->bagian,
+                'bagian_belum_lunas' => $template->bagian_belum_lunas,
+                'bagian_lunas' => $template->bagian_lunas,
             ];
         } else {
             $templateData = config('invoice_template');
@@ -175,47 +200,115 @@ class InvoiceTemplateController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'pemisah' => 'required|string|max:50',
-            'bagian' => 'required|array',
+            'bagian_belum_lunas' => 'required|array',
+            'bagian_lunas' => 'required|array',
         ]);
 
         $validator->after(function ($v) use ($request) {
-            $bagian = $request->input('bagian');
-            if (!is_array($bagian)) {
-                return;
-            }
-
             $requiredKeys = InvoiceRenderer::SECTION_KEYS;
-            $givenKeys = array_keys($bagian);
 
-            if (count($givenKeys) !== 8 || array_diff($requiredKeys, $givenKeys) !== [] || array_diff($givenKeys, $requiredKeys) !== []) {
-                $v->errors()->add('bagian', 'Bagian harus berisi tepat 8 kunci standar.');
-                return;
-            }
-
-            foreach ($requiredKeys as $key) {
-                $item = $bagian[$key] ?? null;
-                if (!is_array($item)) {
-                    $v->errors()->add("bagian.{$key}", "Bagian {$key} harus berupa objek.");
+            // Validate both bagian_belum_lunas and bagian_lunas
+            foreach (['bagian_belum_lunas', 'bagian_lunas'] as $bagianField) {
+                $bagian = $request->input($bagianField);
+                if (!is_array($bagian)) {
+                    $v->errors()->add($bagianField, "Field {$bagianField} harus berupa array.");
                     continue;
                 }
 
-                if (!array_key_exists('aktif', $item) || !is_bool($item['aktif'])) {
-                    $v->errors()->add("bagian.{$key}.aktif", "Field 'aktif' pada {$key} harus boolean.");
+                $givenKeys = array_keys($bagian);
+
+                if (count($givenKeys) !== 8 || array_diff($requiredKeys, $givenKeys) !== [] || array_diff($givenKeys, $requiredKeys) !== []) {
+                    $v->errors()->add($bagianField, 'Bagian harus berisi tepat 8 kunci standar.');
+                    continue;
                 }
 
-                if (array_key_exists('teks', $item) && $item['teks'] !== null) {
-                    if (!is_string($item['teks'])) {
-                        $v->errors()->add("bagian.{$key}.teks", "Field 'teks' pada {$key} harus string.");
-                    } elseif (mb_strlen($item['teks'], 'UTF-8') > 2000) {
-                        $v->errors()->add("bagian.{$key}.teks", "Field 'teks' pada {$key} maksimal 2000 karakter.");
+                foreach ($requiredKeys as $key) {
+                    $item = $bagian[$key] ?? null;
+                    if (!is_array($item)) {
+                        $v->errors()->add("{$bagianField}.{$key}", "Bagian {$key} harus berupa objek.");
+                        continue;
+                    }
+
+                    if (!array_key_exists('aktif', $item) || !is_bool($item['aktif'])) {
+                        $v->errors()->add("{$bagianField}.{$key}.aktif", "Field 'aktif' pada {$key} harus boolean.");
+                    }
+
+                    if (array_key_exists('teks', $item) && $item['teks'] !== null) {
+                        if (!is_string($item['teks'])) {
+                            $v->errors()->add("{$bagianField}.{$key}.teks", "Field 'teks' pada {$key} harus string.");
+                        } elseif (mb_strlen($item['teks'], 'UTF-8') > 2000) {
+                            $v->errors()->add("{$bagianField}.{$key}.teks", "Field 'teks' pada {$key} maksimal 2000 karakter.");
+                        }
+                    }
+
+                    if ($key === 'kelas_pesanan') {
+                        if (!array_key_exists('format_baris', $item) || !is_string($item['format_baris']) || trim($item['format_baris']) === '') {
+                            $v->errors()->add("{$bagianField}.kelas_pesanan.format_baris", "Format baris pada kelas_pesanan wajib diisi.");
+                        } elseif (mb_strlen($item['format_baris'], 'UTF-8') > 255) {
+                            $v->errors()->add("{$bagianField}.kelas_pesanan.format_baris", "Format baris maksimal 255 karakter.");
+                        }
                     }
                 }
+            }
+        });
 
-                if ($key === 'kelas_pesanan') {
-                    if (!array_key_exists('format_baris', $item) || !is_string($item['format_baris']) || trim($item['format_baris']) === '') {
-                        $v->errors()->add('bagian.kelas_pesanan.format_baris', "Format baris pada kelas_pesanan wajib diisi.");
-                    } elseif (mb_strlen($item['format_baris'], 'UTF-8') > 255) {
-                        $v->errors()->add('bagian.kelas_pesanan.format_baris', "Format baris maksimal 255 karakter.");
+        $validator->validate();
+    }
+
+    private function validatePreviewRequest(Request $request): void
+    {
+        $validator = Validator::make($request->all(), [
+            'pemisah' => 'required|string|max:50',
+            'bagian_belum_lunas' => 'nullable|array',
+            'bagian_lunas' => 'nullable|array',
+            'preview_status' => 'sometimes|in:belum_lunas,lunas',
+        ]);
+
+        $validator->after(function ($v) use ($request) {
+            $requiredKeys = InvoiceRenderer::SECTION_KEYS;
+
+            // Validate both bagian_belum_lunas and bagian_lunas if provided
+            foreach (['bagian_belum_lunas', 'bagian_lunas'] as $bagianField) {
+                $bagian = $request->input($bagianField);
+                if (!is_array($bagian)) {
+                    continue; // Skip validation if not provided
+                }
+
+                $givenKeys = array_keys($bagian);
+
+                // Allow partial keys for preview
+                foreach ($givenKeys as $key) {
+                    if (!in_array($key, $requiredKeys)) {
+                        $v->errors()->add($bagianField, "Kunci {$key} tidak valid.");
+                        continue;
+                    }
+
+                    $item = $bagian[$key] ?? null;
+                    if (!is_array($item)) {
+                        $v->errors()->add("{$bagianField}.{$key}", "Bagian {$key} harus berupa objek.");
+                        continue;
+                    }
+
+                    if (array_key_exists('aktif', $item) && !is_bool($item['aktif'])) {
+                        $v->errors()->add("{$bagianField}.{$key}.aktif", "Field 'aktif' pada {$key} harus boolean.");
+                    }
+
+                    if (array_key_exists('teks', $item) && $item['teks'] !== null) {
+                        if (!is_string($item['teks'])) {
+                            $v->errors()->add("{$bagianField}.{$key}.teks", "Field 'teks' pada {$key} harus string.");
+                        } elseif (mb_strlen($item['teks'], 'UTF-8') > 2000) {
+                            $v->errors()->add("{$bagianField}.{$key}.teks", "Field 'teks' pada {$key} maksimal 2000 karakter.");
+                        }
+                    }
+
+                    if ($key === 'kelas_pesanan') {
+                        if (array_key_exists('format_baris', $item)) {
+                            if (!is_string($item['format_baris']) || trim($item['format_baris']) === '') {
+                                $v->errors()->add("{$bagianField}.kelas_pesanan.format_baris", "Format baris pada kelas_pesanan wajib diisi.");
+                            } elseif (mb_strlen($item['format_baris'], 'UTF-8') > 255) {
+                                $v->errors()->add("{$bagianField}.kelas_pesanan.format_baris", "Format baris maksimal 255 karakter.");
+                            }
+                        }
                     }
                 }
             }
