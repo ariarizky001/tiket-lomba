@@ -243,7 +243,7 @@ const SheetRangeMappingPanel = ({ eventId }) => {
             rules={[{ required: true, message: 'Pilih sesi' }]}
           >
             <Form.Item.Input
-              options={sessions.map(s => ({ label: `${s.urutan}. ${s.nama}`, value: s.id }))}
+              options={sessions.map(s => ({ label: `${s.nomor_urut}. ${s.nama}`, value: s.id }))}
               placeholder="Pilih sesi"
             />
           </Form.Item>

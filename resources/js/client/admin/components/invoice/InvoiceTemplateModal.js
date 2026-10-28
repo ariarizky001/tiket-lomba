@@ -338,7 +338,7 @@ const InvoiceTemplateModal = ({ event, onCancel }) => {
                           onChange={(e) => handleSectionTextChange(key, bagianKey, 'format_baris', e.target.value)}
                           onFocus={(e) => setActiveInputRef({ element: e.target, bagianKey, sectionKey: key, fieldName: 'format_baris' })}
                           maxLength={255}
-                          placeholder="{no}. {nama_sesi} — {harga} = {qty}"
+                          placeholder="{no}. {nomor_sesi}. {nama_sesi} — {harga} = {qty}"
                         />
                       </Form.Item>
                     )}

@@ -37,6 +37,7 @@ class InvoiceRendererTest extends TestCase
             'nama' => 'MB A PAKET ANNIVERSARY',
             'harga' => 4500000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoice = Invoice::create([
@@ -226,6 +227,7 @@ class InvoiceRendererTest extends TestCase
             'nama' => 'Session B',
             'harga' => 200000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $session2 = EventSession::create([
@@ -233,6 +235,7 @@ class InvoiceRendererTest extends TestCase
             'nama' => 'Session A',
             'harga' => 100000,
             'kuota' => 10,
+            'nomor_urut' => 2,
         ]);
 
         $invoice = Invoice::create([
@@ -436,6 +439,7 @@ class InvoiceRendererTest extends TestCase
             'nama' => 'Session A',
             'harga' => 100000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoice = Invoice::create([

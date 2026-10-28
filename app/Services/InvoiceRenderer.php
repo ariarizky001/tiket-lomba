@@ -85,17 +85,19 @@ class InvoiceRenderer
         // Process items for kelas_pesanan
         $items = [];
         if ($isModel) {
-            // Sort by event_session_id ASC
+            // Sort by session nomor_urut ASC, then id ASC
             $itemsCollection = $invoice->items;
             if ($itemsCollection) {
-                $items = $itemsCollection->sortBy('event_session_id')->values()->all();
+                $items = $itemsCollection->sortBy(function ($item) {
+                    return $item->session?->nomor_urut ?? PHP_INT_MAX;
+                })->values()->all();
             }
         } else {
             $items = $invoice['items'] ?? [];
             usort($items, function ($a, $b) {
-                $aId = is_array($a) ? ($a['event_session_id'] ?? 0) : ($a->event_session_id ?? 0);
-                $bId = is_array($b) ? ($b['event_session_id'] ?? 0) : ($b->event_session_id ?? 0);
-                return $aId <=> $bId;
+                $aNomor = is_array($a) ? ($a['session']['nomor_urut'] ?? $a['session_nomor'] ?? PHP_INT_MAX) : ($a->session?->nomor_urut ?? PHP_INT_MAX);
+                $bNomor = is_array($b) ? ($b['session']['nomor_urut'] ?? $b['session_nomor'] ?? PHP_INT_MAX) : ($b->session?->nomor_urut ?? PHP_INT_MAX);
+                return $aNomor <=> $bNomor;
             });
         }
 
@@ -137,6 +139,7 @@ class InvoiceRenderer
                     $replacementsBaris = [
                         '{no}' => $no++,
                         '{nama_sesi}' => $namaSesi,
+                        '{nomor_sesi}' => $item->session?->nomor_urut ?? (is_array($item) ? ($item['session']['nomor_urut'] ?? $item['session_nomor'] ?? '') : ''),
                         '{harga}' => 'Rp' . $hargaAngka,
                         '{harga_angka}' => $hargaAngka,
                         '{qty}' => $qty,

@@ -1857,7 +1857,7 @@ var InvoiceForm = function InvoiceForm(_ref) {
       });
       return {
         value: session.id,
-        label: "".concat(session.nama, " \u2014 ").concat((0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(session.harga), " \u2014 sisa ").concat(sisa),
+        label: "".concat(session.nomor_urut, ". ").concat(session.nama, " \u2014 ").concat((0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(session.harga), " \u2014 sisa ").concat(sisa),
         disabled: sisa <= 0 && !isCurrentInvoiceSession
       };
     });
@@ -1906,10 +1906,11 @@ var InvoiceForm = function InvoiceForm(_ref) {
                     }],
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
                       style: {
-                        width: 200
+                        width: 320
                       },
                       placeholder: "Pilih sesi",
-                      options: getSessionOptions(index)
+                      options: getSessionOptions(index),
+                      dropdownMatchSelectWidth: false
                     })
                   })), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, _objectSpread(_objectSpread({}, field), {}, {
                     label: "Qty",
@@ -2044,45 +2045,81 @@ var InvoiceTab = function InvoiceTab(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     invoices = _useState2[0],
     setInvoices = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
-    loading = _useState4[0],
-    setLoading = _useState4[1];
+    sessions = _useState4[0],
+    setSessions = _useState4[1];
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    formVisible = _useState6[0],
-    setFormVisible = _useState6[1];
+    loading = _useState6[0],
+    setLoading = _useState6[1];
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    viewVisible = _useState8[0],
-    setViewVisible = _useState8[1];
+    formVisible = _useState8[0],
+    setFormVisible = _useState8[1];
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    templateVisible = _useState0[0],
-    setTemplateVisible = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    viewVisible = _useState0[0],
+    setViewVisible = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState10 = _slicedToArray(_useState1, 2),
-    selectedInvoice = _useState10[0],
-    setSelectedInvoice = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('semua'),
+    templateVisible = _useState10[0],
+    setTemplateVisible = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    statusFilter = _useState12[0],
-    setStatusFilter = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    selectedInvoice = _useState12[0],
+    setSelectedInvoice = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('semua'),
     _useState14 = _slicedToArray(_useState13, 2),
-    searchQuery = _useState14[0],
-    setSearchQuery = _useState14[1];
+    statusFilter = _useState14[0],
+    setStatusFilter = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('semua'),
+    _useState16 = _slicedToArray(_useState15, 2),
+    sessionFilter = _useState16[0],
+    setSessionFilter = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState18 = _slicedToArray(_useState17, 2),
+    searchQuery = _useState18[0],
+    setSearchQuery = _useState18[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetchInvoices();
-  }, [event.id, statusFilter, searchQuery]);
-  var fetchInvoices = /*#__PURE__*/function () {
+    fetchSessions();
+  }, [event.id, statusFilter, searchQuery, sessionFilter]);
+  var fetchSessions = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-      var params, res, _t;
+      var res, _t;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
+            _context.p = 0;
+            _context.n = 1;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(event.id, "/sessions"));
+          case 1:
+            res = _context.v;
+            setSessions(res.data || []);
+            _context.n = 3;
+            break;
+          case 2:
+            _context.p = 2;
+            _t = _context.v;
+            console.error('Gagal memuat sesi:', _t);
+          case 3:
+            return _context.a(2);
+        }
+      }, _callee, null, [[0, 2]]);
+    }));
+    return function fetchSessions() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var fetchInvoices = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var params, res, _t2;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.p = _context2.n) {
+          case 0:
             setLoading(true);
-            _context.p = 1;
+            _context2.p = 1;
             params = new URLSearchParams();
             if (statusFilter !== 'semua') {
               params.append('status', statusFilter);
@@ -2090,30 +2127,40 @@ var InvoiceTab = function InvoiceTab(_ref) {
             if (searchQuery) {
               params.append('q', searchQuery);
             }
-            _context.n = 2;
+            _context2.n = 2;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].get("/events/".concat(event.id, "/invoices?").concat(params.toString()));
           case 2:
-            res = _context.v;
+            res = _context2.v;
             setInvoices(res.data);
-            _context.n = 4;
+            _context2.n = 4;
             break;
           case 3:
-            _context.p = 3;
-            _t = _context.v;
+            _context2.p = 3;
+            _t2 = _context2.v;
             antd__WEBPACK_IMPORTED_MODULE_9__["default"].error('Gagal memuat invoice');
           case 4:
-            _context.p = 4;
+            _context2.p = 4;
             setLoading(false);
-            return _context.f(4);
+            return _context2.f(4);
           case 5:
-            return _context.a(2);
+            return _context2.a(2);
         }
-      }, _callee, null, [[1, 3, 4, 5]]);
+      }, _callee2, null, [[1, 3, 4, 5]]);
     }));
     return function fetchInvoices() {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }();
+
+  // Filter invoices by session
+  var filteredInvoices = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    if (sessionFilter === 'semua') return invoices;
+    return invoices.filter(function (invoice) {
+      return invoice.items.some(function (item) {
+        return item.event_session_id === parseInt(sessionFilter);
+      });
+    });
+  }, [invoices, sessionFilter]);
   var handleAdd = function handleAdd() {
     setSelectedInvoice(null);
     setFormVisible(true);
@@ -2127,14 +2174,14 @@ var InvoiceTab = function InvoiceTab(_ref) {
     setViewVisible(true);
   };
   var handleStatusToggle = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(invoice) {
-      var newStatus, _t2;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(invoice) {
+      var newStatus, _t3;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.p = _context3.n) {
           case 0:
-            _context2.p = 0;
+            _context3.p = 0;
             newStatus = invoice.status === 'lunas' ? 'belum_lunas' : 'lunas';
-            _context2.n = 1;
+            _context3.n = 1;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/invoices/".concat(invoice.id, "/status"), {
               status: newStatus
             });
@@ -2147,46 +2194,46 @@ var InvoiceTab = function InvoiceTab(_ref) {
               antd__WEBPACK_IMPORTED_MODULE_9__["default"].success('Invoice ditandai belum lunas');
             }
             fetchInvoices();
-            _context2.n = 3;
-            break;
-          case 2:
-            _context2.p = 2;
-            _t2 = _context2.v;
-            antd__WEBPACK_IMPORTED_MODULE_9__["default"].error('Gagal mengubah status');
-          case 3:
-            return _context2.a(2);
-        }
-      }, _callee2, null, [[0, 2]]);
-    }));
-    return function handleStatusToggle(_x) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-  var handleDelete = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(invoice) {
-      var _t3;
-      return _regenerator().w(function (_context3) {
-        while (1) switch (_context3.p = _context3.n) {
-          case 0:
-            _context3.p = 0;
-            _context3.n = 1;
-            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/invoices/".concat(invoice.id));
-          case 1:
-            antd__WEBPACK_IMPORTED_MODULE_9__["default"].success('Invoice dihapus');
-            fetchInvoices();
             _context3.n = 3;
             break;
           case 2:
             _context3.p = 2;
             _t3 = _context3.v;
-            antd__WEBPACK_IMPORTED_MODULE_9__["default"].error('Gagal menghapus invoice');
+            antd__WEBPACK_IMPORTED_MODULE_9__["default"].error('Gagal mengubah status');
           case 3:
             return _context3.a(2);
         }
       }, _callee3, null, [[0, 2]]);
     }));
-    return function handleDelete(_x2) {
+    return function handleStatusToggle(_x) {
       return _ref4.apply(this, arguments);
+    };
+  }();
+  var handleDelete = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(invoice) {
+      var _t4;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
+          case 0:
+            _context4.p = 0;
+            _context4.n = 1;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/invoices/".concat(invoice.id));
+          case 1:
+            antd__WEBPACK_IMPORTED_MODULE_9__["default"].success('Invoice dihapus');
+            fetchInvoices();
+            _context4.n = 3;
+            break;
+          case 2:
+            _context4.p = 2;
+            _t4 = _context4.v;
+            antd__WEBPACK_IMPORTED_MODULE_9__["default"].error('Gagal menghapus invoice');
+          case 3:
+            return _context4.a(2);
+        }
+      }, _callee4, null, [[0, 2]]);
+    }));
+    return function handleDelete(_x2) {
+      return _ref5.apply(this, arguments);
     };
   }();
   var handleSaveForm = function handleSaveForm(invoice) {
@@ -2331,6 +2378,22 @@ var InvoiceTab = function InvoiceTab(_ref) {
           value: "belum_lunas",
           children: "Belum Lunas"
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        value: sessionFilter,
+        onChange: setSessionFilter,
+        style: {
+          width: 200
+        },
+        dropdownMatchSelectWidth: false,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Option, {
+          value: "semua",
+          children: "Semua Sesi"
+        }), sessions.map(function (s) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(Option, {
+            value: s.id,
+            children: [s.nomor_urut, ". ", s.nama]
+          }, s.id);
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
         type: "primary",
         icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_19__["default"], {}),
@@ -2343,11 +2406,11 @@ var InvoiceTab = function InvoiceTab(_ref) {
         },
         children: "Pengaturan Invoice"
       })]
-    }), invoices.length === 0 && !loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_21__["default"], {
-      description: "Belum ada peserta"
+    }), filteredInvoices.length === 0 && !loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      description: sessionFilter === 'semua' ? 'Belum ada peserta' : 'Tidak ada peserta di sesi ini'
     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_22__["default"], {
       columns: columns,
-      dataSource: invoices,
+      dataSource: filteredInvoices,
       loading: loading,
       rowKey: "id",
       scroll: {
@@ -2947,7 +3010,7 @@ var InvoiceTemplateModal = function InvoiceTemplateModal(_ref) {
                       });
                     },
                     maxLength: 255,
-                    placeholder: "{no}. {nama_sesi} \u2014 {harga} = {qty}"
+                    placeholder: "{no}. {nomor_sesi}. {nama_sesi} \u2014 {harga} = {qty}"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   style: {
@@ -3152,13 +3215,43 @@ var InvoiceView = function InvoiceView(_ref) {
       children: "BELUM LUNAS"
     });
   };
+  var fallbackCopy = function fallbackCopy(text) {
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    textarea.style.left = '-9999px';
+    textarea.style.top = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      var successful = document.execCommand('copy');
+      if (successful) {
+        antd__WEBPACK_IMPORTED_MODULE_3__["default"].success('Tersalin');
+      } else {
+        antd__WEBPACK_IMPORTED_MODULE_3__["default"].error('Gagal menyalin teks');
+      }
+    } catch (err) {
+      antd__WEBPACK_IMPORTED_MODULE_3__["default"].error('Gagal menyalin teks');
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  };
   var handleCopy = function handleCopy() {
     if (!teks) return;
-    navigator.clipboard.writeText(teks).then(function () {
-      antd__WEBPACK_IMPORTED_MODULE_3__["default"].success('Tersalin');
-    })["catch"](function () {
-      antd__WEBPACK_IMPORTED_MODULE_3__["default"].error('Gagal menyalin teks');
-    });
+
+    // Coba Clipboard API dulu (modern, async) - hanya di secure context
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(teks).then(function () {
+        antd__WEBPACK_IMPORTED_MODULE_3__["default"].success('Tersalin');
+      })["catch"](function () {
+        fallbackCopy(teks);
+      });
+    } else {
+      // Fallback untuk non-secure context (HTTP + IP LAN)
+      fallbackCopy(teks);
+    }
   };
   var handlePrint = function handlePrint() {
     window.print();
@@ -3270,7 +3363,7 @@ var PlaceholderHelp = function PlaceholderHelp(_ref) {
     onInsert = _ref.onInsert;
   var placeholders = {
     umum: ['{nama_event}', '{nama_event_besar}', '{tanggal_event}', '{tanggal_event_besar}', '{lokasi_event}', '{nama_pemesan}', '{nomor_urut}', '{kode_invoice}', '{tanggal_invoice}', '{total}', '{total_angka}', '{status}', '{status_ikon}'],
-    baris: ['{no}', '{nama_sesi}', '{harga}', '{harga_angka}', '{qty}', '{subtotal}', '{subtotal_angka}']
+    baris: ['{no}', '{nama_sesi}', '{nomor_sesi}', '{harga}', '{harga_angka}', '{qty}', '{subtotal}', '{subtotal_angka}']
   };
   var isBarisActive = activeSectionKey === 'kelas_pesanan';
   var handleClick = function handleClick(placeholder) {
@@ -3915,6 +4008,7 @@ var SessionTable = function SessionTable(_ref) {
     kuota = sesi.kuota,
     peserta = sesi.peserta,
     sessionId = sesi.id,
+    nomor_urut = sesi.nomor_urut,
     urutan = sesi.urutan;
 
   // Build rows from peserta data
@@ -4000,7 +4094,7 @@ var SessionTable = function SessionTable(_ref) {
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
                 },
-                children: ["Sesi ", urutan, " ", nama]
+                children: ["Sesi ", nomor_urut, " ", nama]
               }), !isDashboard && eventId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_spreadsheet_SendToSheetButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
                 eventId: eventId,
                 sessionId: sessionId,
@@ -4229,11 +4323,11 @@ var PrizeGrid = function PrizeGrid(_ref) {
     width: 200,
     fixed: 'left',
     render: function render(text, record) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         style: {
           fontWeight: 'bold'
         },
-        children: text
+        children: [record.nomor_urut ? "".concat(record.nomor_urut, ". ") : '', text]
       });
     }
   }].concat(_toConsumableArray([1, 2, 3, 4, 5].map(function (juara) {
@@ -4577,7 +4671,12 @@ var SessionReportTable = function SessionReportTable(_ref) {
     title: 'Sesi',
     dataIndex: 'nama',
     key: 'nama',
-    width: 150
+    width: 150,
+    render: function render(text, record) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [record.nomor_urut ? "".concat(record.nomor_urut, ". ") : '', text]
+      });
+    }
   }, {
     title: 'Harga',
     dataIndex: 'harga',
@@ -4729,16 +4828,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tooltip/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/ArrowUpOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/ArrowDownOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -4775,6 +4881,10 @@ var SessionTab = function SessionTab(_ref) {
   var _Form$useForm = antd__WEBPACK_IMPORTED_MODULE_3__["default"].useForm(),
     _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
     form = _Form$useForm2[0];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    reorderLoading = _useState0[0],
+    setReorderLoading = _useState0[1];
   var rupiah = new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
@@ -4824,6 +4934,10 @@ var SessionTab = function SessionTab(_ref) {
       setEditing(null);
       form.resetFields();
       form.setFieldValue('kuota', 24);
+      var maxNomor = sessions.length > 0 ? Math.max.apply(Math, _toConsumableArray(sessions.map(function (s) {
+        return s.nomor_urut || 0;
+      }))) : 0;
+      form.setFieldValue('nomor_urut', maxNomor + 1);
     }
     setDrawerVisible(true);
   };
@@ -4904,12 +5018,66 @@ var SessionTab = function SessionTab(_ref) {
       return _ref4.apply(this, arguments);
     };
   }();
+  var handleReorder = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(newIds) {
+      var _t4;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
+          case 0:
+            setReorderLoading(true);
+            _context4.p = 1;
+            _context4.n = 2;
+            return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].put("/events/".concat(event.id, "/sessions/reorder"), {
+              ids: newIds
+            });
+          case 2:
+            antd__WEBPACK_IMPORTED_MODULE_4__["default"].success('Urutan diperbarui');
+            fetchSessions();
+            _context4.n = 4;
+            break;
+          case 3:
+            _context4.p = 3;
+            _t4 = _context4.v;
+            antd__WEBPACK_IMPORTED_MODULE_4__["default"].error('Gagal mengatur ulang urutan');
+          case 4:
+            _context4.p = 4;
+            setReorderLoading(false);
+            return _context4.f(4);
+          case 5:
+            return _context4.a(2);
+        }
+      }, _callee4, null, [[1, 3, 4, 5]]);
+    }));
+    return function handleReorder(_x3) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+  var moveUp = function moveUp(index) {
+    if (index === 0) return;
+    var newIds = _toConsumableArray(sessions.map(function (s) {
+      return s.id;
+    }));
+    var _ref6 = [newIds[index - 1], newIds[index]];
+    newIds[index] = _ref6[0];
+    newIds[index - 1] = _ref6[1];
+    handleReorder(newIds);
+  };
+  var moveDown = function moveDown(index) {
+    if (index === sessions.length - 1) return;
+    var newIds = _toConsumableArray(sessions.map(function (s) {
+      return s.id;
+    }));
+    var _ref7 = [newIds[index + 1], newIds[index]];
+    newIds[index] = _ref7[0];
+    newIds[index + 1] = _ref7[1];
+    handleReorder(newIds);
+  };
   var columns = [{
-    title: 'No',
-    width: 50,
-    render: function render(_, __, index) {
-      return index + 1;
-    }
+    title: 'No Urut',
+    width: 80,
+    dataIndex: 'nomor_urut',
+    key: 'nomor_urut',
+    align: 'center'
   }, {
     title: 'Nama Sesi',
     dataIndex: 'nama',
@@ -4925,12 +5093,14 @@ var SessionTab = function SessionTab(_ref) {
     title: 'Kuota',
     dataIndex: 'kuota',
     key: 'kuota',
-    width: 60
+    width: 60,
+    align: 'center'
   }, {
     title: 'Terjual',
     dataIndex: 'terjual',
     key: 'terjual',
     width: 70,
+    align: 'center',
     render: function render(terjual) {
       return terjual || 0;
     }
@@ -4939,8 +5109,46 @@ var SessionTab = function SessionTab(_ref) {
     dataIndex: 'sisa',
     key: 'sisa',
     width: 60,
+    align: 'center',
     render: function render(sisa) {
       return sisa || 0;
+    }
+  }, {
+    title: 'Urutan',
+    width: 100,
+    key: 'urutan',
+    align: 'center',
+    render: function render(_, record, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        style: {
+          display: 'flex',
+          justifyContent: 'center',
+          gap: 4
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          title: "Naik",
+          placement: "top",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            size: "small",
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_7__["default"], {}),
+            onClick: function onClick() {
+              return moveUp(index);
+            },
+            disabled: index === 0 || reorderLoading
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          title: "Turun",
+          placement: "top",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            size: "small",
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {}),
+            onClick: function onClick() {
+              return moveDown(index);
+            },
+            disabled: index === sessions.length - 1 || reorderLoading
+          })
+        })]
+      });
     }
   }, {
     title: 'Aksi',
@@ -4952,13 +5160,13 @@ var SessionTab = function SessionTab(_ref) {
           display: 'flex',
           gap: 8
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
           size: "small",
           onClick: function onClick() {
             return openDrawer(record);
           },
           children: "Edit"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
           title: "Hapus Sesi",
           description: "Apakah Anda yakin ingin menghapus sesi ini?",
           onConfirm: function onConfirm() {
@@ -4966,7 +5174,7 @@ var SessionTab = function SessionTab(_ref) {
           },
           okText: "Ya",
           cancelText: "Batal",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
             size: "small",
             danger: true,
             children: "Hapus"
@@ -4980,17 +5188,17 @@ var SessionTab = function SessionTab(_ref) {
       style: {
         marginBottom: 16
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
         type: "primary",
-        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_7__["default"], {}),
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {}),
         onClick: function onClick() {
           return openDrawer();
         },
         children: "Tambah Sesi"
       })
-    }), sessions.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }), sessions.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
       description: "Belum ada sesi, tambahkan sesi pertama"
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
       columns: columns,
       dataSource: sessions,
       loading: loading,
@@ -4999,7 +5207,7 @@ var SessionTab = function SessionTab(_ref) {
         x: true
       },
       pagination: false
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
       title: editing ? 'Edit Sesi' : 'Tambah Sesi',
       placement: "right",
       onClose: function onClose() {
@@ -5011,6 +5219,25 @@ var SessionTab = function SessionTab(_ref) {
         layout: "vertical",
         onFinish: onFinish,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"].Item, {
+          label: "Nomor Urut",
+          name: "nomor_urut",
+          rules: [{
+            required: true,
+            message: 'Nomor urut wajib diisi'
+          }, {
+            type: 'number',
+            min: 1,
+            max: 999,
+            message: 'Nomor urut harus antara 1-999'
+          }],
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+            style: {
+              width: '100%'
+            },
+            min: 1,
+            max: 999
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"].Item, {
           label: "Nama Sesi",
           name: "nama",
           rules: [{
@@ -5020,7 +5247,7 @@ var SessionTab = function SessionTab(_ref) {
             max: 150,
             message: 'Nama sesi maksimal 150 karakter'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"].Item, {
           label: "Harga",
           name: "harga",
@@ -5032,7 +5259,7 @@ var SessionTab = function SessionTab(_ref) {
             min: 0,
             message: 'Harga tidak boleh negatif'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
             style: {
               width: '100%'
             },
@@ -5051,7 +5278,7 @@ var SessionTab = function SessionTab(_ref) {
             max: 1000,
             message: 'Kuota harus antara 1-1000'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
             style: {
               width: '100%'
             },
@@ -5059,7 +5286,7 @@ var SessionTab = function SessionTab(_ref) {
             max: 1000
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_3__["default"].Item, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
             type: "primary",
             htmlType: "submit",
             block: true,
@@ -5652,7 +5879,7 @@ var SheetRangeMappingPanel = function SheetRangeMappingPanel(_ref) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"].Item.Input, {
             options: sessions.map(function (s) {
               return {
-                label: "".concat(s.urutan, ". ").concat(s.nama),
+                label: "".concat(s.nomor_urut, ". ").concat(s.nama),
                 value: s.id
               };
             }),

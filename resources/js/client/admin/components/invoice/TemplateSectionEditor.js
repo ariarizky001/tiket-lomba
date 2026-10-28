@@ -93,7 +93,7 @@ const TemplateSectionEditor = ({
               ref={formatBarisRef}
               value={data.format_baris}
               onChange={(e) => onChange({ ...data, format_baris: e.target.value })}
-              placeholder="{no}. {nama_sesi} — {harga} = {qty}"
+              placeholder="{no}. {nomor_sesi}. {nama_sesi} — {harga} = {qty}"
               maxLength={255}
               showCount
               style={{ marginBottom: 8 }}

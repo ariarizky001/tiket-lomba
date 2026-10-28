@@ -14,6 +14,7 @@ class RekapPesertaController extends Controller
     public function show(Event $event)
     {
         $sessions = $event->sessions()
+            ->urut()
             ->with([
                 'invoiceItems' => function ($query) {
                     $query->select('id', 'invoice_id', 'event_session_id', 'qty', 'harga', 'subtotal')
@@ -23,10 +24,9 @@ class RekapPesertaController extends Controller
                         }]);
                 }
             ])
-            ->orderBy('id')
-            ->get(['id', 'nama', 'harga', 'kuota']);
+            ->get(['id', 'nomor_urut', 'nama', 'harga', 'kuota']);
 
-        $sessionsData = $sessions->map(function ($session, $index) {
+        $sessionsData = $sessions->map(function ($session) {
             // Collect all invoice items with their invoice data
             $items = $session->invoiceItems->filter(fn($item) => $item->invoice && in_array($item->invoice->status, ['lunas', 'belum_lunas']));
 
@@ -82,7 +82,8 @@ class RekapPesertaController extends Controller
 
             return [
                 'id' => $session->id,
-                'urutan' => $index + 1,
+                'nomor_urut' => $session->nomor_urut,
+                'urutan' => $session->nomor_urut,
                 'nama' => $session->nama,
                 'harga' => (int) $session->harga,
                 'kuota' => (int) $session->kuota,

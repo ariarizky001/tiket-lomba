@@ -9,6 +9,9 @@ const SessionReportTable = ({ sesi }) => {
       dataIndex: 'nama',
       key: 'nama',
       width: 150,
+      render: (text, record) => (
+        <div>{record.nomor_urut ? `${record.nomor_urut}. ` : ''}{text}</div>
+      ),
     },
     {
       title: 'Harga',

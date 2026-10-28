@@ -30,6 +30,13 @@ class InvoiceController extends Controller
         }
 
         $invoices = $query->get();
+
+        $invoices->each(function ($invoice) {
+            $invoice->items = $invoice->items->sortBy(function ($item) {
+                return $item->session?->nomor_urut ?? PHP_INT_MAX;
+            })->values();
+        });
+
         return response()->json($invoices);
     }
 

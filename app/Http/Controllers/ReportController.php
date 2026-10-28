@@ -85,7 +85,8 @@ class ReportController extends Controller
             ->leftJoin('invoice_items', 'event_sessions.id', '=', 'invoice_items.event_session_id')
             ->leftJoin('invoices', 'invoice_items.invoice_id', '=', 'invoices.id')
             ->where('event_sessions.event_id', $event->id)
-            ->groupBy('event_sessions.id', 'event_sessions.event_id', 'event_sessions.nama', 'event_sessions.harga', 'event_sessions.kuota', 'event_sessions.created_at', 'event_sessions.updated_at')
+            ->groupBy('event_sessions.id', 'event_sessions.event_id', 'event_sessions.nomor_urut', 'event_sessions.nama', 'event_sessions.harga', 'event_sessions.kuota', 'event_sessions.created_at', 'event_sessions.updated_at')
+            ->urut()
             ->with(['prizes' => function ($query) {
                 $query->orderBy('juara')->select('event_session_id', 'juara', 'nominal');
             }])
@@ -96,7 +97,7 @@ class ReportController extends Controller
             $sisa = $session->kuota - $terjual;
             $pemasukan = (int) ($session->pemasukan ?? 0);
             $belumLunas = (int) ($session->belum_lunas ?? 0);
-            
+
             $prizes = $session->prizes;
 
             $totalHadiah = $prizes->sum('nominal');
@@ -104,6 +105,7 @@ class ReportController extends Controller
 
             return [
                 'id' => $session->id,
+                'nomor_urut' => $session->nomor_urut,
                 'nama' => $session->nama,
                 'harga' => $session->harga,
                 'kuota' => $session->kuota,

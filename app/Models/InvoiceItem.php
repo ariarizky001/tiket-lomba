@@ -18,7 +18,7 @@ class InvoiceItem extends Model
         'subtotal',
     ];
 
-    protected $appends = ['session_nama'];
+    protected $appends = ['session_nama', 'session_nomor'];
 
     protected $hidden = ['eventSession'];
 
@@ -35,5 +35,10 @@ class InvoiceItem extends Model
     public function getSessionNamaAttribute()
     {
         return $this->session?->nama;
+    }
+
+    public function getSessionNomorAttribute()
+    {
+        return $this->session?->nomor_urut;
     }
 }

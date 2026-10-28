@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
     Route::apiResource('events', EventController::class);
+    Route::put('/events/{event}/sessions/reorder', [EventSessionController::class, 'reorder']);
     Route::apiResource('events.sessions', EventSessionController::class)
         ->shallow()
         ->parameters(['sessions' => 'eventSession']);
@@ -40,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/expenses/{expense}', [ExpenseController::class, 'update']);
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
     Route::get('/events/{event}/bookkeeping', [ExpenseController::class, 'bookkeeping']);
-    // Route::get('/events/{event}/participant-recap', [ParticipantRecapController::class, 'show']);
+    Route::get('/events/{event}/participant-recap', [ParticipantRecapController::class, 'show']);
     Route::get('/events/{event}/rekap-peserta', [RekapPesertaController::class, 'show']);
     Route::get('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'show']);
     Route::post('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'store']);

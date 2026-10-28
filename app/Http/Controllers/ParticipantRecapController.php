@@ -11,11 +11,11 @@ class ParticipantRecapController extends Controller
     public function show(Event $event)
     {
         $sessions = $event->sessions()
+            ->urut()
             ->with(['invoiceItems.invoice' => function ($query) {
                 $query->select('id', 'event_id', 'nama_peserta', 'kode', 'status', 'paid_at', 'total');
             }])
-            ->orderBy('id')
-            ->get(['id', 'nama', 'event_id', 'harga', 'kuota']);
+            ->get(['id', 'nomor_urut', 'nama', 'event_id', 'harga', 'kuota']);
 
         $sessionsData = $sessions->map(function ($session) {
             $pesertaList = [];
@@ -46,6 +46,7 @@ class ParticipantRecapController extends Controller
 
             return [
                 'id' => $session->id,
+                'nomor_urut' => $session->nomor_urut,
                 'nama' => $session->nama,
                 'harga' => (int) $session->harga,
                 'kuota' => (int) $session->kuota,

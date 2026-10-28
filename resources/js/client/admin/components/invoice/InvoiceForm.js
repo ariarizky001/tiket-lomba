@@ -113,7 +113,7 @@ const InvoiceForm = ({ visible, invoice, event, sessionId, onSave, onCancel }) =
       const isCurrentInvoiceSession = invoice?.items?.some((item) => item.event_session_id === session.id);
       return {
         value: session.id,
-        label: `${session.nama} — ${formatRupiah(session.harga)} — sisa ${sisa}`,
+        label: `${session.nomor_urut}. ${session.nama} — ${formatRupiah(session.harga)} — sisa ${sisa}`,
         disabled: sisa <= 0 && !isCurrentInvoiceSession,
       };
     });
@@ -156,7 +156,12 @@ const InvoiceForm = ({ visible, invoice, event, sessionId, onSave, onCancel }) =
                         name={[field.name, 'event_session_id']}
                         rules={[{ required: true, message: 'Pilih sesi' }]}
                       >
-                        <Select style={{ width: 200 }} placeholder="Pilih sesi" options={getSessionOptions(index)} />
+                        <Select
+                          style={{ width: 320 }}
+                          placeholder="Pilih sesi"
+                          options={getSessionOptions(index)}
+                          dropdownMatchSelectWidth={false}
+                        />
                       </Form.Item>
                       <Form.Item
                         {...field}

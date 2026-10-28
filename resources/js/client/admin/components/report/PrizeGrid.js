@@ -89,7 +89,7 @@ const PrizeGrid = ({ sesi, event, onRefresh }) => {
       width: 200,
       fixed: 'left',
       render: (text, record) => (
-        <div style={{ fontWeight: 'bold' }}>{text}</div>
+        <div style={{ fontWeight: 'bold' }}>{record.nomor_urut ? `${record.nomor_urut}. ` : ''}{text}</div>
       ),
     },
     ...[1, 2, 3, 4, 5].map((juara) => ({

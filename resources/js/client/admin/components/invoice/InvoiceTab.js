@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Table, Button, Input, Select, Tag, Popconfirm, message, Empty, Space } from 'antd';
 import { EyeOutlined, EditOutlined, CheckOutlined, StopOutlined, DeleteOutlined, SettingOutlined, UserAddOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
@@ -12,17 +12,29 @@ const { Option } = Select;
 
 const InvoiceTab = ({ event }) => {
   const [invoices, setInvoices] = useState([]);
+  const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [viewVisible, setViewVisible] = useState(false);
   const [templateVisible, setTemplateVisible] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [statusFilter, setStatusFilter] = useState('semua');
+  const [sessionFilter, setSessionFilter] = useState('semua');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchInvoices();
-  }, [event.id, statusFilter, searchQuery]);
+    fetchSessions();
+  }, [event.id, statusFilter, searchQuery, sessionFilter]);
+
+  const fetchSessions = async () => {
+    try {
+      const res = await HTTP.get(`/events/${event.id}/sessions`);
+      setSessions(res.data || []);
+    } catch (error) {
+      console.error('Gagal memuat sesi:', error);
+    }
+  };
 
   const fetchInvoices = async () => {
     setLoading(true);
@@ -42,6 +54,15 @@ const InvoiceTab = ({ event }) => {
       setLoading(false);
     }
   };
+
+  // Filter invoices by session
+  const filteredInvoices = useMemo(() => {
+    if (sessionFilter === 'semua') return invoices;
+    
+    return invoices.filter(invoice => 
+      invoice.items.some(item => item.event_session_id === parseInt(sessionFilter))
+    );
+  }, [invoices, sessionFilter]);
 
   const handleAdd = () => {
     setSelectedInvoice(null);
@@ -201,6 +222,12 @@ const InvoiceTab = ({ event }) => {
           <Option value="lunas">Lunas</Option>
           <Option value="belum_lunas">Belum Lunas</Option>
         </Select>
+        <Select value={sessionFilter} onChange={setSessionFilter} style={{ width: 200 }} dropdownMatchSelectWidth={false}>
+          <Option value="semua">Semua Sesi</Option>
+          {sessions.map(s => (
+            <Option key={s.id} value={s.id}>{s.nomor_urut}. {s.nama}</Option>
+          ))}
+        </Select>
         <Button type="primary" icon={<UserAddOutlined />} onClick={handleAdd}>
           Tambah Peserta
         </Button>
@@ -209,12 +236,12 @@ const InvoiceTab = ({ event }) => {
         </Button>
       </Space>
 
-      {invoices.length === 0 && !loading ? (
-        <Empty description="Belum ada peserta" />
+      {filteredInvoices.length === 0 && !loading ? (
+        <Empty description={sessionFilter === 'semua' ? 'Belum ada peserta' : 'Tidak ada peserta di sesi ini'} />
       ) : (
         <Table
           columns={columns}
-          dataSource={invoices}
+          dataSource={filteredInvoices}
           loading={loading}
           rowKey="id"
           scroll={{ x: true }}

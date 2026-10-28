@@ -12,7 +12,7 @@ const PlaceholderHelp = ({ activeSectionKey, onInsert }) => {
       '{tanggal_invoice}', '{total}', '{total_angka}', '{status}', '{status_ikon}',
     ],
     baris: [
-      '{no}', '{nama_sesi}', '{harga}', '{harga_angka}', '{qty}', '{subtotal}', '{subtotal_angka}',
+      '{no}', '{nama_sesi}', '{nomor_sesi}', '{harga}', '{harga_angka}', '{qty}', '{subtotal}', '{subtotal_angka}',
     ],
   };
 

@@ -226,6 +226,7 @@ class InvoiceTemplateTest extends TestCase
             'nama' => 'MB A PAKET ANNIVERSARY',
             'harga' => 4500000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoice = Invoice::create([
@@ -292,6 +293,7 @@ str_contains($teks, 'Rizal Medan') &&
             'nama' => 'Test Session',
             'harga' => 100000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoice = Invoice::create([
@@ -355,6 +357,7 @@ str_contains($teks, 'Rizal Medan') &&
             'nama' => 'Test Session',
             'harga' => 100000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoice = Invoice::create([
@@ -391,6 +394,7 @@ str_contains($teks, 'Rizal Medan') &&
             'nama' => 'Test Session',
             'harga' => 100000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoice = Invoice::create([
@@ -549,6 +553,7 @@ str_contains($teks, 'Rizal Medan') &&
             'nama' => 'Test Session',
             'harga' => 100000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoiceBelumLunas = Invoice::create([
@@ -615,6 +620,7 @@ str_contains($teks, 'Rizal Medan') &&
             'nama' => 'Test Session',
             'harga' => 100000,
             'kuota' => 10,
+            'nomor_urut' => 1,
         ]);
 
         $invoice = Invoice::create([

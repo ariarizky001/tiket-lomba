@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,11 @@ class EventSession extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['event_id', 'nama', 'harga', 'kuota'];
+    protected $fillable = ['event_id', 'nomor_urut', 'nama', 'harga', 'kuota'];
+
+    protected $casts = [
+        'nomor_urut' => 'integer',
+    ];
 
     public function event(): BelongsTo
     {
@@ -26,5 +31,10 @@ class EventSession extends Model
     public function prizes(): HasMany
     {
         return $this->hasMany(Prize::class, 'event_session_id');
+    }
+
+    public function scopeUrut(Builder $query): Builder
+    {
+        return $query->orderBy('nomor_urut', 'asc')->orderBy('id', 'asc');
     }
 }
