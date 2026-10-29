@@ -3,6 +3,13 @@ import { Table, Button, Popconfirm, message, Tag, Empty, Select, DatePicker, Inp
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
 import dayjs from 'dayjs';
+import 'dayjs/locale/id';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import isBetween from 'dayjs/plugin/isBetween';
+
+dayjs.extend(localizedFormat);
+dayjs.extend(isBetween);
+dayjs.locale('id');
 
 const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categories }) => {
   const [filtered, setFiltered] = useState(expenses);
@@ -11,6 +18,8 @@ const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categori
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
+    let mounted = true;
+
     let result = expenses;
 
     if (selectedCategory !== 'all') {
@@ -18,9 +27,11 @@ const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categori
     }
 
     if (dateRange[0] && dateRange[1]) {
+      const start = dayjs(dateRange[0]);
+      const end = dayjs(dateRange[1]);
       result = result.filter(e => {
         const d = dayjs(e.tanggal);
-        return d.isBetween(dateRange[0], dateRange[1], null, '[]');
+        return d.isBetween(start, end, null, '[]');
       });
     }
 
@@ -31,7 +42,11 @@ const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categori
       );
     }
 
-    setFiltered(result);
+    if (mounted) {
+      setFiltered(result);
+    }
+
+    return () => { mounted = false; };
   }, [expenses, selectedCategory, dateRange, searchText]);
 
   const handleDelete = async (expenseId) => {
@@ -124,8 +139,12 @@ const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categori
           <DatePicker.RangePicker
             value={dateRange}
             onChange={(dates) => setDateRange(dates)}
-            style={{ width: '100%' }}
+            onClick={(e) => e.stopPropagation()}
+            style={{ width: '100%', zIndex: 9999 }}
             format="DD/MM/YYYY"
+            getPopupContainer={() => document.body}
+            allowClear={false}
+            showTime={false}
           />
         </Col>
         <Col xs={24} sm={12} md={6}>

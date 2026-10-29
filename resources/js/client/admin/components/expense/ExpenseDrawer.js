@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Drawer, Form, Input, DatePicker, Select, InputNumber, Button, message } from 'antd';
 import HTTP from '../../../../common/helpers/HTTP';
 import dayjs from 'dayjs';
+import 'dayjs/locale/id';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+
+dayjs.extend(localizedFormat);
+dayjs.locale('id');
 
 const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefresh }) => {
   const [form] = Form.useForm();
@@ -78,7 +83,7 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
           name="tanggal"
           rules={[{ required: true, message: 'Tanggal wajib diisi' }]}
         >
-          <DatePicker format="DD/MM/YYYY" style={{ width: '100%' }} />
+          <DatePicker format="DD/MM/YYYY" style={{ width: '100%' }} getPopupContainer={() => document.body} />
         </Form.Item>
 
         <Form.Item
