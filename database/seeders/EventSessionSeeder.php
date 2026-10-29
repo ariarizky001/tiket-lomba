@@ -32,13 +32,8 @@ class EventSessionSeeder extends Seeder
             ['nama' => 'MB C PAKET INTEGRITAS', 'harga' => 4500000, 'kuota' => 24],
         ];
 
-        foreach ($sessions as $index => $sessionData) {
-            EventSession::create([
-                'event_id' => $event->id,
-                'nama' => $sessionData['nama'],
-                'harga' => $sessionData['harga'],
-                'kuota' => $sessionData['kuota'],
-            ]);
+        foreach ($sessions as $sessionData) {
+            EventSession::factory()->forEvent($event)->create($sessionData);
         }
 
         $this->command->info("Created 12 sessions for event: {$event->nama}");

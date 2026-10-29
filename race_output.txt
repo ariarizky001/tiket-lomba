@@ -1,0 +1,29 @@
+﻿[13:47:50] Login sebagai test@example.com...
+[13:47:51] Login OK, token: 12|H13r9gjYLGw1dbQV3...
+[13:47:51] Membuat event test...
+[13:47:51] Event ID: 8
+[13:47:52] Sesi C1 (quota=1) ID: 41
+[13:47:53] Sesi C2/C3 IDs: 42, 43, 44
+[13:47:53] 
+=== C1: 10 request simultan ke sesi quota 1 ===
+[13:47:57] Hasil C1: Sukses=1, Gagal(422)=9, Waktu=3.4785001277924s
+
+Fatal error: Uncaught TypeError: Cannot access offset of type string on string in D:\portofolio\tiket-lomba\tests\Race\race.php:151
+Stack trace:
+#0 [internal function]: {closure}('The nama field ...')
+#1 D:\portofolio\tiket-lomba\tests\Race\race.php(151): array_filter(Array, Object(Closure))
+#2 {main}
+php : PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in 
+D:\portofolio\tiket-lomba\tests\Race\race.php:151
+At line:1 char:1
++ php tests/Race/race.php 2>&1 | Out-File -Encoding utf8 race_output.tx ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (PHP Fatal error...ce\race.php:151:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Stack trace:
+#0 [internal function]: {closure}('The nama field ...')
+#1 D:\portofolio\tiket-lomba\tests\Race\race.php(151): array_filter(Array, Object(Closure))
+#2 {main}
+  thrown in D:\portofolio\tiket-lomba\tests\Race\race.php on line 151
+  thrown in D:\portofolio\tiket-lomba\tests\Race\race.php on line 151

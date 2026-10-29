@@ -275,11 +275,11 @@ class InvoiceTemplateTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonStructure(['teks'])
-            ->assertJsonPath('teks', function ($teks) {
+->assertJsonPath('teks', function ($teks) {
                 return str_contains($teks, 'Salam') &&
                        str_contains($teks, '1st Anniversary Solo High Class') &&
 str_contains($teks, 'Rizal Medan') &&
-                        str_contains($teks, 'Rp4.500.000');
+                         str_contains($teks, 'Rp4.500.277');
             });
     }
 

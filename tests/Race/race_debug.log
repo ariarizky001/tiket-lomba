@@ -1,0 +1,115 @@
+[13:51:55] Login sebagai test@example.com...
+[13:51:56] Login OK, token: 19|PjgRHEKrTibDoWlmv...
+[13:51:56] Membuat event test...
+[13:51:56] Event ID: 14
+[13:51:57] Sesi C1 (quota=1) ID: 65
+[13:51:58] Sesi C2/C3 IDs: 66, 67, 68
+[13:51:58] 
+=== C1: 10 request simultan ke sesi quota 1 ===
+[13:52:02] Hasil C1: Sukses=1, Gagal(422)=9, Waktu=3.3342959880829s
+[13:52:50] Login sebagai test@example.com...
+[13:52:51] Login OK, token: 20|kW6nre6e7ZRWEeDDF...
+[13:52:51] Membuat event test...
+[13:52:51] Event ID: 15
+[13:52:52] Sesi C1 (quota=1) ID: 69
+[13:52:53] Sesi C2/C3 IDs: 70, 71, 72
+[13:52:53] 
+=== C1: 10 request simultan ke sesi quota 1 ===
+[13:52:57] Hasil C1: Sukses=1, Gagal(422)=9, Waktu=3.7133631706238s
+[13:57:51] Login sebagai test@example.com...
+[13:57:52] Login OK, token: 21|MViEn9FnzyE5djTsq...
+[13:57:52] Membuat event test...
+[13:57:53] Event ID: 16
+[13:57:54] Sesi C1 (quota=1) ID: 73
+[13:57:56] Sesi C2/C3 IDs: 74, 75, 76
+[13:57:56] 
+=== C1: 10 request simultan ke sesi quota 1 ===
+[13:58:04] Hasil C1: Sukses=1, Gagal(422)=9, Waktu=7.4497520923615s
+[13:58:04] ERROR: C1 ERROR: Cannot access offset of type string on string
+#0 [internal function]: {closure}('The nama field ...')
+#1 D:\portofolio\tiket-lomba\tests\Race\race.php(161): array_filter(Array, Object(Closure))
+#2 {main}
+[13:59:10] Login sebagai test@example.com...
+[13:59:11] Login OK, token: 22|uw5FgDftddBuI2JLF...
+[13:59:11] Membuat event test...
+[13:59:11] Event ID: 17
+[13:59:12] Sesi C1 (quota=1) ID: 77
+[13:59:15] Sesi C2/C3 IDs: 78, 79, 80
+[13:59:15] 
+=== C1: 10 request simultan ke sesi quota 1 ===
+[13:59:21] Hasil C1: Sukses=1, Gagal(422)=9, Waktu=6.2782199382782s
+[13:59:22] Verifikasi DB: terjual=1, sisa=0, kuota=1
+[13:59:22] ✅ C1 LULUS: terjual <= kuota
+[13:59:22] >>> C1 SELESAI, lanjut ke C2...
+[13:59:22] 
+=== C2: 20 request simultan buat invoice (sesi beda) ===
+[13:59:35] Hasil C2: Sukses=20/20, Kode: 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, Waktu=13.046587944031s
+[13:59:36] ✅ C2 LULUS: nomor & kode invoice unik
+[13:59:36] >>> C2 SELESAI, lanjut ke C3...
+[13:59:36] 
+=== C3: Edit invoice bersamaan (2 request) ===
+[13:59:37] Invoice awal ID: 333 (total=100000)
+[13:59:38]   Request 1: code=405 err={"message":"The POST method is not supported for route api\/invoices\/333. Supported methods: GET, HEAD, PUT, DELETE.","exception":"Symfony\\Component\\HttpKernel\\Exception\\MethodNotAllowedHttpException","file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php","line":122,"trace":[{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php","line":107,"function":"requestMethodNotAllowed","class":"Illuminate\\Routing\\AbstractRouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php","line":41,"function":"getRouteForMethods","class":"Illuminate\\Routing\\AbstractRouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\RouteCollection.php","line":162,"function":"handleMatchedRoute","class":"Illuminate\\Routing\\AbstractRouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":761,"function":"match","class":"Illuminate\\Routing\\RouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":748,"function":"findRoute","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":737,"function":"dispatchToRoute","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":200,"function":"dispatch","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":144,"function":"Illuminate\\Foundation\\Http\\{closure}","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php","line":21,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php","line":31,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php","line":21,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php","line":40,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TrimStrings","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php","line":27,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php","line":99,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php","line":62,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Http\\Middleware\\HandleCors","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php","line":39,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Http\\Middleware\\TrustProxies","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":119,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":175,"function":"then","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":144,"function":"sendRequestThroughRouter","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\public\\index.php","line":51,"function":"handle","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php","line":16,"function":"require_once"}]}
+[13:59:38]   Request 2: code=405 err={"message":"The POST method is not supported for route api\/invoices\/333. Supported methods: GET, HEAD, PUT, DELETE.","exception":"Symfony\\Component\\HttpKernel\\Exception\\MethodNotAllowedHttpException","file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php","line":122,"trace":[{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php","line":107,"function":"requestMethodNotAllowed","class":"Illuminate\\Routing\\AbstractRouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\AbstractRouteCollection.php","line":41,"function":"getRouteForMethods","class":"Illuminate\\Routing\\AbstractRouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\RouteCollection.php","line":162,"function":"handleMatchedRoute","class":"Illuminate\\Routing\\AbstractRouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":761,"function":"match","class":"Illuminate\\Routing\\RouteCollection","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":748,"function":"findRoute","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php","line":737,"function":"dispatchToRoute","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":200,"function":"dispatch","class":"Illuminate\\Routing\\Router","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":144,"function":"Illuminate\\Foundation\\Http\\{closure}","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php","line":21,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php","line":31,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php","line":21,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php","line":40,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\TrimStrings","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php","line":27,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php","line":99,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php","line":62,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Http\\Middleware\\HandleCors","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php","line":39,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":183,"function":"handle","class":"Illuminate\\Http\\Middleware\\TrustProxies","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php","line":119,"function":"Illuminate\\Pipeline\\{closure}","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":175,"function":"then","class":"Illuminate\\Pipeline\\Pipeline","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php","line":144,"function":"sendRequestThroughRouter","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\public\\index.php","line":51,"function":"handle","class":"Illuminate\\Foundation\\Http\\Kernel","type":"->"},{"file":"D:\\portofolio\\tiket-lomba\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php","line":16,"function":"require_once"}]}
+[13:59:39] >>> C3 SELESAI...
+[13:59:39] 
+=== Query Integrity Check (via API) ===
+[13:59:40] ✅ Tidak ada kuota jebol
+[13:59:40] 
+=== SELESAI ===
+[14:02:09] Login sebagai test@example.com...
+[14:02:10] Login OK, token: 23|aEuSAF9gEzcrrEXwW...
+[14:02:10] Membuat event test...
+[14:02:11] Event ID: 18
+[14:02:12] Sesi C1 (quota=1) ID: 81
+[14:02:14] Sesi C2/C3 IDs: 82, 83, 84
+[14:02:14] 
+=== C1: 10 request simultan ke sesi quota 1 ===
+[14:02:18] Hasil C1: Sukses=1, Gagal(422)=9, Waktu=4.7876589298248s
+[14:02:19] Verifikasi DB: terjual=1, sisa=0, kuota=1
+[14:02:19] ✅ C1 LULUS: terjual <= kuota
+[14:02:19] >>> C1 SELESAI, lanjut ke C2...
+[14:02:19] 
+=== C2: 20 request simultan buat invoice (sesi beda) ===
+[14:02:30] Hasil C2: Sukses=20/20, Kode: 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, Waktu=10.463738918304s
+[14:02:30] ✅ C2 LULUS: nomor & kode invoice unik
+[14:02:30] >>> C2 SELESAI, lanjut ke C3...
+[14:02:30] 
+=== C3: Edit invoice bersamaan (2 request) ===
+[14:02:31] Invoice awal ID: 355 (total=100000)
+[14:02:32]   Request 1: code=200 total=300000
+[14:02:32]   Request 2: code=200 total=200000
+[14:02:32] >>> C3 SELESAI...
+[14:02:32] 
+=== Query Integrity Check (via API) ===
+[14:02:33] ✅ Tidak ada kuota jebol
+[14:02:33] 
+=== SELESAI ===
+[14:03:02] Login sebagai test@example.com...
+[14:03:02] Login OK, token: 24|NnrwxjleShqQ5V8PI...
+[14:03:02] Membuat event test...
+[14:03:03] Event ID: 19
+[14:03:03] Sesi C1 (quota=1) ID: 85
+[14:03:05] Sesi C2/C3 IDs: 86, 87, 88
+[14:03:05] 
+=== C1: 10 request simultan ke sesi quota 1 ===
+[14:03:10] Hasil C1: Sukses=1, Gagal(422)=9, Waktu=4.9262008666992s
+[14:03:11] Verifikasi DB: terjual=1, sisa=0, kuota=1
+[14:03:11] ✅ C1 LULUS: terjual <= kuota
+[14:03:11] >>> C1 SELESAI, lanjut ke C2...
+[14:03:11] 
+=== C2: 20 request simultan buat invoice (sesi beda) ===
+[14:03:25] Hasil C2: Sukses=20/20, Kode: 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, Waktu=14.079699993134s
+[14:03:26] ✅ C2 LULUS: nomor & kode invoice unik
+[14:03:26] >>> C2 SELESAI, lanjut ke C3...
+[14:03:26] 
+=== C3: Edit invoice bersamaan (2 request) ===
+[14:03:27] Invoice awal ID: 377 (total=100000)
+[14:03:28]   Request 1: code=200 total=300000
+[14:03:28]   Request 2: code=200 total=200000
+[14:03:29] >>> C3 SELESAI...
+[14:03:29] 
+=== Query Integrity Check (via API) ===
+[14:03:30] ✅ Tidak ada kuota jebol
+[14:03:30] 
+=== SELESAI ===

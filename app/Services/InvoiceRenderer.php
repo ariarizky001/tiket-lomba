@@ -63,7 +63,9 @@ class InvoiceRenderer
         $statusStr = strtoupper($statusVal) === 'LUNAS' ? 'LUNAS' : 'BELUM LUNAS';
         $statusIkon = strtoupper($statusVal) === 'LUNAS' ? '✅' : '⏳';
 
-        $totalAngka = $this->formatRupiahAngka($totalVal);
+        // Display total: subtotal + nomor invoice (only for display)
+        $displayTotalVal = $totalVal + (int)$nomorUrut;
+        $totalAngka = $this->formatRupiahAngka($displayTotalVal);
         $totalRp = 'Rp' . $totalAngka;
 
         $replacementsGeneral = [

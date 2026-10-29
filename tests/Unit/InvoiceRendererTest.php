@@ -116,7 +116,7 @@ class InvoiceRendererTest extends TestCase
             "1. MB A PAKET ANNIVERSARY — Rp4.500.000 = 1\n" .
             "━━━━━━━━━━━━━━━━━━\n" .
             "💰 TOTAL PEMBAYARAN\n" .
-            "👉 Rp 4.500.000\n" .
+            "👉 Rp 4.500.277\n" .
             "━━━━━━━━━━━━━━━━━━\n" .
             "⚠️ KETENTUAN PEMBAYARAN\n" .
             "Pembayaran maksimal 1 × 24 jam setelah invoice diterima.\n\n" .
@@ -166,7 +166,7 @@ class InvoiceRendererTest extends TestCase
 
         $rendered = $this->renderer->render($templateData, $event, $invoice);
 
-        $this->assertEquals("Nama: {total}\nTotal: Rp100.000", $rendered);
+        $this->assertEquals("Nama: {total}\nTotal: Rp100.001", $rendered);
     }
 
     /** @test */
@@ -482,8 +482,8 @@ class InvoiceRendererTest extends TestCase
         $this->assertStringContainsString('Nama: Test User', $renderedBelumLunas);
         $this->assertStringContainsString('Nama: Test User', $renderedLunas);
 
-        $this->assertStringContainsString('Total: Rp100.000', $renderedBelumLunas);
-        $this->assertStringContainsString('Total: Rp100.000', $renderedLunas);
+        $this->assertStringContainsString('Total: Rp100.001', $renderedBelumLunas);
+        $this->assertStringContainsString('Total: Rp100.001', $renderedLunas);
     }
 
     /** @test */
