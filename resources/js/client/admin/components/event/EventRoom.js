@@ -16,6 +16,7 @@ const EventRoom = () => {
   const { id } = useParams();
   const history = useHistory();
   const user = useSelector((state) => state.auth.user);
+  const permissions = useSelector((state) => state.auth.permissions);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -67,43 +68,51 @@ const EventRoom = () => {
       key: 'session',
       label: 'Sesi',
       children: <SessionTab event={event} />,
+      permission: 'view_sessions',
+    },
+    {
+      key: 'participant',
+      label: 'Peserta & Invoice',
+      children: <InvoiceTab event={event} />,
+      permission: 'view_invoices',
     },
     {
       key: 'rekap-peserta',
       label: 'Rekap Peserta',
       children: <RekapPeserta eventId={event.id} />,
+      permission: 'view_rekap',
     },
     {
       key: 'report',
       label: 'Laporan',
       children: <ReportTab event={event} />,
+      permission: 'view_reports',
     },
     {
       key: 'expense',
       label: 'Pengeluaran',
       children: <ExpenseTab eventId={event.id} />,
+      permission: 'view_expenses',
+    },
+    {
+      key: 'spreadsheet',
+      label: 'Koneksi Spreadsheet',
+      children: <SpreadsheetConnection eventId={event.id} />,
+      permission: 'manage_spreadsheet',
+    },
+    {
+      key: 'sheet-mapping',
+      label: 'Mapping Sheet',
+      children: <SheetRangeMappingPanel eventId={event.id} />,
+      permission: 'manage_sheet_mapping',
     },
   ];
 
-  if (user?.role === 'superadmin') {
-    items.splice(1, 0, {
-      key: 'participant',
-      label: 'Peserta & Invoice',
-      children: <InvoiceTab event={event} />,
-    });
-    items.push(
-      {
-        key: 'spreadsheet',
-        label: 'Koneksi Spreadsheet',
-        children: <SpreadsheetConnection eventId={event.id} />,
-      },
-      {
-        key: 'sheet-mapping',
-        label: 'Mapping Sheet',
-        children: <SheetRangeMappingPanel eventId={event.id} />,
-      }
-    );
-  }
+  const filteredItems = items.filter((item) => {
+    if (!item.permission) return true;
+    if (user?.role === 'superadmin') return true;
+    return permissions.includes(item.permission);
+  });
 
   return (
     <div>
@@ -113,7 +122,7 @@ const EventRoom = () => {
         subTitle={`${new Date(event.tanggal).toLocaleDateString('id-ID')}${event.lokasi ? ' • ' + event.lokasi : ''}`}
         style={{ marginBottom: 24 }}
       />
-      <Tabs items={items} />
+      <Tabs items={filteredItems} />
     </div>
   );
 };

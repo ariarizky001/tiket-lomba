@@ -11,6 +11,7 @@ const AppLayout = ({ children, location }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.auth.user);
+  const permissions = useSelector((state) => state.auth.permissions);
 
   const handleLogout = () => {
     dispatch(logout()).then(() => {
@@ -26,6 +27,7 @@ const AppLayout = ({ children, location }) => {
 
   if (user?.role === 'superadmin') {
     menuItems.push({ key: '/users', label: 'Kelola User' });
+    menuItems.push({ key: '/permissions', label: 'Kelola Permission' });
   }
 
   return (

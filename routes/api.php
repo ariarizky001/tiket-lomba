@@ -12,6 +12,7 @@ use App\Http\Controllers\EventSpreadsheetController;
 use App\Http\Controllers\SheetRangeMappingController;
 use App\Http\Controllers\RekapPesertaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
@@ -19,59 +20,59 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
+    
     Route::apiResource('events', EventController::class);
     Route::put('/events/{event}/sessions/reorder', [EventSessionController::class, 'reorder']);
     Route::apiResource('events.sessions', EventSessionController::class)
         ->shallow()
         ->parameters(['sessions' => 'eventSession']);
-    Route::get('/events/{event}/invoices', [InvoiceController::class, 'index']);
-    Route::post('/events/{event}/invoices', [InvoiceController::class, 'store']);
-    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show']);
-    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update']);
-    Route::patch('/invoices/{invoice}/status', [InvoiceController::class, 'status']);
-    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy']);
-    Route::get('/events/{event}/invoice-template', [InvoiceTemplateController::class, 'show']);
-    Route::put('/events/{event}/invoice-template', [InvoiceTemplateController::class, 'update']);
-    Route::post('/events/{event}/invoice-template/preview', [InvoiceTemplateController::class, 'preview']);
-    Route::get('/invoices/{invoice}/teks', [InvoiceTemplateController::class, 'renderInvoiceText']);
-    Route::get('/events/{event}/report', [ReportController::class, 'show']);
-    Route::put('/events/{event}/prizes', [ReportController::class, 'updatePrizes']);
-    Route::get('/expense-categories', fn() => response()->json(config('expense.categories')));
-    Route::get('/events/{event}/expenses', [ExpenseController::class, 'index']);
-    Route::post('/events/{event}/expenses', [ExpenseController::class, 'store']);
-    Route::put('/expenses/{expense}', [ExpenseController::class, 'update']);
-    Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
-    Route::get('/events/{event}/bookkeeping', [ExpenseController::class, 'bookkeeping']);
-    Route::get('/events/{event}/participant-recap', [ParticipantRecapController::class, 'show']);
-    Route::get('/events/{event}/rekap-peserta', [RekapPesertaController::class, 'show']);
-    Route::get('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'show']);
-    Route::post('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'store']);
-    Route::put('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'update']);
-    Route::delete('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'destroy']);
-    Route::post('/events/{event}/spreadsheet/test', [EventSpreadsheetController::class, 'testConnection']);
-    Route::post('/events/{event}/spreadsheet/send-rekap', [EventSpreadsheetController::class, 'sendRekapToSheet']);
     
-    Route::get('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'index']);
-    Route::post('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'store']);
-    Route::put('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'update']);
-    Route::delete('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'destroy']);
-    Route::post('/events/{event}/sheet-mappings/bulk', [SheetRangeMappingController::class, 'bulkStore']);
+    Route::get('/events/{event}/invoices', [InvoiceController::class, 'index'])->middleware('permission:view_invoices');
+    Route::post('/events/{event}/invoices', [InvoiceController::class, 'store'])->middleware('permission:create_invoices');
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->middleware('permission:view_invoices');
+    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->middleware('permission:edit_invoices');
+    Route::patch('/invoices/{invoice}/status', [InvoiceController::class, 'status'])->middleware('permission:change_invoice_status');
+    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->middleware('permission:delete_invoices');
+    
+    Route::get('/events/{event}/invoice-template', [InvoiceTemplateController::class, 'show'])->middleware('permission:view_invoices');
+    Route::put('/events/{event}/invoice-template', [InvoiceTemplateController::class, 'update'])->middleware('permission:manage_spreadsheet');
+    Route::post('/events/{event}/invoice-template/preview', [InvoiceTemplateController::class, 'preview'])->middleware('permission:view_invoices');
+    Route::get('/invoices/{invoice}/teks', [InvoiceTemplateController::class, 'renderInvoiceText'])->middleware('permission:view_invoices');
+    
+    Route::get('/events/{event}/report', [ReportController::class, 'show'])->middleware('permission:view_reports');
+    Route::put('/events/{event}/prizes', [ReportController::class, 'updatePrizes'])->middleware('permission:view_reports');
+    
+    Route::get('/expense-categories', fn() => response()->json(config('expense.categories')))->middleware('permission:view_expenses');
+    Route::get('/events/{event}/expenses', [ExpenseController::class, 'index'])->middleware('permission:view_expenses');
+    Route::post('/events/{event}/expenses', [ExpenseController::class, 'store'])->middleware('permission:manage_expenses');
+    Route::put('/expenses/{expense}', [ExpenseController::class, 'update'])->middleware('permission:manage_expenses');
+    Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->middleware('permission:manage_expenses');
+    Route::get('/events/{event}/bookkeeping', [ExpenseController::class, 'bookkeeping'])->middleware('permission:view_expenses');
+    
+    Route::get('/events/{event}/participant-recap', [ParticipantRecapController::class, 'show'])->middleware('permission:view_invoices');
+    Route::get('/events/{event}/rekap-peserta', [RekapPesertaController::class, 'show'])->middleware('permission:view_rekap');
+    
+    Route::get('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'show'])->middleware('permission:manage_spreadsheet');
+    Route::post('/events/{event}/spreadsheet/test', [EventSpreadsheetController::class, 'testConnection'])->middleware('permission:manage_spreadsheet');
+    Route::post('/events/{event}/spreadsheet/send-rekap', [EventSpreadsheetController::class, 'sendRekapToSheet'])->middleware('permission:manage_spreadsheet');
+    
+    Route::get('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'index'])->middleware('permission:manage_sheet_mapping');
 });
 
-// Only for superadmin
-Route::middleware(['auth:sanctum', 'role:superadmin'])->group(function () {
-    Route::apiResource('users', UserController::class);
-});
-
-// Restrict sensitive features for non-superadmin
 Route::middleware(['auth:sanctum', 'role:superadmin'])->group(function () {
     Route::post('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'store']);
     Route::put('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'update']);
     Route::delete('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'destroy']);
-    Route::post('/events/{event}/spreadsheet/test', [EventSpreadsheetController::class, 'testConnection']);
-    Route::post('/events/{event}/spreadsheet/send-rekap', [EventSpreadsheetController::class, 'sendRekapToSheet']);
     Route::post('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'store']);
     Route::put('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'update']);
     Route::delete('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'destroy']);
     Route::post('/events/{event}/sheet-mappings/bulk', [SheetRangeMappingController::class, 'bulkStore']);
+    
+    Route::apiResource('users', UserController::class);
+    
+    Route::get('/permissions', [PermissionController::class, 'index']);
+    Route::get('/permissions/role/{role}', [PermissionController::class, 'getRolePermissions']);
+    Route::put('/permissions/role/{role}', [PermissionController::class, 'updateRolePermissions']);
+    Route::get('/permissions/user/{user}', [PermissionController::class, 'getUserPermissions']);
+    Route::put('/permissions/user/{user}', [PermissionController::class, 'updateUserPermissions']);
 });

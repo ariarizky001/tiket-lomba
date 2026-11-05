@@ -2,12 +2,14 @@ import HTTP from '../../../common/helpers/HTTP';
 
 const INITIAL_STATE = {
   user: null,
+  permissions: [],
   ready: false,
 };
 
 const AUTH_SET_USER = 'AUTH_SET_USER';
 const AUTH_SET_READY = 'AUTH_SET_READY';
 const AUTH_LOGOUT = 'AUTH_LOGOUT';
+const AUTH_SET_PERMISSIONS = 'AUTH_SET_PERMISSIONS';
 
 export const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -15,7 +17,13 @@ export const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: action.payload,
+        permissions: action.payload.permissions || [],
         ready: true,
+      };
+    case AUTH_SET_PERMISSIONS:
+      return {
+        ...state,
+        permissions: action.payload,
       };
     case AUTH_SET_READY:
       return {
@@ -26,6 +34,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: null,
+        permissions: [],
       };
     default:
       return state;
@@ -62,11 +71,11 @@ export const fetchMe = () => (dispatch) => {
 export const login = (email, password) => (dispatch) => {
   return HTTP.post('/login', { email, password })
     .then((res) => {
-      const { token, ...user } = res.data;
+      const { token, permissions, ...user } = res.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      dispatch({ type: AUTH_SET_USER, payload: user });
-      return user;
+      dispatch({ type: AUTH_SET_USER, payload: { ...user, permissions } });
+      return { ...user, permissions };
     })
     .catch((err) => {
       throw err;

@@ -10,6 +10,7 @@ import EventList from '../components/event/EventList';
 import EventRoom from '../components/event/EventRoom';
 import RekapDashboard from '../components/rekap/RekapDashboard';
 import UserManagement from '../components/user/UserManagement';
+import PermissionManagement from '../components/permission/PermissionManagement';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,9 @@ const App = () => {
                 </Route>
                 <Route exact path="/users">
                   {user?.role === 'superadmin' ? <UserManagement /> : <Redirect to="/" />}
+                </Route>
+                <Route exact path="/permissions">
+                  {user?.role === 'superadmin' ? <PermissionManagement /> : <Redirect to="/" />}
                 </Route>
               </Switch>
             </AppLayout>
