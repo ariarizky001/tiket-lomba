@@ -29170,6 +29170,16 @@ module.exports = copy;
 
 /***/ }),
 
+/***/ "./node_modules/dayjs/plugin/weekday.js":
+/*!**********************************************!*\
+  !*** ./node_modules/dayjs/plugin/weekday.js ***!
+  \**********************************************/
+/***/ (function(module) {
+
+!function(e,t){ true?module.exports=t():0}(this,(function(){"use strict";return function(e,t){t.prototype.weekday=function(e){var t=this.$locale().weekStart||0,i=this.$W,n=(i<t?i+7:i)-t;return this.$utils().u(e)?n:this.subtract(n,"day").add(e,"day")}}}));
+
+/***/ }),
+
 /***/ "./node_modules/dom-align/dist-web/index.js":
 /*!**************************************************!*\
   !*** ./node_modules/dom-align/dist-web/index.js ***!

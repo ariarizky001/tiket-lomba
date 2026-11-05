@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, message, Spin, Table, Modal, Typography, Tag, Space } from 'antd';
+import { Form, Input, InputNumber, Select, Button, message, Spin, Table, Modal, Typography, Tag, Space } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
 
@@ -242,7 +242,7 @@ const SheetRangeMappingPanel = ({ eventId }) => {
             name="session_id"
             rules={[{ required: true, message: 'Pilih sesi' }]}
           >
-            <Form.Item.Input
+            <Select
               options={sessions.map(s => ({ label: `${s.nomor_urut}. ${s.nama}`, value: s.id }))}
               placeholder="Pilih sesi"
             />
@@ -253,7 +253,7 @@ const SheetRangeMappingPanel = ({ eventId }) => {
             name="session_index"
             rules={[{ required: true, message: 'Index sesi diperlukan' }]}
           >
-            <Input.Number min={1} placeholder="1, 2, 3..." />
+            <InputNumber min={1} placeholder="1, 2, 3..." style={{ width: '100%' }} />
           </Form.Item>
 
           <Form.Item

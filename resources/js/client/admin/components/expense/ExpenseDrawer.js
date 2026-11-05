@@ -4,8 +4,12 @@ import HTTP from '../../../../common/helpers/HTTP';
 import dayjs from 'dayjs';
 import 'dayjs/locale/id';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import isBetween from 'dayjs/plugin/isBetween';
+import weekday from 'dayjs/plugin/weekday';
 
 dayjs.extend(localizedFormat);
+dayjs.extend(isBetween);
+dayjs.extend(weekday);
 dayjs.locale('id');
 
 const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefresh }) => {
@@ -13,24 +17,28 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (expense) {
-      form.setFieldsValue({
-        tanggal: dayjs(expense.tanggal),
-        kategori: expense.kategori,
-        keterangan: expense.keterangan,
-        penerima: expense.penerima,
-        nominal: expense.nominal,
-      });
+    if (visible) {
+      if (expense) {
+        form.setFieldsValue({
+          tanggal: dayjs(expense.tanggal),
+          kategori: expense.kategori,
+          keterangan: expense.keterangan,
+          penerima: expense.penerima,
+          nominal: expense.nominal,
+        });
+      } else {
+        form.setFieldsValue({
+          tanggal: dayjs(),
+          kategori: undefined,
+          keterangan: '',
+          penerima: '',
+          nominal: undefined,
+        });
+      }
     } else {
-      form.setFieldsValue({
-        tanggal: dayjs(),
-        kategori: undefined,
-        keterangan: '',
-        penerima: '',
-        nominal: undefined,
-      });
+      form.resetFields();
     }
-  }, [expense, visible, form]);
+  }, [expense, visible]);
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -76,6 +84,7 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
       onClose={onClose}
       open={visible}
       width={400}
+      destroyOnClose
     >
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
@@ -83,7 +92,13 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
           name="tanggal"
           rules={[{ required: true, message: 'Tanggal wajib diisi' }]}
         >
-          <DatePicker format="DD/MM/YYYY" style={{ width: '100%' }} getPopupContainer={() => document.body} />
+          <div onMouseDown={(e) => e.stopPropagation()}>
+            <DatePicker
+              format="DD/MM/YYYY"
+              style={{ width: '100%', zIndex: 9999 }}
+              getPopupContainer={() => document.body}
+            />
+          </div>
         </Form.Item>
 
         <Form.Item

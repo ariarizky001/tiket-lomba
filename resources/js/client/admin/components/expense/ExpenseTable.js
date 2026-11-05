@@ -6,9 +6,11 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/id';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import isBetween from 'dayjs/plugin/isBetween';
+import weekday from 'dayjs/plugin/weekday';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isBetween);
+dayjs.extend(weekday);
 dayjs.locale('id');
 
 const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categories }) => {
