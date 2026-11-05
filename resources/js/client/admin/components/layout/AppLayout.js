@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Layout, Menu, Button, Popconfirm, message } from 'antd';
+import { Layout, Menu, Button, Popconfirm, message, Tag } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { logout } from '../../redux/auth';
 
@@ -24,6 +24,10 @@ const AppLayout = ({ children, location }) => {
     { key: '/events', label: 'Event' },
   ];
 
+  if (user?.role === 'superadmin') {
+    menuItems.push({ key: '/users', label: 'Kelola User' });
+  }
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ background: '#fff', padding: '0 24px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -31,6 +35,11 @@ const AppLayout = ({ children, location }) => {
         <Menu mode="horizontal" selectedKeys={[location.pathname]} items={menuItems} onClick={(e) => history.push(e.key)} style={{ flex: 1, marginLeft: 32 }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <span>{user?.name}</span>
+          {user?.role && (
+            <Tag color={user.role === 'superadmin' ? 'red' : 'green'}>
+              {user.role === 'superadmin' ? 'Superadmin' : 'Admin'}
+            </Tag>
+          )}
           <Popconfirm
             title="Keluar"
             description="Apakah Anda yakin ingin keluar?"

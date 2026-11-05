@@ -11,6 +11,7 @@ use App\Http\Controllers\ParticipantRecapController;
 use App\Http\Controllers\EventSpreadsheetController;
 use App\Http\Controllers\SheetRangeMappingController;
 use App\Http\Controllers\RekapPesertaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
@@ -51,6 +52,24 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/events/{event}/spreadsheet/send-rekap', [EventSpreadsheetController::class, 'sendRekapToSheet']);
     
     Route::get('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'index']);
+    Route::post('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'store']);
+    Route::put('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'update']);
+    Route::delete('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'destroy']);
+    Route::post('/events/{event}/sheet-mappings/bulk', [SheetRangeMappingController::class, 'bulkStore']);
+});
+
+// Only for superadmin
+Route::middleware(['auth:sanctum', 'role:superadmin'])->group(function () {
+    Route::apiResource('users', UserController::class);
+});
+
+// Restrict sensitive features for non-superadmin
+Route::middleware(['auth:sanctum', 'role:superadmin'])->group(function () {
+    Route::post('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'store']);
+    Route::put('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'update']);
+    Route::delete('/events/{event}/spreadsheet', [EventSpreadsheetController::class, 'destroy']);
+    Route::post('/events/{event}/spreadsheet/test', [EventSpreadsheetController::class, 'testConnection']);
+    Route::post('/events/{event}/spreadsheet/send-rekap', [EventSpreadsheetController::class, 'sendRekapToSheet']);
     Route::post('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'store']);
     Route::put('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'update']);
     Route::delete('/events/{event}/sheet-mappings/{mapping}', [SheetRangeMappingController::class, 'destroy']);

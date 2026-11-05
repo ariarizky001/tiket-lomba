@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { PageHeader, Tabs, Result, Button, Spin } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
@@ -14,6 +15,7 @@ import SheetRangeMappingPanel from '../spreadsheet/SheetRangeMappingPanel';
 const EventRoom = () => {
   const { id } = useParams();
   const history = useHistory();
+  const user = useSelector((state) => state.auth.user);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -67,11 +69,6 @@ const EventRoom = () => {
       children: <SessionTab event={event} />,
     },
     {
-      key: 'participant',
-      label: 'Peserta & Invoice',
-      children: <InvoiceTab event={event} />,
-    },
-    {
       key: 'rekap-peserta',
       label: 'Rekap Peserta',
       children: <RekapPeserta eventId={event.id} />,
@@ -86,17 +83,27 @@ const EventRoom = () => {
       label: 'Pengeluaran',
       children: <ExpenseTab eventId={event.id} />,
     },
-    {
-      key: 'spreadsheet',
-      label: 'Koneksi Spreadsheet',
-      children: <SpreadsheetConnection eventId={event.id} />,
-    },
-    {
-      key: 'sheet-mapping',
-      label: 'Mapping Sheet',
-      children: <SheetRangeMappingPanel eventId={event.id} />,
-    },
   ];
+
+  if (user?.role === 'superadmin') {
+    items.splice(1, 0, {
+      key: 'participant',
+      label: 'Peserta & Invoice',
+      children: <InvoiceTab event={event} />,
+    });
+    items.push(
+      {
+        key: 'spreadsheet',
+        label: 'Koneksi Spreadsheet',
+        children: <SpreadsheetConnection eventId={event.id} />,
+      },
+      {
+        key: 'sheet-mapping',
+        label: 'Mapping Sheet',
+        children: <SheetRangeMappingPanel eventId={event.id} />,
+      }
+    );
+  }
 
   return (
     <div>
