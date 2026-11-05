@@ -77,7 +77,15 @@ const SessionTable = ({
             <tr className="rekap-header-row-1" style={headerRowStyle}>
               <th colSpan="2" className="rekap-session-name" title={nama} style={headerCellStyle}>
                 <div className="flex items-center justify-between" style={{ padding: '0 4px', height: '100%' }}>
-                  <span style={{ fontSize: `${headerFontSize}px`, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <span style={{ 
+                    fontSize: `${headerFontSize}px`, 
+                    whiteSpace: 'nowrap', 
+                    overflow: 'hidden', 
+                    textOverflow: 'ellipsis',
+                    flex: '1 1 auto',
+                    minWidth: 0,
+                    marginRight: '8px'
+                  }}>
                     Sesi {nomor_urut} {nama}
                   </span>
                   {!isDashboard && eventId && (

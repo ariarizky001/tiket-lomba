@@ -30,27 +30,27 @@ const SendToSheetButton = ({ eventId, sessionId, sessionName, onSuccess }) => {
     if (loading) {
       return {
         icon: <LoadingOutlined />,
-        children: 'Mengirim...',
+        title: 'Mengirim...',
         loading: true,
       };
     }
     if (status === 'success') {
       return {
         icon: <CheckCircleOutlined />,
-        children: 'Terkirim',
+        title: 'Terkirim',
         type: 'success',
       };
     }
     if (status === 'error') {
       return {
         icon: <ExclamationCircleOutlined />,
-        children: 'Gagal',
+        title: 'Gagal',
         danger: true,
       };
     }
     return {
       icon: <SendOutlined />,
-      children: 'Kirim ke Sheet',
+      title: 'Kirim ke Sheet',
     };
   };
 
@@ -67,8 +67,10 @@ const SendToSheetButton = ({ eventId, sessionId, sessionName, onSuccess }) => {
       <Button
         type="primary"
         size="small"
-        {...props}
+        icon={props.icon}
         disabled={loading}
+        title={props.title}
+        {...props}
       />
     </Popconfirm>
   );
