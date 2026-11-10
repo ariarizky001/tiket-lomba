@@ -24,7 +24,9 @@ export const generateInvoiceCode = (eventName, invoiceNumber) => {
 };
 
 export const sessionName = (item) => {
-  return item.session_nama || item.event_session?.nama || item.eventSession?.nama || `Sesi #${item.event_session_id}`;
+  const nama = item.session_nama || item.event_session?.nama || item.eventSession?.nama || `Sesi #${item.event_session_id}`;
+  const nomor = item.session_nomor || item.event_session?.nomor_urut || item.eventSession?.nomor_urut;
+  return nomor ? `${nomor}. ${nama}` : nama;
 };
 
 export default { formatRupiah, formatAngka, generateInvoiceCode, sessionName };
