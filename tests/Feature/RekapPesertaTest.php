@@ -22,7 +22,7 @@ class RekapPesertaTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->user = User::factory()->superadmin()->create();
         $this->event = Event::factory()->create();
     }
 

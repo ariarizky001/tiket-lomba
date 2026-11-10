@@ -43,6 +43,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['permissions'];
+
+    /**
+     * Cached permissions for the current request to avoid N+1 queries
+     *
+     * @var array|null
+     */
+    protected $cachedPermissions = null;
+
     public function isSuperAdmin(): bool
     {
         return $this->role === 'superadmin';
@@ -53,49 +62,58 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
-    public function hasPermission(string $permission): bool
+    /**
+     * Load all permissions for this user once and cache them for the request
+     *
+     * @return array
+     */
+    protected function loadPermissions(): array
     {
-        if ($this->isSuperAdmin()) {
-            return true;
+        if ($this->cachedPermissions !== null) {
+            return $this->cachedPermissions;
         }
 
-        $hasRolePermission = RolePermission::where('role', $this->role)
-            ->whereHas('permission', fn($q) => $q->where('name', $permission))
-            ->exists();
-
-        $userPermission = UserPermission::where('user_id', $this->id)
-            ->whereHas('permission', fn($q) => $q->where('name', $permission))
-            ->first();
-
-        if ($userPermission) {
-            return $userPermission->granted;
-        }
-
-        return $hasRolePermission;
-    }
-
-    public function getAllPermissions()
-    {
         if ($this->isSuperAdmin()) {
-            return Permission::pluck('name');
+            return $this->cachedPermissions = Permission::pluck('name')->toArray();
         }
 
         $rolePermissions = Permission::whereHas('rolePermissions', fn($q) =>
             $q->where('role', $this->role)
-        )->pluck('name');
+        )->pluck('name')->toArray();
 
         $userPermissions = UserPermission::where('user_id', $this->id)
             ->with('permission')
             ->get();
 
         foreach ($userPermissions as $up) {
-            if ($up->granted && !$rolePermissions->contains($up->permission->name)) {
-                $rolePermissions->push($up->permission->name);
+            if ($up->granted && !in_array($up->permission->name, $rolePermissions)) {
+                $rolePermissions[] = $up->permission->name;
             } elseif (!$up->granted) {
-                $rolePermissions = $rolePermissions->reject(fn($p) => $p === $up->permission->name);
+                $rolePermissions = array_filter($rolePermissions, fn($p) => $p !== $up->permission->name);
             }
         }
 
-        return $rolePermissions;
+        return $this->cachedPermissions = array_values($rolePermissions);
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        $permissions = $this->loadPermissions();
+        
+        return in_array($permission, $permissions);
+    }
+
+    public function getAllPermissions()
+    {
+        return collect($this->loadPermissions());
+    }
+
+    public function getPermissionsAttribute()
+    {
+        return $this->loadPermissions();
     }
 }

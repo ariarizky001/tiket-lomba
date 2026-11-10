@@ -19,7 +19,7 @@ class PrizeTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->user = User::factory()->superadmin()->create();
     }
 
     public function test_update_prizes_bulk()

@@ -3,6 +3,7 @@ import { Table, Button, Input, Select, Tag, Popconfirm, message, Empty, Space } 
 import { EyeOutlined, EditOutlined, CheckOutlined, StopOutlined, DeleteOutlined, SettingOutlined, UserAddOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
 import { formatRupiah, sessionName } from '../../../common/helpers/Utils';
+import dayjs from 'dayjs';
 import InvoiceForm from './InvoiceForm';
 import InvoiceView from './InvoiceView';
 import InvoiceTemplateModal from './InvoiceTemplateModal';
@@ -170,6 +171,16 @@ const InvoiceTab = ({ event }) => {
         ) : (
           <Tag color="error">Belum Lunas</Tag>
         ),
+    },
+    {
+      title: 'Tgl Lunas',
+      dataIndex: 'paid_at',
+      key: 'paid_at',
+      width: 120,
+      render: (paidAt, record) =>
+        record.status === 'lunas' && paidAt
+          ? dayjs(paidAt).format('DD/MM/YYYY')
+          : '-',
     },
     {
       title: 'Aksi',

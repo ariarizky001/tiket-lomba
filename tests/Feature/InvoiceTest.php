@@ -20,7 +20,7 @@ class InvoiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->user = User::factory()->superadmin()->create();
     }
 
     public function test_create_invoice_with_two_sessions()

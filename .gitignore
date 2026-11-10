@@ -34,6 +34,7 @@ storage/framework/views/*
 
 # Testing
 /coverage
+.phpunit.result.cache
 
 # Laravel Mix
 /public/js/manifest.js
@@ -42,13 +43,6 @@ storage/framework/views/*
 /public/css/antd.css
 /public/mix-manifest.json
 
-# Optional: jika ingin commit built assets
-# !public/js/manifest.js
-# !public/js/vendor.js
-# !public/js/admin.js
-# !public/css/antd.css
-# !public/mix-manifest.json
-
 # Google Service Account Credentials
 *.json
 !composer.json
@@ -56,3 +50,14 @@ storage/framework/views/*
 !package.json
 !package-lock.json
 !public/mix-manifest.json
+
+# CI/CD artifacts
+.gitlab-ci.yml.backup
+deploy.sh.backup
+rollback.sh.backup
+*.tmp
+*.temp
+
+# Docker environment
+.env.docker
+.env.docker.local

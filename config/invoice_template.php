@@ -20,7 +20,7 @@ return [
         'kelas_pesanan' => [
             'aktif' => true,
             'teks' => "🎟️ KELAS PESANAN",
-            'format_baris' => "{no}. {nama_sesi} — {harga} = {qty}",
+            'format_baris' => "{nomor_sesi}. {nama_sesi} — {harga} = {qty}",
         ],
         'total_pembayaran' => [
             'aktif' => true,
@@ -57,7 +57,7 @@ return [
         'kelas_pesanan' => [
             'aktif' => true,
             'teks' => "🎟️ KELAS PESANAN",
-            'format_baris' => "{no}. {nama_sesi} — {harga} = {qty}",
+            'format_baris' => "{nomor_sesi}. {nama_sesi} — {harga} = {qty}",
         ],
         'total_pembayaran' => [
             'aktif' => true,

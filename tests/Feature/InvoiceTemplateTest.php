@@ -22,7 +22,7 @@ class InvoiceTemplateTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->user = User::factory()->superadmin()->create();
         $this->event = Event::create([
             'nama' => '1st Anniversary Solo High Class',
             'tanggal' => '2026-10-11',

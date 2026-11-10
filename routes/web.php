@@ -6,10 +6,6 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
-Route::get('/admin/{any?}', function () {
-    return view('admin.app');
-})->where('any', '.*');
+Route::view('/admin/{any?}', 'admin.app')->where('any', '.*');
 
-Route::get('/admin/events/{event}/rekap/layar-penuh', function () {
-    return view('admin.app');
-})->where('event', '[0-9]+');
+Route::view('/admin/events/{event}/rekap/layar-penuh', 'admin.app')->where('event', '[0-9]+');
