@@ -13,6 +13,9 @@ use App\Http\Controllers\SheetRangeMappingController;
 use App\Http\Controllers\RekapPesertaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\LatberController;
+use App\Http\Controllers\LatberSessionController;
+use App\Http\Controllers\LatberCountController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
@@ -62,6 +65,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/events/{event}/spreadsheet/send-rekap', [EventSpreadsheetController::class, 'sendRekapToSheet'])->middleware('permission:manage_spreadsheet');
     
     Route::get('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'index'])->middleware('permission:manage_sheet_mapping');
+    
+    Route::apiResource('latbers', LatberController::class);
+    Route::put('/latbers/{latber}/sessions/reorder', [LatberSessionController::class, 'reorder']);
+    Route::get('/latbers/{latber}/sessions', [LatberSessionController::class, 'index']);
+    Route::post('/latbers/{latber}/sessions', [LatberSessionController::class, 'store']);
+    Route::put('/latber-sessions/{latberSession}', [LatberSessionController::class, 'update']);
+    Route::delete('/latber-sessions/{latberSession}', [LatberSessionController::class, 'destroy']);
+    Route::put('/latbers/{latber}/terjual', [LatberCountController::class, 'updateTerjual']);
+    Route::put('/latbers/{latber}/terpesan', [LatberCountController::class, 'updateTerpesan']);
+    Route::put('/latbers/{latber}/terpesan/ambil', [LatberCountController::class, 'ambilTerpesan']);
 });
 
 Route::middleware(['auth:sanctum', 'role:superadmin'])->group(function () {

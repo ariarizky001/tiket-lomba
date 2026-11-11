@@ -23,6 +23,7 @@ const AppLayout = ({ children, location }) => {
   const menuItems = [
     { key: '/', label: 'Dashboard' },
     { key: '/events', label: 'Event' },
+    { key: '/latbers', label: 'Latber' },
   ];
 
   if (user?.role === 'superadmin') {

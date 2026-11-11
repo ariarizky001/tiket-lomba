@@ -11,6 +11,8 @@ import EventRoom from '../components/event/EventRoom';
 import RekapDashboard from '../components/rekap/RekapDashboard';
 import UserManagement from '../components/user/UserManagement';
 import PermissionManagement from '../components/permission/PermissionManagement';
+import LatberList from '../components/latber/LatberList';
+import LatberRoom from '../components/latber/LatberRoom';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,6 +49,12 @@ const App = () => {
                 </Route>
                 <Route path="/events/:id">
                   <EventRoom />
+                </Route>
+                <Route exact path="/latbers">
+                  <LatberList />
+                </Route>
+                <Route path="/latbers/:id">
+                  <LatberRoom />
                 </Route>
                 <Route exact path="/users">
                   {user?.role === 'superadmin' ? <UserManagement /> : <Redirect to="/" />}

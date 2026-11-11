@@ -26,6 +26,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        Route::model('latberSession', \App\Models\LatberSession::class);
+        Route::model('latber', \App\Models\Latber::class);
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
