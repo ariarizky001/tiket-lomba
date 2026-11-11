@@ -77,6 +77,15 @@ const PermissionManagement = () => {
       ),
     },
     {
+      key: 'latber',
+      label: (
+        <span>
+          <UserOutlined />
+          Latber
+        </span>
+      ),
+    },
+    {
       key: 'superadmin',
       label: (
         <span>

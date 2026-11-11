@@ -116,9 +116,9 @@ const UserManagement = () => {
       key: 'role',
       width: 150,
       render: (role) => {
-        const color = role === 'superadmin' ? 'red' : 'green';
-        const text = role === 'superadmin' ? 'Superadmin' : 'Admin';
-        return <Tag color={color}>{text}</Tag>;
+        if (role === 'superadmin') return <Tag color="red">Superadmin</Tag>;
+        if (role === 'latber') return <Tag color="blue">Latber</Tag>;
+        return <Tag color="green">Admin</Tag>;
       },
     },
     {
@@ -242,6 +242,9 @@ const UserManagement = () => {
               </Select.Option>
               <Select.Option value="admin">
                 <Tag color="green">Admin</Tag>
+              </Select.Option>
+              <Select.Option value="latber">
+                <Tag color="blue">Latber</Tag>
               </Select.Option>
             </Select>
           </Form.Item>

@@ -29,11 +29,25 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
     
-    Route::apiResource('events', EventController::class);
-    Route::put('/events/{event}/sessions/reorder', [EventSessionController::class, 'reorder']);
+    Route::apiResource('events', EventController::class)
+        ->middleware([
+            'index' => 'permission:view_events',
+            'store' => 'permission:manage_events',
+            'show' => 'permission:view_events',
+            'update' => 'permission:manage_events',
+            'destroy' => 'permission:manage_events',
+        ]);
+    Route::put('/events/{event}/sessions/reorder', [EventSessionController::class, 'reorder'])->middleware('permission:manage_sessions');
     Route::apiResource('events.sessions', EventSessionController::class)
         ->shallow()
-        ->parameters(['sessions' => 'eventSession']);
+        ->parameters(['sessions' => 'eventSession'])
+        ->middleware([
+            'index' => 'permission:view_sessions',
+            'store' => 'permission:manage_sessions',
+            'show' => 'permission:view_sessions',
+            'update' => 'permission:manage_sessions',
+            'destroy' => 'permission:manage_sessions',
+        ]);
     
     Route::get('/events/{event}/invoices', [InvoiceController::class, 'index'])->middleware('permission:view_invoices');
     Route::post('/events/{event}/invoices', [InvoiceController::class, 'store'])->middleware('permission:create_invoices');
@@ -66,15 +80,22 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('/events/{event}/sheet-mappings', [SheetRangeMappingController::class, 'index'])->middleware('permission:manage_sheet_mapping');
     
-    Route::apiResource('latbers', LatberController::class);
-    Route::put('/latbers/{latber}/sessions/reorder', [LatberSessionController::class, 'reorder']);
-    Route::get('/latbers/{latber}/sessions', [LatberSessionController::class, 'index']);
-    Route::post('/latbers/{latber}/sessions', [LatberSessionController::class, 'store']);
-    Route::put('/latber-sessions/{latberSession}', [LatberSessionController::class, 'update']);
-    Route::delete('/latber-sessions/{latberSession}', [LatberSessionController::class, 'destroy']);
-    Route::put('/latbers/{latber}/terjual', [LatberCountController::class, 'updateTerjual']);
-    Route::put('/latbers/{latber}/terpesan', [LatberCountController::class, 'updateTerpesan']);
-    Route::put('/latbers/{latber}/terpesan/ambil', [LatberCountController::class, 'ambilTerpesan']);
+    Route::apiResource('latbers', LatberController::class)
+        ->middleware([
+            'index' => 'permission:view_latbers',
+            'store' => 'permission:manage_latbers',
+            'show' => 'permission:view_latbers',
+            'update' => 'permission:manage_latbers',
+            'destroy' => 'permission:manage_latbers',
+        ]);
+    Route::put('/latbers/{latber}/sessions/reorder', [LatberSessionController::class, 'reorder'])->middleware('permission:manage_latber_sessions');
+    Route::get('/latbers/{latber}/sessions', [LatberSessionController::class, 'index'])->middleware('permission:view_latber_sessions');
+    Route::post('/latbers/{latber}/sessions', [LatberSessionController::class, 'store'])->middleware('permission:manage_latber_sessions');
+    Route::put('/latber-sessions/{latberSession}', [LatberSessionController::class, 'update'])->middleware('permission:manage_latber_sessions');
+    Route::delete('/latber-sessions/{latberSession}', [LatberSessionController::class, 'destroy'])->middleware('permission:manage_latber_sessions');
+    Route::put('/latbers/{latber}/terjual', [LatberCountController::class, 'updateTerjual'])->middleware('permission:manage_latber_sessions');
+    Route::put('/latbers/{latber}/terpesan', [LatberCountController::class, 'updateTerpesan'])->middleware('permission:manage_latber_sessions');
+    Route::put('/latbers/{latber}/terpesan/ambil', [LatberCountController::class, 'ambilTerpesan'])->middleware('permission:manage_latber_sessions');
 });
 
 Route::middleware(['auth:sanctum', 'role:superadmin'])->group(function () {

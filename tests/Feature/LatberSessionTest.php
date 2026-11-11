@@ -21,6 +21,31 @@ class LatberSessionTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->latber = Latber::create(['nama' => 'Latber Utama', 'tanggal' => '2026-11-15']);
+        $this->grantLatberPermissions();
+    }
+
+    protected function grantLatberPermissions(): void
+    {
+        $permissionNames = [
+            'view_latbers',
+            'manage_latbers',
+            'view_latber_sessions',
+            'manage_latber_sessions',
+        ];
+
+        foreach ($permissionNames as $name) {
+            $permission = \App\Models\Permission::firstOrCreate(
+                ['name' => $name],
+                ['display_name' => ucfirst(str_replace('_', ' ', $name)), 'category' => 'latber', 'description' => 'Test permission']
+            );
+            
+            \App\Models\UserPermission::firstOrCreate([
+                'user_id' => $this->user->id,
+                'permission_id' => $permission->id,
+            ], [
+                'granted' => true,
+            ]);
+        }
     }
 
     public function test_create_session_with_default_nomor_urut()

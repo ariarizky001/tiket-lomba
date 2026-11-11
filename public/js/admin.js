@@ -5599,13 +5599,19 @@ var AppLayout = function AppLayout(_ref) {
   var menuItems = [{
     key: '/',
     label: 'Dashboard'
-  }, {
-    key: '/events',
-    label: 'Event'
-  }, {
-    key: '/latbers',
-    label: 'Latber'
   }];
+  if ((user === null || user === void 0 ? void 0 : user.role) === 'superadmin' || permissions.includes('view_events')) {
+    menuItems.push({
+      key: '/events',
+      label: 'Event'
+    });
+  }
+  if ((user === null || user === void 0 ? void 0 : user.role) === 'superadmin' || permissions.includes('view_latbers')) {
+    menuItems.push({
+      key: '/latbers',
+      label: 'Latber'
+    });
+  }
   if ((user === null || user === void 0 ? void 0 : user.role) === 'superadmin') {
     menuItems.push({
       key: '/users',
@@ -5862,6 +5868,11 @@ var PermissionManagement = function PermissionManagement() {
     key: 'admin',
     label: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {}), "Admin"]
+    })
+  }, {
+    key: 'latber',
+    label: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {}), "Latber"]
     })
   }, {
     key: 'superadmin',
@@ -9035,11 +9046,17 @@ var UserManagement = function UserManagement() {
     key: 'role',
     width: 150,
     render: function render(role) {
-      var color = role === 'superadmin' ? 'red' : 'green';
-      var text = role === 'superadmin' ? 'Superadmin' : 'Admin';
+      if (role === 'superadmin') return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        color: "red",
+        children: "Superadmin"
+      });
+      if (role === 'latber') return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        color: "blue",
+        children: "Latber"
+      });
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        color: color,
-        children: text
+        color: "green",
+        children: "Admin"
       });
     }
   }, {
@@ -9197,6 +9214,12 @@ var UserManagement = function UserManagement() {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
                 color: "green",
                 children: "Admin"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_18__["default"].Option, {
+              value: "latber",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                color: "blue",
+                children: "Latber"
               })
             })]
           })

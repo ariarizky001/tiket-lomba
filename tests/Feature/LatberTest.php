@@ -19,6 +19,31 @@ class LatberTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->grantLatberPermissions();
+    }
+
+    protected function grantLatberPermissions(): void
+    {
+        $permissionNames = [
+            'view_latbers',
+            'manage_latbers',
+            'view_latber_sessions',
+            'manage_latber_sessions',
+        ];
+
+        foreach ($permissionNames as $name) {
+            $permission = \App\Models\Permission::firstOrCreate(
+                ['name' => $name],
+                ['display_name' => ucfirst(str_replace('_', ' ', $name)), 'category' => 'latber', 'description' => 'Test permission']
+            );
+            
+            \App\Models\UserPermission::firstOrCreate([
+                'user_id' => $this->user->id,
+                'permission_id' => $permission->id,
+            ], [
+                'granted' => true,
+            ]);
+        }
     }
 
     public function test_unauthenticated_requests_return_401()

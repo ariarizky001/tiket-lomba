@@ -22,9 +22,15 @@ const AppLayout = ({ children, location }) => {
 
   const menuItems = [
     { key: '/', label: 'Dashboard' },
-    { key: '/events', label: 'Event' },
-    { key: '/latbers', label: 'Latber' },
   ];
+
+  if (user?.role === 'superadmin' || permissions.includes('view_events')) {
+    menuItems.push({ key: '/events', label: 'Event' });
+  }
+
+  if (user?.role === 'superadmin' || permissions.includes('view_latbers')) {
+    menuItems.push({ key: '/latbers', label: 'Latber' });
+  }
 
   if (user?.role === 'superadmin') {
     menuItems.push({ key: '/users', label: 'Kelola User' });

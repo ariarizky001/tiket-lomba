@@ -20,7 +20,18 @@ class UserSeeder extends Seeder
             'role' => 'superadmin',
         ]);
 
+        // Create Latber Admin user with role 'latber'
+        User::firstOrCreate(
+            ['email' => 'latber@example.com'],
+            [
+                'name' => 'Latber Admin',
+                'password' => Hash::make('password'),
+                'role' => 'latber',
+            ]
+        );
+
         $this->command->info("Default admin user created: {$email}");
+        $this->command->info("Latber admin user created: latber@example.com");
         $this->command->warn('IMPORTANT: Change ADMIN_EMAIL and ADMIN_PASSWORD in .env before production use!');
     }
 }

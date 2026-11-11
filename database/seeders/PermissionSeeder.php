@@ -37,6 +37,12 @@ class PermissionSeeder extends Seeder
             // Spreadsheet Integration
             ['name' => 'manage_spreadsheet', 'display_name' => 'Kelola Koneksi Spreadsheet', 'category' => 'integration', 'description' => 'Bisa mengatur koneksi Google Spreadsheet'],
             ['name' => 'manage_sheet_mapping', 'display_name' => 'Kelola Mapping Sheet', 'category' => 'integration', 'description' => 'Bisa mengatur mapping session ke spreadsheet'],
+            
+            // Latber
+            ['name' => 'view_latbers', 'display_name' => 'Lihat Latber', 'category' => 'latber', 'description' => 'Bisa melihat daftar latber'],
+            ['name' => 'manage_latbers', 'display_name' => 'Kelola Latber', 'category' => 'latber', 'description' => 'Bisa menambah, mengedit, menghapus latber'],
+            ['name' => 'view_latber_sessions', 'display_name' => 'Lihat Sesi Latber', 'category' => 'latber', 'description' => 'Bisa melihat daftar sesi latber'],
+            ['name' => 'manage_latber_sessions', 'display_name' => 'Kelola Sesi Latber', 'category' => 'latber', 'description' => 'Bisa menambah, mengedit, menghapus sesi latber'],
         ];
 
         foreach ($permissions as $permission) {

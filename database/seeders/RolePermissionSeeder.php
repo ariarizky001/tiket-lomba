@@ -12,6 +12,7 @@ class RolePermissionSeeder extends Seeder
     {
         $this->seedSuperadminPermissions();
         $this->seedAdminPermissions();
+        $this->seedLatberPermissions();
     }
 
     private function seedSuperadminPermissions(): void
@@ -44,6 +45,10 @@ class RolePermissionSeeder extends Seeder
             'view_rekap',
             'view_expenses',
             'manage_expenses',
+            'view_latbers',
+            'manage_latbers',
+            'view_latber_sessions',
+            'manage_latber_sessions',
         ];
 
         foreach ($adminPermissions as $permissionName) {
@@ -53,6 +58,29 @@ class RolePermissionSeeder extends Seeder
                 RolePermission::firstOrCreate(
                     [
                         'role' => 'admin',
+                        'permission_id' => $permission->id,
+                    ]
+                );
+            }
+        }
+    }
+
+    private function seedLatberPermissions(): void
+    {
+        $latberPermissions = [
+            'view_latbers',
+            'manage_latbers',
+            'view_latber_sessions',
+            'manage_latber_sessions',
+        ];
+
+        foreach ($latberPermissions as $permissionName) {
+            $permission = Permission::where('name', $permissionName)->first();
+            
+            if ($permission) {
+                RolePermission::firstOrCreate(
+                    [
+                        'role' => 'latber',
                         'permission_id' => $permission->id,
                     ]
                 );
