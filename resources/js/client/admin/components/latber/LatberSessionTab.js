@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Drawer, Form, InputNumber, Input, Popconfirm, message, Empty, Tooltip } from 'antd';
-import { PlusOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { Table, Button, Drawer, Form, InputNumber, Input, Popconfirm, message, Empty, Tooltip, Space, Grid, Tag } from 'antd';
+import { PlusOutlined, ArrowUpOutlined, ArrowDownOutlined, EditOutlined, DeleteOutlined, SettingOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 import HTTP from '../../../../common/helpers/HTTP';
 import { formatRupiah } from '../../../common/helpers/Utils';
@@ -12,6 +12,8 @@ const LatberSessionTab = ({ latber }) => {
   const [editing, setEditing] = useState(null);
   const [form] = Form.useForm();
   const [reorderLoading, setReorderLoading] = useState(false);
+  const screens = Grid.useBreakpoint();
+  const isMobile = screens.xs;
 
   useEffect(() => {
     fetchSessions();
@@ -130,7 +132,7 @@ const LatberSessionTab = ({ latber }) => {
   const columns = [
     {
       title: 'No Urut',
-      width: 80,
+      width: 60,
       dataIndex: 'nomor_urut',
       key: 'nomor_urut',
       align: 'center',
@@ -139,18 +141,21 @@ const LatberSessionTab = ({ latber }) => {
       title: 'Nama Sesi',
       dataIndex: 'nama',
       key: 'nama',
+      width: 120,
+      fixed: isMobile ? false : 'left',
     },
     {
       title: 'Harga',
       dataIndex: 'harga',
       key: 'harga',
+      width: 100,
       render: (harga) => formatRupiah(harga),
     },
     {
       title: 'Terjual',
       dataIndex: 'terjual',
       key: 'terjual',
-      width: 70,
+      width: 60,
       align: 'center',
       render: (terjual) => terjual || 0,
     },
@@ -158,45 +163,35 @@ const LatberSessionTab = ({ latber }) => {
       title: 'Terpesan',
       dataIndex: 'terpesan',
       key: 'terpesan',
-      width: 70,
+      width: 60,
       align: 'center',
       render: (terpesan) => terpesan || 0,
     },
     {
       title: 'Urutan',
-      width: 100,
+      width: 80,
       key: 'urutan',
       align: 'center',
+      className: isMobile ? 'ant-table-column-hidden-xs' : '',
       render: (_, record, index) => (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 4 }}>
+        <Space size={4}>
           <Tooltip title="Naik" placement="top">
-            <Button
-              size="small"
-              icon={<ArrowUpOutlined />}
-              onClick={() => moveUp(index)}
-              disabled={index === 0 || reorderLoading}
-            />
+            <Button size="small" icon={<ArrowUpOutlined />} onClick={() => moveUp(index)} disabled={index === 0 || reorderLoading} />
           </Tooltip>
           <Tooltip title="Turun" placement="top">
-            <Button
-              size="small"
-              icon={<ArrowDownOutlined />}
-              onClick={() => moveDown(index)}
-              disabled={index === sessions.length - 1 || reorderLoading}
-            />
+            <Button size="small" icon={<ArrowDownOutlined />} onClick={() => moveDown(index)} disabled={index === sessions.length - 1 || reorderLoading} />
           </Tooltip>
-        </div>
+        </Space>
       ),
     },
     {
       title: 'Aksi',
       key: 'aksi',
-      width: 150,
+      width: 140,
+      fixed: isMobile ? false : 'right',
       render: (_, record) => (
-        <div style={{ display: 'flex', gap: 8 }}>
-          <Button size="small" onClick={() => openDrawer(record)}>
-            Edit
-          </Button>
+        <Space direction={isMobile ? "vertical" : "horizontal"} size={4} style={{ width: '100%' }}>
+          <Button size="small" icon={<EditOutlined />} onClick={() => openDrawer(record)} block={isMobile}>Edit</Button>
           <Popconfirm
             title="Hapus Sesi"
             description="Apakah Anda yakin ingin menghapus sesi ini?"
@@ -204,19 +199,22 @@ const LatberSessionTab = ({ latber }) => {
             okText="Ya"
             cancelText="Batal"
           >
-            <Button size="small" danger>
-              Hapus
-            </Button>
+            <Button size="small" danger icon={<DeleteOutlined />} block={isMobile}>Hapus</Button>
           </Popconfirm>
-        </div>
+        </Space>
       ),
     },
   ];
 
+const drawerTitle = editing ? 'Edit Sesi' : 'Tambah Sesi';
+  const drawerPlacement = isMobile ? "top" : "right";
+  const drawerStyle = isMobile ? { height: '80%', top: 'auto', bottom: 0 } : {};
+  const drawerWidth = isMobile ? '100%' : 520;
+
   return (
     <div>
       <div style={{ marginBottom: 16 }}>
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => openDrawer()}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => openDrawer()} block={isMobile}>
           Tambah Sesi
         </Button>
       </div>
@@ -235,10 +233,12 @@ const LatberSessionTab = ({ latber }) => {
       )}
 
       <Drawer
-        title={editing ? 'Edit Sesi' : 'Tambah Sesi'}
-        placement="right"
+        title={drawerTitle}
+        placement={drawerPlacement}
         onClose={() => setDrawerVisible(false)}
         open={drawerVisible}
+        style={drawerStyle}
+        width={drawerWidth}
       >
         <Form
           form={form}

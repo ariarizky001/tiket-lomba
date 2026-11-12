@@ -296,16 +296,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/date-picker/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/switch/index.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/grid/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/space/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/date-picker/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/switch/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/SettingOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/EditOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/DeleteOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
@@ -336,6 +342,8 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 var EventList = function EventList() {
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
+  var screens = antd__WEBPACK_IMPORTED_MODULE_5__["default"].useBreakpoint();
+  var isMobile = screens.xs;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     events = _useState2[0],
@@ -352,7 +360,7 @@ var EventList = function EventList() {
     _useState8 = _slicedToArray(_useState7, 2),
     editing = _useState8[0],
     setEditing = _useState8[1];
-  var _Form$useForm = antd__WEBPACK_IMPORTED_MODULE_5__["default"].useForm(),
+  var _Form$useForm = antd__WEBPACK_IMPORTED_MODULE_6__["default"].useForm(),
     _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
     form = _Form$useForm2[0];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -376,7 +384,7 @@ var EventList = function EventList() {
           case 3:
             _context.p = 3;
             _t = _context.v;
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal memuat event');
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal memuat event');
           case 4:
             _context.p = 4;
             setLoading(false);
@@ -420,14 +428,14 @@ var EventList = function EventList() {
             _context2.n = 1;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].put("/events/".concat(editing.id), data);
           case 1:
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Event diperbarui');
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Event diperbarui');
             _context2.n = 4;
             break;
           case 2:
             _context2.n = 3;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].post('/events', data);
           case 3:
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Event ditambahkan');
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Event ditambahkan');
           case 4:
             setDrawerVisible(false);
             fetchEvents();
@@ -445,7 +453,7 @@ var EventList = function EventList() {
                 }]);
               });
             } else {
-              antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal menyimpan event');
+              antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal menyimpan event');
             }
           case 6:
             return _context2.a(2);
@@ -466,14 +474,14 @@ var EventList = function EventList() {
             _context3.n = 1;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/events/".concat(id));
           case 1:
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Event dihapus');
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Event dihapus');
             fetchEvents();
             _context3.n = 3;
             break;
           case 2:
             _context3.p = 2;
             _t3 = _context3.v;
-            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal menghapus event');
+            antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal menghapus event');
           case 3:
             return _context3.a(2);
         }
@@ -486,47 +494,67 @@ var EventList = function EventList() {
   var columns = [{
     title: 'Nama',
     dataIndex: 'nama',
-    key: 'nama'
+    key: 'nama',
+    width: 150,
+    fixed: isMobile ? false : 'left'
   }, {
     title: 'Tanggal',
     dataIndex: 'tanggal',
     key: 'tanggal',
+    width: 100,
     render: function render(text) {
       return new Date(text).toLocaleDateString('id-ID');
     }
   }, {
     title: 'Lokasi',
     dataIndex: 'lokasi',
-    key: 'lokasi'
+    key: 'lokasi',
+    width: 120,
+    className: isMobile ? 'ant-table-column-hidden-xs' : ''
   }, {
     title: 'Status',
     dataIndex: 'is_active',
     key: 'is_active',
+    width: 90,
     render: function render(active) {
-      return active ? 'Aktif' : 'Nonaktif';
+      return active ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        color: "green",
+        children: "Aktif"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        color: "default",
+        children: "Nonaktif"
+      });
     }
   }, {
     title: 'Aksi',
     key: 'aksi',
+    width: 180,
+    fixed: isMobile ? false : 'right',
     render: function render(_, record) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        direction: isMobile ? "vertical" : "horizontal",
+        size: 4,
         style: {
-          display: 'flex',
-          gap: 8
+          width: '100%'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
           size: "small",
+          type: "primary",
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_11__["default"], {}),
           onClick: function onClick() {
             return history.push("/events/".concat(record.id));
           },
+          block: isMobile,
           children: "Kelola"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
           size: "small",
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_12__["default"], {}),
           onClick: function onClick() {
             return openDrawer(record);
           },
+          block: isMobile,
           children: "Edit"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
           title: "Hapus",
           description: "Menghapus event juga menghapus seluruh sesinya. Apakah Anda yakin ingin menghapus event ini?",
           onConfirm: function onConfirm() {
@@ -534,9 +562,11 @@ var EventList = function EventList() {
           },
           okText: "Ya",
           cancelText: "Batal",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             size: "small",
             danger: true,
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_14__["default"], {}),
+            block: isMobile,
             children: "Hapus"
           })
         })]
@@ -548,15 +578,15 @@ var EventList = function EventList() {
       style: {
         marginBottom: 16
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
         type: "primary",
-        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {}),
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_15__["default"], {}),
         onClick: function onClick() {
           return openDrawer();
         },
         children: "Tambah Event"
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
       columns: columns,
       dataSource: events,
       loading: loading,
@@ -564,18 +594,18 @@ var EventList = function EventList() {
       scroll: {
         x: true
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_17__["default"], {
       title: editing ? 'Edit Event' : 'Tambah Event',
       placement: "right",
       onClose: function onClose() {
         return setDrawerVisible(false);
       },
       open: drawerVisible,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
         form: form,
         layout: "vertical",
         onFinish: onFinish,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
           label: "Nama",
           name: "nama",
           rules: [{
@@ -585,34 +615,34 @@ var EventList = function EventList() {
             max: 150,
             message: 'Nama maksimal 150 karakter'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_18__["default"], {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
           label: "Tanggal",
           name: "tanggal",
           rules: [{
             required: true,
             message: 'Tanggal wajib diisi'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_19__["default"], {
             style: {
               width: '100%'
             }
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
           label: "Lokasi",
           name: "lokasi",
           rules: [{
             max: 150,
             message: 'Lokasi maksimal 150 karakter'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_18__["default"], {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
           label: "Aktif",
           name: "is_active",
           valuePropName: "checked",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_20__["default"], {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             type: "primary",
             htmlType: "submit",
             block: true,
@@ -3546,10 +3576,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/typography/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/grid/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
 /* harmony import */ var _common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/helpers/Utils */ "./resources/js/client/common/helpers/Utils.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -3575,6 +3606,8 @@ var CountGrid = function CountGrid(_ref) {
     mode = _ref.mode,
     note = _ref.note,
     loading = _ref.loading;
+  var screens = antd__WEBPACK_IMPORTED_MODULE_4__["default"].useBreakpoint();
+  var isMobile = screens.xs;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     counts = _useState2[0],
@@ -3641,19 +3674,21 @@ var CountGrid = function CountGrid(_ref) {
     title: 'No Urut',
     dataIndex: 'nomor_urut',
     key: 'nomor_urut',
-    width: 80,
+    width: 60,
     align: 'center'
   }, {
     title: 'Sesi',
     dataIndex: 'nama',
     key: 'nama',
-    fixed: 'left'
+    width: 120,
+    fixed: isMobile ? false : 'left'
   }];
   if (mode === 'sold') {
     columns.push({
       title: 'Harga',
       dataIndex: 'harga',
       key: 'harga',
+      width: 100,
       render: function render(harga) {
         return (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatRupiah)(harga);
       }
@@ -3661,10 +3696,10 @@ var CountGrid = function CountGrid(_ref) {
     columns.push({
       title: 'Jumlah Terjual',
       key: 'jumlah',
-      width: 150,
+      width: 130,
       render: function render(_, record) {
         var _counts$record$id;
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
           min: 0,
           max: 99999,
           precision: 0,
@@ -3681,6 +3716,7 @@ var CountGrid = function CountGrid(_ref) {
     columns.push({
       title: 'Pemasukan',
       key: 'pemasukan',
+      width: 120,
       render: function render(_, record) {
         var _counts$record$id2;
         return (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatRupiah)(((_counts$record$id2 = counts[record.id]) !== null && _counts$record$id2 !== void 0 ? _counts$record$id2 : 0) * record.harga);
@@ -3691,6 +3727,7 @@ var CountGrid = function CountGrid(_ref) {
       title: 'Harga',
       dataIndex: 'harga',
       key: 'harga',
+      width: 100,
       render: function render(harga) {
         return (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatRupiah)(harga);
       }
@@ -3698,10 +3735,10 @@ var CountGrid = function CountGrid(_ref) {
     columns.push({
       title: 'Jumlah Terpesan',
       key: 'jumlah',
-      width: 150,
+      width: 130,
       render: function render(_, record) {
         var _counts$record$id3;
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
           min: 0,
           max: 99999,
           precision: 0,
@@ -3718,6 +3755,7 @@ var CountGrid = function CountGrid(_ref) {
     columns.push({
       title: 'Nilai Terpesan',
       key: 'nilai',
+      width: 120,
       render: function render(_, record) {
         var _counts$record$id4;
         return (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatRupiah)(((_counts$record$id4 = counts[record.id]) !== null && _counts$record$id4 !== void 0 ? _counts$record$id4 : 0) * record.harga);
@@ -3738,23 +3776,27 @@ var CountGrid = function CountGrid(_ref) {
         marginBottom: 16,
         display: 'flex',
         alignItems: 'center',
-        gap: 12
+        gap: 12,
+        flexWrap: 'wrap',
+        flexDirection: isMobile ? 'column' : 'row'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
         type: "primary",
         onClick: handleSave,
         disabled: !hasChanges,
         loading: loading,
+        block: isMobile,
         children: "Simpan"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
         onClick: handleReset,
         disabled: !hasChanges || loading,
+        block: isMobile,
         children: "Batal Perubahan"
-      }), hasChanges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), hasChanges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
         color: "warning",
         children: "Ada perubahan belum disimpan"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
       columns: columns,
       dataSource: sessions,
       rowKey: "id",
@@ -3763,34 +3805,34 @@ var CountGrid = function CountGrid(_ref) {
         x: true
       },
       summary: function summary() {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary, {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary, {
           fixed: true,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Row, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Row, {
             style: {
               fontWeight: 'bold',
               background: '#fafafa'
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Cell, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Cell, {
               index: 0,
               colSpan: 2,
               children: "Total"
             }), mode === 'sold' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Cell, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Cell, {
                 index: 1
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Cell, {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Cell, {
                 index: 2,
                 children: totalJumlah
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Cell, {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Cell, {
                 index: 3,
                 children: (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatRupiah)(totalPemasukan)
               })]
             }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Cell, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Cell, {
                 index: 1
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Cell, {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Cell, {
                 index: 2,
                 children: totalJumlah
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Summary.Cell, {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"].Summary.Cell, {
                 index: 3,
                 children: (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_1__.formatRupiah)(totalPemasukan)
               })]
@@ -3817,16 +3859,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/date-picker/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/grid/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/space/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/date-picker/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/SettingOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/EditOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/DeleteOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
 /* harmony import */ var _common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/helpers/Utils */ "./resources/js/client/common/helpers/Utils.js");
@@ -3863,6 +3910,8 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 var LatberList = function LatberList() {
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
+  var screens = antd__WEBPACK_IMPORTED_MODULE_6__["default"].useBreakpoint();
+  var isMobile = screens.xs;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     latbers = _useState2[0],
@@ -3883,7 +3932,7 @@ var LatberList = function LatberList() {
     _useState0 = _slicedToArray(_useState9, 2),
     editing = _useState0[0],
     setEditing = _useState0[1];
-  var _Form$useForm = antd__WEBPACK_IMPORTED_MODULE_6__["default"].useForm(),
+  var _Form$useForm = antd__WEBPACK_IMPORTED_MODULE_7__["default"].useForm(),
     _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
     form = _Form$useForm2[0];
   var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
@@ -3918,7 +3967,7 @@ var LatberList = function LatberList() {
           case 3:
             _context.p = 3;
             _t = _context.v;
-            antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal memuat latber');
+            antd__WEBPACK_IMPORTED_MODULE_8__["default"].error('Gagal memuat latber');
           case 4:
             _context.p = 4;
             setLoading(false);
@@ -3980,14 +4029,14 @@ var LatberList = function LatberList() {
             _context2.n = 1;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].put("/latbers/".concat(editing.id), data);
           case 1:
-            antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Latber diperbarui');
+            antd__WEBPACK_IMPORTED_MODULE_8__["default"].success('Latber diperbarui');
             _context2.n = 4;
             break;
           case 2:
             _context2.n = 3;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].post('/latbers', data);
           case 3:
-            antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Latber ditambahkan');
+            antd__WEBPACK_IMPORTED_MODULE_8__["default"].success('Latber ditambahkan');
           case 4:
             setDrawerVisible(false);
             fetchLatbers();
@@ -4005,7 +4054,7 @@ var LatberList = function LatberList() {
                 }]);
               });
             } else {
-              antd__WEBPACK_IMPORTED_MODULE_7__["default"].error('Gagal menyimpan latber');
+              antd__WEBPACK_IMPORTED_MODULE_8__["default"].error('Gagal menyimpan latber');
             }
           case 6:
             return _context2.a(2);
@@ -4026,7 +4075,7 @@ var LatberList = function LatberList() {
             _context3.n = 1;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/latbers/".concat(id));
           case 1:
-            antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Latber dihapus');
+            antd__WEBPACK_IMPORTED_MODULE_8__["default"].success('Latber dihapus');
             fetchLatbers();
             _context3.n = 3;
             break;
@@ -4034,7 +4083,7 @@ var LatberList = function LatberList() {
             _context3.p = 2;
             _t3 = _context3.v;
             msg = ((_error$response2 = _t3.response) === null || _error$response2 === void 0 || (_error$response2 = _error$response2.data) === null || _error$response2 === void 0 ? void 0 : _error$response2.message) || 'Gagal menghapus latber';
-            antd__WEBPACK_IMPORTED_MODULE_7__["default"].error(msg);
+            antd__WEBPACK_IMPORTED_MODULE_8__["default"].error(msg);
           case 3:
             return _context3.a(2);
         }
@@ -4048,21 +4097,28 @@ var LatberList = function LatberList() {
     title: 'Tanggal',
     dataIndex: 'tanggal',
     key: 'tanggal',
+    width: 100,
     render: function render(text) {
       return new Date(text).toLocaleDateString('id-ID');
     }
   }, {
     title: 'Nama',
     dataIndex: 'nama',
-    key: 'nama'
+    key: 'nama',
+    width: 150,
+    fixed: isMobile ? false : 'left'
   }, {
     title: 'Lokasi',
     dataIndex: 'lokasi',
-    key: 'lokasi'
+    key: 'lokasi',
+    width: 120,
+    className: isMobile ? 'ant-table-column-hidden-xs' : ''
   }, {
     title: 'Sesi',
     key: 'sesi',
     align: 'center',
+    width: 70,
+    className: isMobile ? 'ant-table-column-hidden-xs' : '',
     render: function render(_, record) {
       var _record$ringkasan;
       return ((_record$ringkasan = record.ringkasan) === null || _record$ringkasan === void 0 ? void 0 : _record$ringkasan.jumlah_sesi) || 0;
@@ -4071,6 +4127,7 @@ var LatberList = function LatberList() {
     title: 'Tiket Terjual',
     key: 'terjual',
     align: 'center',
+    width: 100,
     render: function render(_, record) {
       var _record$ringkasan2;
       return ((_record$ringkasan2 = record.ringkasan) === null || _record$ringkasan2 === void 0 ? void 0 : _record$ringkasan2.total_terjual) || 0;
@@ -4078,6 +4135,7 @@ var LatberList = function LatberList() {
   }, {
     title: 'Pemasukan',
     key: 'pemasukan',
+    width: 120,
     render: function render(_, record) {
       var _record$ringkasan3;
       return (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(((_record$ringkasan3 = record.ringkasan) === null || _record$ringkasan3 === void 0 ? void 0 : _record$ringkasan3.pemasukan) || 0);
@@ -4086,6 +4144,8 @@ var LatberList = function LatberList() {
     title: 'Tiket Terpesan',
     key: 'terpesan',
     align: 'center',
+    width: 100,
+    className: isMobile ? 'ant-table-column-hidden-xs' : '',
     render: function render(_, record) {
       var _record$ringkasan4;
       return ((_record$ringkasan4 = record.ringkasan) === null || _record$ringkasan4 === void 0 ? void 0 : _record$ringkasan4.total_terpesan) || 0;
@@ -4093,25 +4153,33 @@ var LatberList = function LatberList() {
   }, {
     title: 'Aksi',
     key: 'aksi',
+    width: 180,
+    fixed: isMobile ? false : 'right',
     render: function render(_, record) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        direction: isMobile ? "vertical" : "horizontal",
+        size: 4,
         style: {
-          display: 'flex',
-          gap: 8
+          width: '100%'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
           size: "small",
+          type: "primary",
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_11__["default"], {}),
           onClick: function onClick() {
             return history.push("/latbers/".concat(record.id));
           },
+          block: isMobile,
           children: "Kelola"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
           size: "small",
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_12__["default"], {}),
           onClick: function onClick() {
             return openDrawer(record);
           },
+          block: isMobile,
           children: "Edit"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
           title: "Hapus",
           description: "Apakah Anda yakin ingin menghapus latber ini?",
           onConfirm: function onConfirm() {
@@ -4119,9 +4187,11 @@ var LatberList = function LatberList() {
           },
           okText: "Ya",
           cancelText: "Batal",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             size: "small",
             danger: true,
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_14__["default"], {}),
+            block: isMobile,
             children: "Hapus"
           })
         })]
@@ -4133,34 +4203,39 @@ var LatberList = function LatberList() {
       style: {
         marginBottom: 16,
         display: 'flex',
-        gap: 12,
-        flexWrap: 'wrap'
+        gap: 8,
+        flexWrap: 'wrap',
+        flexDirection: isMobile ? 'column' : 'row'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"].Search, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"].Search, {
         placeholder: "Cari nama latber",
         allowClear: true,
         style: {
-          width: 250
+          width: isMobile ? '100%' : 220
         },
         onChange: function onChange(e) {
           return setSearchNama(e.target.value);
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].RangePicker, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"].RangePicker, {
         onChange: function onChange(dates) {
           return setDateRange(dates);
         },
-        format: "DD/MM/YYYY"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        format: "DD/MM/YYYY",
+        style: {
+          width: isMobile ? '100%' : 'auto'
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
         type: "primary",
-        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_12__["default"], {}),
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_17__["default"], {}),
         onClick: function onClick() {
           return openDrawer();
         },
+        block: isMobile,
         children: "Tambah Latber"
       })]
-    }), filteredLatbers.length === 0 && !loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    }), filteredLatbers.length === 0 && !loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_18__["default"], {
       description: "Belum ada latber"
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_19__["default"], {
       columns: columns,
       dataSource: filteredLatbers,
       loading: loading,
@@ -4168,18 +4243,18 @@ var LatberList = function LatberList() {
       scroll: {
         x: true
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_20__["default"], {
       title: editing ? 'Edit Latber' : 'Tambah Latber',
       placement: "right",
       onClose: function onClose() {
         return setDrawerVisible(false);
       },
       open: drawerVisible,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
         form: form,
         layout: "vertical",
         onFinish: onFinish,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Item, {
           label: "Nama",
           name: "nama",
           rules: [{
@@ -4189,30 +4264,30 @@ var LatberList = function LatberList() {
             max: 150,
             message: 'Nama maksimal 150 karakter'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Item, {
           label: "Tanggal",
           name: "tanggal",
           rules: [{
             required: true,
             message: 'Tanggal wajib diisi'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
             style: {
               width: '100%'
             },
             format: "DD/MM/YYYY"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Item, {
           label: "Lokasi",
           name: "lokasi",
           rules: [{
             max: 150,
             message: 'Lokasi maksimal 150 karakter'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"].Item, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             type: "primary",
             htmlType: "submit",
             block: true,
@@ -4239,15 +4314,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/result/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/page-header/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/row/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/col/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/statistic/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tabs/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/grid/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/spin/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/result/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/page-header/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/row/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/col/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/statistic/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tabs/index.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
 /* harmony import */ var _common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/helpers/Utils */ "./resources/js/client/common/helpers/Utils.js");
 /* harmony import */ var _LatberSessionTab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LatberSessionTab */ "./resources/js/client/admin/components/latber/LatberSessionTab.js");
@@ -4275,9 +4351,11 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var LatberRoom = function LatberRoom() {
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
+  var screens = antd__WEBPACK_IMPORTED_MODULE_7__["default"].useBreakpoint();
+  var isMobile = screens.xs;
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useParams)(),
     id = _useParams.id;
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     latber = _useState2[0],
@@ -4329,14 +4407,14 @@ var LatberRoom = function LatberRoom() {
     };
   }();
   if (loading) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {});
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {});
   }
   if (notFound) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
       status: "404",
       title: "Latber tidak ditemukan",
       subTitle: "Latber yang Anda cari tidak ada atau sudah dihapus.",
-      extra: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      extra: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
         type: "primary",
         onClick: function onClick() {
           return history.push('/latbers');
@@ -4382,35 +4460,46 @@ var LatberRoom = function LatberRoom() {
     })
   }];
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
       onBack: function onBack() {
         return history.push('/latbers');
       },
       title: latber.nama,
-      subTitle: "".concat(new Date(latber.tanggal).toLocaleDateString('id-ID')).concat(latber.lokasi ? ' • ' + latber.lokasi : ''),
+      subTitle: isMobile ? [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        children: new Date(latber.tanggal).toLocaleDateString('id-ID')
+      }, "date"), latber.lokasi && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        style: {
+          color: '#8c8c8c',
+          fontSize: 13
+        },
+        children: latber.lokasi
+      }, "loc")] : "".concat(new Date(latber.tanggal).toLocaleDateString('id-ID')).concat(latber.lokasi ? ' • ' + latber.lokasi : ''),
       style: {
         marginBottom: 24
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      gutter: 16,
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      gutter: [16, 16],
       style: {
         marginBottom: 24
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
         xs: 24,
         sm: 8,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
           title: "Total Tiket Terjual",
-          value: ringkasan.total_terjual
+          value: ringkasan.total_terjual,
+          style: {
+            marginBottom: isMobile ? 16 : 0
+          }
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
         xs: 24,
         sm: 8,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           style: {
-            marginBottom: 8
+            marginBottom: isMobile ? 16 : 8
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
             title: "Pemasukan",
             value: ringkasan.pemasukan,
             formatter: function formatter(value) {
@@ -4428,14 +4517,14 @@ var LatberRoom = function LatberRoom() {
             children: ["Terpesan: ", (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(ringkasan.pemasukan_terpesan)]
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
         xs: 24,
         sm: 8,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           style: {
-            marginBottom: 8
+            marginBottom: isMobile ? 16 : 8
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
             title: "Total Tiket Terpesan",
             value: ringkasan.total_terpesan
           })
@@ -4447,7 +4536,7 @@ var LatberRoom = function LatberRoom() {
           children: ["Nilai: ", (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(ringkasan.nilai_terpesan), " belum dibayar"]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
       items: items
     })]
   });
@@ -4469,19 +4558,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tooltip/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/ArrowUpOutlined.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/ArrowDownOutlined.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/grid/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/space/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tooltip/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/empty/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/ArrowUpOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/ArrowDownOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/EditOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/DeleteOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/PlusOutlined.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
 /* harmony import */ var _common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/helpers/Utils */ "./resources/js/client/common/helpers/Utils.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -4531,6 +4624,8 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
     _useState0 = _slicedToArray(_useState9, 2),
     reorderLoading = _useState0[0],
     setReorderLoading = _useState0[1];
+  var screens = antd__WEBPACK_IMPORTED_MODULE_5__["default"].useBreakpoint();
+  var isMobile = screens.xs;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetchSessions();
   }, [latber.id]);
@@ -4552,7 +4647,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
           case 3:
             _context.p = 3;
             _t = _context.v;
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error('Gagal memuat sesi');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal memuat sesi');
           case 4:
             _context.p = 4;
             setLoading(false);
@@ -4600,7 +4695,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             newPemasukan = editing.terjual * values.harga;
             _context2.n = 1;
             return new Promise(function (resolve) {
-              antd__WEBPACK_IMPORTED_MODULE_6__["default"].confirm({
+              antd__WEBPACK_IMPORTED_MODULE_7__["default"].confirm({
                 title: 'Konfirmasi Perubahan Harga',
                 content: "Mengubah harga akan mengubah pemasukan sesi ini dari ".concat((0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(oldPemasukan), " menjadi ").concat((0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(newPemasukan), ". Lanjutkan?"),
                 okText: 'Ya',
@@ -4624,14 +4719,14 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             _context2.n = 3;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].put("/latber-sessions/".concat(editing.id), values);
           case 3:
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].success('Sesi diperbarui');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Sesi diperbarui');
             _context2.n = 6;
             break;
           case 4:
             _context2.n = 5;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"].post("/latbers/".concat(latber.id, "/sessions"), values);
           case 5:
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].success('Sesi ditambahkan');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Sesi ditambahkan');
           case 6:
             setDrawerVisible(false);
             fetchSessions();
@@ -4649,7 +4744,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
                 }]);
               });
             } else {
-              antd__WEBPACK_IMPORTED_MODULE_5__["default"].error('Gagal menyimpan sesi');
+              antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal menyimpan sesi');
             }
           case 8:
             return _context2.a(2);
@@ -4670,7 +4765,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             _context3.n = 1;
             return _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/latber-sessions/".concat(id));
           case 1:
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].success('Sesi dihapus');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Sesi dihapus');
             fetchSessions();
             _context3.n = 3;
             break;
@@ -4678,7 +4773,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             _context3.p = 2;
             _t3 = _context3.v;
             msg = ((_error$response2 = _t3.response) === null || _error$response2 === void 0 || (_error$response2 = _error$response2.data) === null || _error$response2 === void 0 ? void 0 : _error$response2.message) || 'Gagal menghapus sesi';
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error(msg);
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error(msg);
           case 3:
             return _context3.a(2);
         }
@@ -4701,14 +4796,14 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
               ids: newIds
             });
           case 2:
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].success('Urutan diperbarui');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Urutan diperbarui');
             fetchSessions();
             _context4.n = 4;
             break;
           case 3:
             _context4.p = 3;
             _t4 = _context4.v;
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error('Gagal mengatur ulang urutan');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal mengatur ulang urutan');
           case 4:
             _context4.p = 4;
             setReorderLoading(false);
@@ -4744,18 +4839,21 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
   };
   var columns = [{
     title: 'No Urut',
-    width: 80,
+    width: 60,
     dataIndex: 'nomor_urut',
     key: 'nomor_urut',
     align: 'center'
   }, {
     title: 'Nama Sesi',
     dataIndex: 'nama',
-    key: 'nama'
+    key: 'nama',
+    width: 120,
+    fixed: isMobile ? false : 'left'
   }, {
     title: 'Harga',
     dataIndex: 'harga',
     key: 'harga',
+    width: 100,
     render: function render(harga) {
       return (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(harga);
     }
@@ -4763,7 +4861,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
     title: 'Terjual',
     dataIndex: 'terjual',
     key: 'terjual',
-    width: 70,
+    width: 60,
     align: 'center',
     render: function render(terjual) {
       return terjual || 0;
@@ -4772,40 +4870,37 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
     title: 'Terpesan',
     dataIndex: 'terpesan',
     key: 'terpesan',
-    width: 70,
+    width: 60,
     align: 'center',
     render: function render(terpesan) {
       return terpesan || 0;
     }
   }, {
     title: 'Urutan',
-    width: 100,
+    width: 80,
     key: 'urutan',
     align: 'center',
+    className: isMobile ? 'ant-table-column-hidden-xs' : '',
     render: function render(_, record, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        style: {
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 4
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        size: 4,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
           title: "Naik",
           placement: "top",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             size: "small",
-            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {}),
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_11__["default"], {}),
             onClick: function onClick() {
               return moveUp(index);
             },
             disabled: index === 0 || reorderLoading
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
           title: "Turun",
           placement: "top",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             size: "small",
-            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {}),
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_12__["default"], {}),
             onClick: function onClick() {
               return moveDown(index);
             },
@@ -4817,20 +4912,24 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
   }, {
     title: 'Aksi',
     key: 'aksi',
-    width: 150,
+    width: 140,
+    fixed: isMobile ? false : 'right',
     render: function render(_, record) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        direction: isMobile ? "vertical" : "horizontal",
+        size: 4,
         style: {
-          display: 'flex',
-          gap: 8
+          width: '100%'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
           size: "small",
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_13__["default"], {}),
           onClick: function onClick() {
             return openDrawer(record);
           },
+          block: isMobile,
           children: "Edit"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
           title: "Hapus Sesi",
           description: "Apakah Anda yakin ingin menghapus sesi ini?",
           onConfirm: function onConfirm() {
@@ -4838,31 +4937,42 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
           },
           okText: "Ya",
           cancelText: "Batal",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             size: "small",
             danger: true,
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_15__["default"], {}),
+            block: isMobile,
             children: "Hapus"
           })
         })]
       });
     }
   }];
+  var drawerTitle = editing ? 'Edit Sesi' : 'Tambah Sesi';
+  var drawerPlacement = isMobile ? "top" : "right";
+  var drawerStyle = isMobile ? {
+    height: '80%',
+    top: 'auto',
+    bottom: 0
+  } : {};
+  var drawerWidth = isMobile ? '100%' : 520;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       style: {
         marginBottom: 16
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
         type: "primary",
-        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_12__["default"], {}),
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_16__["default"], {}),
         onClick: function onClick() {
           return openDrawer();
         },
+        block: isMobile,
         children: "Tambah Sesi"
       })
-    }), sessions.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    }), sessions.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_17__["default"], {
       description: "Belum ada sesi, tambahkan sesi pertama"
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_18__["default"], {
       columns: columns,
       dataSource: sessions,
       loading: loading,
@@ -4871,13 +4981,15 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
         x: true
       },
       pagination: false
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      title: editing ? 'Edit Sesi' : 'Tambah Sesi',
-      placement: "right",
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      title: drawerTitle,
+      placement: drawerPlacement,
       onClose: function onClose() {
         return setDrawerVisible(false);
       },
       open: drawerVisible,
+      style: drawerStyle,
+      width: drawerWidth,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
         form: form,
         layout: "vertical",
@@ -4894,7 +5006,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             max: 999,
             message: 'Nomor urut harus antara 1-999'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_20__["default"], {
             style: {
               width: '100%'
             },
@@ -4911,7 +5023,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             max: 150,
             message: 'Nama sesi maksimal 150 karakter'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_17__["default"], {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_21__["default"], {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
           label: "Harga",
           name: "harga",
@@ -4923,7 +5035,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             min: 0,
             message: 'Harga tidak boleh negatif'
           }],
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_20__["default"], {
             style: {
               width: '100%'
             },
@@ -4937,7 +5049,7 @@ var LatberSessionTab = function LatberSessionTab(_ref) {
             min: 0
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             type: "primary",
             htmlType: "submit",
             block: true,
@@ -4965,14 +5077,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/typography/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tooltip/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/DollarOutlined.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/grid/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/input-number/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/space/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tooltip/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/modal/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/DollarOutlined.js");
 /* harmony import */ var _common_helpers_HTTP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/helpers/HTTP */ "./resources/js/common/helpers/HTTP.js");
 /* harmony import */ var _common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/helpers/Utils */ "./resources/js/client/common/helpers/Utils.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -5002,6 +5116,8 @@ var Text = antd__WEBPACK_IMPORTED_MODULE_4__["default"].Text;
 var OrderedTab = function OrderedTab(_ref) {
   var latber = _ref.latber,
     onSessionsUpdate = _ref.onSessionsUpdate;
+  var screens = antd__WEBPACK_IMPORTED_MODULE_5__["default"].useBreakpoint();
+  var isMobile = screens.xs;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     sessions = _useState2[0],
@@ -5065,7 +5181,7 @@ var OrderedTab = function OrderedTab(_ref) {
           case 3:
             _context.p = 3;
             _t = _context.v;
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error('Gagal memuat data sesi');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Gagal memuat data sesi');
           case 4:
             _context.p = 4;
             setLoading(false);
@@ -5128,7 +5244,7 @@ var OrderedTab = function OrderedTab(_ref) {
             });
           case 3:
             res = _context2.v;
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].success('Tersimpan');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Tersimpan');
             setSessions(res.data);
             setTerpesanCounts({});
             setHasChanges(false);
@@ -5141,7 +5257,7 @@ var OrderedTab = function OrderedTab(_ref) {
             _context2.p = 4;
             _t2 = _context2.v;
             msg = ((_error$response = _t2.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message) || 'Gagal menyimpan data';
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error(msg);
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error(msg);
           case 5:
             _context2.p = 5;
             setLoading(false);
@@ -5170,14 +5286,14 @@ var OrderedTab = function OrderedTab(_ref) {
               _context3.n = 1;
               break;
             }
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error('Jumlah harus lebih dari 0');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Jumlah harus lebih dari 0');
             return _context3.a(2);
           case 1:
             if (!(ambilJumlah > selectedSession.terpesan)) {
               _context3.n = 2;
               break;
             }
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error('Jumlah melebihi tiket terpesan yang tersedia');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error('Jumlah melebihi tiket terpesan yang tersedia');
             return _context3.a(2);
           case 2:
             setAmbilLoading(true);
@@ -5189,7 +5305,7 @@ var OrderedTab = function OrderedTab(_ref) {
             });
           case 4:
             res = _context3.v;
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].success('Tiket terpesan berhasil ditandai sebagai sudah diambil');
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Tiket terpesan berhasil ditandai sebagai sudah diambil');
             setSessions(res.data);
             setAmbilModalVisible(false);
             if (onSessionsUpdate) {
@@ -5201,7 +5317,7 @@ var OrderedTab = function OrderedTab(_ref) {
             _context3.p = 5;
             _t3 = _context3.v;
             msg = ((_error$response2 = _t3.response) === null || _error$response2 === void 0 || (_error$response2 = _error$response2.data) === null || _error$response2 === void 0 ? void 0 : _error$response2.message) || 'Gagal memproses pengambilan';
-            antd__WEBPACK_IMPORTED_MODULE_5__["default"].error(msg);
+            antd__WEBPACK_IMPORTED_MODULE_6__["default"].error(msg);
           case 6:
             _context3.p = 6;
             setAmbilLoading(false);
@@ -5219,28 +5335,30 @@ var OrderedTab = function OrderedTab(_ref) {
     title: 'No Urut',
     dataIndex: 'nomor_urut',
     key: 'nomor_urut',
-    width: 80,
+    width: 60,
     align: 'center'
   }, {
     title: 'Sesi',
     dataIndex: 'nama',
     key: 'nama',
-    fixed: 'left'
+    width: 120,
+    fixed: isMobile ? false : 'left'
   }, {
     title: 'Harga',
     dataIndex: 'harga',
     key: 'harga',
+    width: 100,
     render: function render(harga) {
       return (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(harga);
     }
   }, {
     title: 'Jumlah Terpesan',
     key: 'jumlah',
-    width: 150,
+    width: 130,
     align: 'center',
     render: function render(_, record) {
       var _terpesanCounts$recor;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
         min: 0,
         max: 99999,
         precision: 0,
@@ -5257,6 +5375,7 @@ var OrderedTab = function OrderedTab(_ref) {
   }, {
     title: 'Nilai Terpesan',
     key: 'nilai',
+    width: 120,
     render: function render(_, record) {
       var _terpesanCounts$recor2;
       var count = (_terpesanCounts$recor2 = terpesanCounts[record.id]) !== null && _terpesanCounts$recor2 !== void 0 ? _terpesanCounts$recor2 : record.terpesan;
@@ -5265,24 +5384,25 @@ var OrderedTab = function OrderedTab(_ref) {
   }, {
     title: 'Aksi',
     key: 'aksi',
-    width: 180,
+    width: 150,
     render: function render(_, record) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        direction: isMobile ? "vertical" : "horizontal",
+        size: 4,
         style: {
-          display: 'flex',
-          gap: 8,
-          justifyContent: 'center'
+          width: '100%'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
           title: "Tandai sudah diambil (pembayaran)",
           placement: "top",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
             type: "primary",
-            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {}),
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_11__["default"], {}),
             onClick: function onClick() {
               return openAmbilModal(record);
             },
             disabled: record.terpesan === 0 || loading,
+            block: isMobile,
             children: "Tandai Diambil"
           })
         })
@@ -5302,28 +5422,34 @@ var OrderedTab = function OrderedTab(_ref) {
       style: {
         marginBottom: 16,
         display: 'flex',
-        alignItems: 'center',
-        gap: 12,
-        flexWrap: 'wrap'
+        gap: 8,
+        flexWrap: 'wrap',
+        flexDirection: isMobile ? 'column' : 'row'
       },
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Text, {
         type: "secondary",
+        style: {
+          flex: 1,
+          minWidth: isMobile ? '100%' : 'auto'
+        },
         children: "Tiket terpesan belum dihitung sebagai pemasukan. Edit jumlah lalu klik Simpan."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
         type: "primary",
         onClick: handleSaveTerpesan,
         disabled: !hasChanges || loading,
         loading: loading,
+        block: isMobile,
         children: "Simpan Perubahan"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
         onClick: handleReset,
         disabled: !hasChanges || loading,
+        block: isMobile,
         children: "Batal"
-      }), hasChanges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      }), hasChanges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
         color: "warning",
         children: "Ada perubahan belum disimpan"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"], {
       columns: columns,
       dataSource: sessions,
       rowKey: "id",
@@ -5333,30 +5459,30 @@ var OrderedTab = function OrderedTab(_ref) {
         x: true
       },
       summary: function summary() {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Summary, {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"].Summary, {
           fixed: true,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Summary.Row, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_13__["default"].Summary.Row, {
             style: {
               fontWeight: 'bold',
               background: '#fafafa'
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Summary.Cell, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"].Summary.Cell, {
               index: 0,
               colSpan: 3,
               children: "Total"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Summary.Cell, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"].Summary.Cell, {
               index: 1,
               children: totalTerpesan
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Summary.Cell, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"].Summary.Cell, {
               index: 2,
               children: (0,_common_helpers_Utils__WEBPACK_IMPORTED_MODULE_2__.formatRupiah)(totalNilai)
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"].Summary.Cell, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_13__["default"].Summary.Cell, {
               index: 3
             })]
           })
         });
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
       title: "Tandai Terpesan Sudah Diambil - ".concat((selectedSession === null || selectedSession === void 0 ? void 0 : selectedSession.nama) || ''),
       open: ambilModalVisible,
       onOk: handleAmbilConfirm,
@@ -5366,6 +5492,10 @@ var OrderedTab = function OrderedTab(_ref) {
       confirmLoading: ambilLoading,
       okText: "Konfirmasi",
       cancelText: "Batal",
+      fullscreen: isMobile,
+      style: {
+        top: isMobile ? 0 : undefined
+      },
       children: selectedSession && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
@@ -5383,7 +5513,7 @@ var OrderedTab = function OrderedTab(_ref) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
               children: "Jumlah yang Diambil:"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
             style: {
               width: '100%',
               marginTop: 8
@@ -5562,14 +5692,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/layout/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/menu/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/LogoutOutlined.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/grid/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/message/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/tag/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/drawer/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/avatar/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/menu/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/popconfirm/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/dropdown/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! antd */ "./node_modules/antd/es/space/index.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/SettingOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/UserOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/LogoutOutlined.js");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ant-design/icons */ "./node_modules/@ant-design/icons/es/icons/MenuOutlined.js");
 /* harmony import */ var _redux_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../redux/auth */ "./resources/js/client/admin/redux/auth.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
@@ -5590,36 +5734,194 @@ var AppLayout = function AppLayout(_ref) {
   var permissions = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.auth.permissions;
   });
+  var screens = antd__WEBPACK_IMPORTED_MODULE_6__["default"].useBreakpoint();
+  var isMobile = screens.xs || screens.sm;
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    drawerVisible = _React$useState2[0],
+    setDrawerVisible = _React$useState2[1];
   var handleLogout = function handleLogout() {
     dispatch((0,_redux_auth__WEBPACK_IMPORTED_MODULE_2__.logout)()).then(function () {
-      antd__WEBPACK_IMPORTED_MODULE_6__["default"].success('Logout berhasil');
+      antd__WEBPACK_IMPORTED_MODULE_7__["default"].success('Logout berhasil');
       history.push('/login');
     });
   };
   var menuItems = [{
     key: '/',
-    label: 'Dashboard'
+    label: 'Dashboard',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {})
   }];
   if ((user === null || user === void 0 ? void 0 : user.role) === 'superadmin' || permissions.includes('view_events')) {
     menuItems.push({
       key: '/events',
-      label: 'Event'
+      label: 'Event',
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {})
     });
   }
   if ((user === null || user === void 0 ? void 0 : user.role) === 'superadmin' || permissions.includes('view_latbers')) {
     menuItems.push({
       key: '/latbers',
-      label: 'Latber'
+      label: 'Latber',
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {})
     });
   }
   if ((user === null || user === void 0 ? void 0 : user.role) === 'superadmin') {
     menuItems.push({
       key: '/users',
-      label: 'Kelola User'
+      label: 'Kelola User',
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {})
     });
     menuItems.push({
       key: '/permissions',
-      label: 'Kelola Permission'
+      label: 'Kelola Permission',
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+    });
+  }
+  var userMenuItems = [{
+    label: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+        children: user === null || user === void 0 ? void 0 : user.name
+      })
+    }),
+    key: 'user-info',
+    disabled: true
+  }, {
+    type: 'divider'
+  }, {
+    label: 'Keluar',
+    key: 'logout',
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {}),
+    onClick: handleLogout,
+    danger: true
+  }];
+  var getRoleTag = function getRoleTag(role) {
+    if (role === 'superadmin') return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      color: "red",
+      children: "Superadmin"
+    });
+    if (role === 'latber') return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      color: "blue",
+      children: "Latber"
+    });
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      color: "green",
+      children: "Admin"
+    });
+  };
+  var handleMenuClick = function handleMenuClick(e) {
+    history.push(e.key);
+    if (isMobile) setDrawerVisible(false);
+  };
+  if (isMobile) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      style: {
+        minHeight: '100vh'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(Header, {
+        style: {
+          background: '#fff',
+          padding: '0 16px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          height: 56
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          style: {
+            fontSize: 18,
+            fontWeight: 600,
+            color: '#1890ff'
+          },
+          children: "Tiket Lomba"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          type: "text",
+          icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_13__["default"], {}),
+          onClick: function onClick() {
+            return setDrawerVisible(true);
+          },
+          size: "large",
+          "aria-label": "Buka Menu"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        placement: "left",
+        closable: false,
+        onClose: function onClose() {
+          return setDrawerVisible(false);
+        },
+        open: drawerVisible,
+        width: 280,
+        style: {
+          zIndex: 1000
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          style: {
+            padding: 24,
+            borderBottom: '1px solid #f0f0f0'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+              size: "large",
+              icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {}),
+              style: {
+                backgroundColor: '#1890ff'
+              }
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                style: {
+                  fontWeight: 600,
+                  fontSize: 16
+                },
+                children: user === null || user === void 0 ? void 0 : user.name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                style: {
+                  fontSize: 12,
+                  color: '#8c8c8c',
+                  marginTop: 4
+                },
+                children: getRoleTag(user === null || user === void 0 ? void 0 : user.role)
+              })]
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
+          mode: "inline",
+          selectedKeys: [location.pathname],
+          items: menuItems,
+          onClick: handleMenuClick,
+          style: {
+            borderRight: 'none'
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          style: {
+            padding: 16,
+            borderTop: '1px solid #f0f0f0'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_17__["default"], {
+            title: "Keluar",
+            description: "Apakah Anda yakin ingin keluar?",
+            onConfirm: handleLogout,
+            okText: "Ya",
+            cancelText: "Batal",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_12__["default"], {
+              type: "primary",
+              danger: true,
+              icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {}),
+              block: true,
+              children: "Keluar"
+            })
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Content, {
+        style: {
+          padding: '16px'
+        },
+        children: children
+      })]
     });
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -5633,48 +5935,56 @@ var AppLayout = function AppLayout(_ref) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: 64
       },
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
         style: {
-          margin: 0
+          margin: 0,
+          fontSize: 20,
+          color: '#1890ff'
         },
         children: "Tiket Lomba"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_16__["default"], {
         mode: "horizontal",
         selectedKeys: [location.pathname],
         items: menuItems,
-        onClick: function onClick(e) {
-          return history.push(e.key);
-        },
+        onClick: handleMenuClick,
         style: {
           flex: 1,
           marginLeft: 32
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         style: {
           display: 'flex',
           alignItems: 'center',
           gap: 16
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-          children: user === null || user === void 0 ? void 0 : user.name
-        }), (user === null || user === void 0 ? void 0 : user.role) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          color: user.role === 'superadmin' ? 'red' : 'green',
-          children: user.role === 'superadmin' ? 'Superadmin' : 'Admin'
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          title: "Keluar",
-          description: "Apakah Anda yakin ingin keluar?",
-          onConfirm: handleLogout,
-          okText: "Ya",
-          cancelText: "Batal",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_10__["default"], {
-            type: "primary",
-            danger: true,
-            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_11__["default"], {}),
-            children: "Keluar"
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_18__["default"], {
+          menu: {
+            items: userMenuItems
+          },
+          trigger: ['click'],
+          placement: "bottomRight",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(antd__WEBPACK_IMPORTED_MODULE_19__["default"], {
+            style: {
+              alignItems: 'center',
+              gap: 8
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(antd__WEBPACK_IMPORTED_MODULE_15__["default"], {
+              size: 32,
+              icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ant_design_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {}),
+              style: {
+                backgroundColor: '#1890ff'
+              }
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              style: {
+                fontWeight: 500
+              },
+              children: user === null || user === void 0 ? void 0 : user.name
+            }), getRoleTag(user === null || user === void 0 ? void 0 : user.role)]
           })
-        })]
+        })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Content, {
       style: {

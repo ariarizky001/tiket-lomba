@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, InputNumber, Modal, message, Typography, Tag, Tooltip } from 'antd';
+import { Table, Button, InputNumber, Modal, message, Typography, Tag, Tooltip, Space, Grid } from 'antd';
 import { DollarOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
 import { formatRupiah } from '../../../common/helpers/Utils';
@@ -7,6 +7,8 @@ import { formatRupiah } from '../../../common/helpers/Utils';
 const { Text } = Typography;
 
 const OrderedTab = ({ latber, onSessionsUpdate }) => {
+  const screens = Grid.useBreakpoint();
+  const isMobile = screens.xs;
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [terpesanCounts, setTerpesanCounts] = useState({});
@@ -137,25 +139,27 @@ const OrderedTab = ({ latber, onSessionsUpdate }) => {
       title: 'No Urut',
       dataIndex: 'nomor_urut',
       key: 'nomor_urut',
-      width: 80,
+      width: 60,
       align: 'center',
     },
     {
       title: 'Sesi',
       dataIndex: 'nama',
       key: 'nama',
-      fixed: 'left',
+      width: 120,
+      fixed: isMobile ? false : 'left',
     },
     {
       title: 'Harga',
       dataIndex: 'harga',
       key: 'harga',
+      width: 100,
       render: (harga) => formatRupiah(harga),
     },
     {
       title: 'Jumlah Terpesan',
       key: 'jumlah',
-      width: 150,
+      width: 130,
       align: 'center',
       render: (_, record) => (
         <InputNumber
@@ -172,6 +176,7 @@ const OrderedTab = ({ latber, onSessionsUpdate }) => {
     {
       title: 'Nilai Terpesan',
       key: 'nilai',
+      width: 120,
       render: (_, record) => {
         const count = terpesanCounts[record.id] ?? record.terpesan;
         return formatRupiah(count * record.harga);
@@ -180,20 +185,21 @@ const OrderedTab = ({ latber, onSessionsUpdate }) => {
     {
       title: 'Aksi',
       key: 'aksi',
-      width: 180,
+      width: 150,
       render: (_, record) => (
-        <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+        <Space direction={isMobile ? "vertical" : "horizontal"} size={4} style={{ width: '100%' }}>
           <Tooltip title="Tandai sudah diambil (pembayaran)" placement="top">
             <Button
               type="primary"
               icon={<DollarOutlined />}
               onClick={() => openAmbilModal(record)}
               disabled={record.terpesan === 0 || loading}
+              block={isMobile}
             >
               Tandai Diambil
             </Button>
           </Tooltip>
-        </div>
+        </Space>
       ),
     },
   ];
@@ -203,17 +209,18 @@ const OrderedTab = ({ latber, onSessionsUpdate }) => {
 
   return (
     <div>
-      <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-        <Text type="secondary">Tiket terpesan belum dihitung sebagai pemasukan. Edit jumlah lalu klik Simpan.</Text>
+      <div style={{ marginBottom: 16, display: 'flex', gap: 8, flexWrap: 'wrap', flexDirection: isMobile ? 'column' : 'row' }}>
+        <Text type="secondary" style={{ flex: 1, minWidth: isMobile ? '100%' : 'auto' }}>Tiket terpesan belum dihitung sebagai pemasukan. Edit jumlah lalu klik Simpan.</Text>
         <Button
           type="primary"
           onClick={handleSaveTerpesan}
           disabled={!hasChanges || loading}
           loading={loading}
+          block={isMobile}
         >
           Simpan Perubahan
         </Button>
-        <Button onClick={handleReset} disabled={!hasChanges || loading}>
+        <Button onClick={handleReset} disabled={!hasChanges || loading} block={isMobile}>
           Batal
         </Button>
         {hasChanges && <Tag color="warning">Ada perubahan belum disimpan</Tag>}
@@ -252,6 +259,8 @@ const OrderedTab = ({ latber, onSessionsUpdate }) => {
         confirmLoading={ambilLoading}
         okText="Konfirmasi"
         cancelText="Batal"
+        fullscreen={isMobile}
+        style={{ top: isMobile ? 0 : undefined }}
       >
         {selectedSession && (
           <div>

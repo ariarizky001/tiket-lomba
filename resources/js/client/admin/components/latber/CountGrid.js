@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, InputNumber, Button, Tag, message, Typography } from 'antd';
+import { Table, InputNumber, Button, Tag, message, Typography, Space, Grid } from 'antd';
 import { formatRupiah } from '../../../common/helpers/Utils';
 
 const { Text } = Typography;
 
 const CountGrid = ({ sessions, onSave, mode, note, loading }) => {
+  const screens = Grid.useBreakpoint();
+  const isMobile = screens.xs;
   const [counts, setCounts] = useState({});
   const [hasChanges, setHasChanges] = useState(false);
 
@@ -65,14 +67,15 @@ const CountGrid = ({ sessions, onSave, mode, note, loading }) => {
       title: 'No Urut',
       dataIndex: 'nomor_urut',
       key: 'nomor_urut',
-      width: 80,
+      width: 60,
       align: 'center',
     },
     {
       title: 'Sesi',
       dataIndex: 'nama',
       key: 'nama',
-      fixed: 'left',
+      width: 120,
+      fixed: isMobile ? false : 'left',
     },
   ];
 
@@ -81,13 +84,14 @@ const CountGrid = ({ sessions, onSave, mode, note, loading }) => {
       title: 'Harga',
       dataIndex: 'harga',
       key: 'harga',
+      width: 100,
       render: (harga) => formatRupiah(harga),
     });
 
     columns.push({
       title: 'Jumlah Terjual',
       key: 'jumlah',
-      width: 150,
+      width: 130,
       render: (_, record) => (
         <InputNumber
           min={0}
@@ -103,6 +107,7 @@ const CountGrid = ({ sessions, onSave, mode, note, loading }) => {
     columns.push({
       title: 'Pemasukan',
       key: 'pemasukan',
+      width: 120,
       render: (_, record) => formatRupiah((counts[record.id] ?? 0) * record.harga),
     });
   } else {
@@ -110,13 +115,14 @@ const CountGrid = ({ sessions, onSave, mode, note, loading }) => {
       title: 'Harga',
       dataIndex: 'harga',
       key: 'harga',
+      width: 100,
       render: (harga) => formatRupiah(harga),
     });
 
     columns.push({
       title: 'Jumlah Terpesan',
       key: 'jumlah',
-      width: 150,
+      width: 130,
       render: (_, record) => (
         <InputNumber
           min={0}
@@ -132,6 +138,7 @@ const CountGrid = ({ sessions, onSave, mode, note, loading }) => {
     columns.push({
       title: 'Nilai Terpesan',
       key: 'nilai',
+      width: 120,
       render: (_, record) => formatRupiah((counts[record.id] ?? 0) * record.harga),
     });
   }
@@ -144,21 +151,20 @@ const CountGrid = ({ sessions, onSave, mode, note, loading }) => {
         </div>
       )}
 
-      <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', flexDirection: isMobile ? 'column' : 'row' }}>
         <Button
           type="primary"
           onClick={handleSave}
           disabled={!hasChanges}
           loading={loading}
+          block={isMobile}
         >
           Simpan
         </Button>
-        <Button onClick={handleReset} disabled={!hasChanges || loading}>
+        <Button onClick={handleReset} disabled={!hasChanges || loading} block={isMobile}>
           Batal Perubahan
         </Button>
-        {hasChanges && (
-          <Tag color="warning">Ada perubahan belum disimpan</Tag>
-        )}
+        {hasChanges && <Tag color="warning">Ada perubahan belum disimpan</Tag>}
       </div>
 
       <Table

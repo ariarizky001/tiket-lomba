@@ -1435,6 +1435,164 @@
     page-break-inside: avoid;
     margin-bottom: 12px;
   }
+}
+.hidden-xs {
+  display: none !important;
+}
+.hidden-sm {
+  display: none !important;
+}
+.hidden-md {
+  display: none !important;
+}
+.hidden-lg {
+  display: none !important;
+}
+.hidden-xl {
+  display: none !important;
+}
+.hidden-xxl {
+  display: none !important;
+}
+.visible-xs {
+  display: block !important;
+}
+.visible-sm {
+  display: block !important;
+}
+.visible-md {
+  display: block !important;
+}
+.visible-lg {
+  display: block !important;
+}
+.visible-xl {
+  display: block !important;
+}
+.visible-xxl {
+  display: block !important;
+}
+.flex-col-xs {
+  flex-direction: column !important;
+}
+.flex-row-sm {
+  flex-direction: row !important;
+}
+@media (max-width: 575.98px) {
+  .btn-touch {
+    min-height: 44px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  .input-touch {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .table-action-btn {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 4px 8px;
+  }
+  .drawer-mobile-width {
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .ant-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ant-table {
+    min-width: 600px;
+  }
+  .ant-table-thead > tr > th {
+    white-space: nowrap;
+  }
+  .ant-table-tbody > tr > td {
+    white-space: nowrap;
+  }
+  .ant-table-thead > tr > th {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+  .ant-table-tbody > tr > td {
+    font-size: 13px;
+    padding: 8px 6px;
+  }
+  .ant-table-column-hidden-xs {
+    display: none !important;
+  }
+  .ant-table-column-hidden-sm {
+    display: none !important;
+  }
+}
+.p-responsive {
+  padding: 16px;
+}
+@media (min-width: 768px) {
+  .p-responsive {
+    padding: 24px;
+  }
+}
+.m-responsive {
+  margin-bottom: 16px;
+}
+@media (min-width: 768px) {
+  .m-responsive {
+    margin-bottom: 24px;
+  }
+}
+@media (max-width: 575.98px) {
+  .ant-statistic {
+    padding: 12px 8px;
+  }
+  .ant-statistic-title {
+    font-size: 12px;
+  }
+  .ant-statistic-content {
+    font-size: 18px;
+  }
+  .ant-statistic-content-value-int {
+    font-size: 18px;
+  }
+  .ant-form-item-label > label {
+    font-size: 13px;
+  }
+  .ant-input, .ant-picker {
+    font-size: 16px;
+    height: 44px;
+  }
+  .ant-btn {
+    height: 44px;
+    font-size: 14px;
+  }
+  .ant-form-item {
+    margin-bottom: 16px;
+  }
+  .ant-drawer-body {
+    padding: 16px;
+  }
+  .ant-modal-fullscreen-xs {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  .ant-modal-fullscreen-xs .ant-modal-content {
+    height: 100vh;
+    max-height: 100vh;
+  }
+  .ant-modal-fullscreen-xs .ant-modal-body {
+    overflow-y: auto;
+  }
+  .ant-drawer-content-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .ant-drawer-body {
+    padding: 16px;
+  }
+}
+@media print {
   .no-print {
     display: none !important;
   }
@@ -1445,13 +1603,7 @@
     padding: 0 !important;
     margin: 0 !important;
   }
-  .ant-layout,
-  .ant-layout-header,
-  .ant-layout-sider,
-  .ant-layout-content,
-  .ant-menu,
-  .ant-breadcrumb,
-  .ant-page-header {
+  .ant-layout, .ant-layout-header, .ant-layout-sider, .ant-layout-content, .ant-menu, .ant-breadcrumb, .ant-page-header {
     display: none !important;
   }
   .print-container > div[key] {
@@ -1469,10 +1621,7 @@
   .ant-table-tbody > tr > td {
     border-color: #d9d9d9 !important;
   }
-  .ant-table-container {
-    overflow: visible !important;
-  }
-  .ant-table-scroll {
+  .ant-table-container, .ant-table-scroll {
     overflow: visible !important;
   }
   .ant-table-thead {
@@ -1511,6 +1660,37 @@
   }
   .ant-table-sticky-holder {
     z-index: 10;
+  }
+}
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.text-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@supports (padding: max(0px)) {
+  .safe-top {
+    padding-top: max(16px, env(safe-area-inset-top));
+  }
+  .safe-bottom {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+  .safe-left {
+    padding-left: max(16px, env(safe-area-inset-left));
+  }
+  .safe-right {
+    padding-right: max(16px, env(safe-area-inset-right));
   }
 }
 @property --tw-scale-x {

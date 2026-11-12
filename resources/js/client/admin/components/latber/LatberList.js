@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Drawer, Form, DatePicker, Input, Popconfirm, message, Empty } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Table, Button, Drawer, Form, DatePicker, Input, Popconfirm, message, Empty, Space, Grid } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, SettingOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import HTTP from '../../../../common/helpers/HTTP';
 import { formatRupiah, formatAngka } from '../../../common/helpers/Utils';
@@ -8,6 +8,8 @@ import dayjs from 'dayjs';
 
 const LatberList = () => {
   const history = useHistory();
+  const screens = Grid.useBreakpoint();
+  const isMobile = screens.xs;
   const [latbers, setLatbers] = useState([]);
   const [filteredLatbers, setFilteredLatbers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -123,42 +125,63 @@ const LatberList = () => {
       title: 'Tanggal',
       dataIndex: 'tanggal',
       key: 'tanggal',
+      width: 100,
       render: (text) => new Date(text).toLocaleDateString('id-ID'),
     },
-    { title: 'Nama', dataIndex: 'nama', key: 'nama' },
-    { title: 'Lokasi', dataIndex: 'lokasi', key: 'lokasi' },
+    { 
+      title: 'Nama', 
+      dataIndex: 'nama', 
+      key: 'nama',
+      width: 150,
+      fixed: isMobile ? false : 'left',
+    },
+    { 
+      title: 'Lokasi', 
+      dataIndex: 'lokasi', 
+      key: 'lokasi',
+      width: 120,
+      className: isMobile ? 'ant-table-column-hidden-xs' : '',
+    },
     {
       title: 'Sesi',
       key: 'sesi',
       align: 'center',
+      width: 70,
+      className: isMobile ? 'ant-table-column-hidden-xs' : '',
       render: (_, record) => record.ringkasan?.jumlah_sesi || 0,
     },
     {
       title: 'Tiket Terjual',
       key: 'terjual',
       align: 'center',
+      width: 100,
       render: (_, record) => record.ringkasan?.total_terjual || 0,
     },
     {
       title: 'Pemasukan',
       key: 'pemasukan',
+      width: 120,
       render: (_, record) => formatRupiah(record.ringkasan?.pemasukan || 0),
     },
     {
       title: 'Tiket Terpesan',
       key: 'terpesan',
       align: 'center',
+      width: 100,
+      className: isMobile ? 'ant-table-column-hidden-xs' : '',
       render: (_, record) => record.ringkasan?.total_terpesan || 0,
     },
     {
       title: 'Aksi',
       key: 'aksi',
+      width: 180,
+      fixed: isMobile ? false : 'right',
       render: (_, record) => (
-        <div style={{ display: 'flex', gap: 8 }}>
-          <Button size="small" onClick={() => history.push(`/latbers/${record.id}`)}>
+        <Space direction={isMobile ? "vertical" : "horizontal"} size={4} style={{ width: '100%' }}>
+          <Button size="small" type="primary" icon={<SettingOutlined />} onClick={() => history.push(`/latbers/${record.id}`)} block={isMobile}>
             Kelola
           </Button>
-          <Button size="small" onClick={() => openDrawer(record)}>Edit</Button>
+          <Button size="small" icon={<EditOutlined />} onClick={() => openDrawer(record)} block={isMobile}>Edit</Button>
           <Popconfirm
             title="Hapus"
             description="Apakah Anda yakin ingin menghapus latber ini?"
@@ -166,27 +189,28 @@ const LatberList = () => {
             okText="Ya"
             cancelText="Batal"
           >
-            <Button size="small" danger>Hapus</Button>
+            <Button size="small" danger icon={<DeleteOutlined />} block={isMobile}>Hapus</Button>
           </Popconfirm>
-        </div>
+        </Space>
       ),
     },
   ];
 
   return (
     <div>
-      <div style={{ marginBottom: 16, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      <div style={{ marginBottom: 16, display: 'flex', gap: 8, flexWrap: 'wrap', flexDirection: isMobile ? 'column' : 'row' }}>
         <Input.Search
           placeholder="Cari nama latber"
           allowClear
-          style={{ width: 250 }}
+          style={{ width: isMobile ? '100%' : 220 }}
           onChange={(e) => setSearchNama(e.target.value)}
         />
         <DatePicker.RangePicker
           onChange={(dates) => setDateRange(dates)}
           format="DD/MM/YYYY"
+          style={{ width: isMobile ? '100%' : 'auto' }}
         />
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => openDrawer()}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => openDrawer()} block={isMobile}>
           Tambah Latber
         </Button>
       </div>

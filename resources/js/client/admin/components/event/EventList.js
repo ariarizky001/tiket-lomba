@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Drawer, Form, DatePicker, Input, Switch, Popconfirm, message } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Table, Button, Drawer, Form, DatePicker, Input, Switch, Popconfirm, message, Space, Tag, Grid } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, SettingOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import HTTP from '../../../../common/helpers/HTTP';
 import dayjs from 'dayjs';
 
 const EventList = () => {
   const history = useHistory();
+  const screens = Grid.useBreakpoint();
+  const isMobile = screens.xs;
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -88,19 +90,45 @@ const EventList = () => {
   };
 
   const columns = [
-    { title: 'Nama', dataIndex: 'nama', key: 'nama' },
-    { title: 'Tanggal', dataIndex: 'tanggal', key: 'tanggal', render: (text) => new Date(text).toLocaleDateString('id-ID') },
-    { title: 'Lokasi', dataIndex: 'lokasi', key: 'lokasi' },
-    { title: 'Status', dataIndex: 'is_active', key: 'is_active', render: (active) => active ? 'Aktif' : 'Nonaktif' },
+    { 
+      title: 'Nama', 
+      dataIndex: 'nama', 
+      key: 'nama',
+      width: 150,
+      fixed: isMobile ? false : 'left',
+    },
+    { 
+      title: 'Tanggal', 
+      dataIndex: 'tanggal', 
+      key: 'tanggal', 
+      width: 100,
+      render: (text) => new Date(text).toLocaleDateString('id-ID') 
+    },
+    { 
+      title: 'Lokasi', 
+      dataIndex: 'lokasi', 
+      key: 'lokasi',
+      width: 120,
+      className: isMobile ? 'ant-table-column-hidden-xs' : '',
+    },
+    { 
+      title: 'Status', 
+      dataIndex: 'is_active', 
+      key: 'is_active', 
+      width: 90,
+      render: (active) => active ? <Tag color="green">Aktif</Tag> : <Tag color="default">Nonaktif</Tag> 
+    },
     {
       title: 'Aksi',
       key: 'aksi',
+      width: 180,
+      fixed: isMobile ? false : 'right',
       render: (_, record) => (
-        <div style={{ display: 'flex', gap: 8 }}>
-          <Button size="small" onClick={() => history.push(`/events/${record.id}`)}>
+        <Space direction={isMobile ? "vertical" : "horizontal"} size={4} style={{ width: '100%' }}>
+          <Button size="small" type="primary" icon={<SettingOutlined />} onClick={() => history.push(`/events/${record.id}`)} block={isMobile}>
             Kelola
           </Button>
-          <Button size="small" onClick={() => openDrawer(record)}>Edit</Button>
+          <Button size="small" icon={<EditOutlined />} onClick={() => openDrawer(record)} block={isMobile}>Edit</Button>
           <Popconfirm
             title="Hapus"
             description="Menghapus event juga menghapus seluruh sesinya. Apakah Anda yakin ingin menghapus event ini?"
@@ -108,9 +136,9 @@ const EventList = () => {
             okText="Ya"
             cancelText="Batal"
           >
-            <Button size="small" danger>Hapus</Button>
+            <Button size="small" danger icon={<DeleteOutlined />} block={isMobile}>Hapus</Button>
           </Popconfirm>
-        </div>
+        </Space>
       ),
     },
   ];

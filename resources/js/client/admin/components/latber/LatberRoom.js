@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { PageHeader, Tabs, Result, Button, Spin, Row, Col, Statistic } from 'antd';
+import { PageHeader, Tabs, Result, Button, Spin, Row, Col, Statistic, Grid } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import HTTP from '../../../../common/helpers/HTTP';
 import { formatRupiah, formatAngka } from '../../../common/helpers/Utils';
@@ -9,6 +9,8 @@ import SoldTab from './SoldTab';
 import OrderedTab from './OrderedTab';
 
 const LatberRoom = () => {
+  const screens = Grid.useBreakpoint();
+  const isMobile = screens.xs;
   const { id } = useParams();
   const history = useHistory();
   const [latber, setLatber] = useState(null);
@@ -89,19 +91,25 @@ const LatberRoom = () => {
       <PageHeader
         onBack={() => history.push('/latbers')}
         title={latber.nama}
-        subTitle={`${new Date(latber.tanggal).toLocaleDateString('id-ID')}${latber.lokasi ? ' • ' + latber.lokasi : ''}`}
+        subTitle={isMobile
+          ? [
+              <div key="date">{new Date(latber.tanggal).toLocaleDateString('id-ID')}</div>,
+              latber.lokasi && <div key="loc" style={{ color: '#8c8c8c', fontSize: 13 }}>{latber.lokasi}</div>,
+            ]
+          : `${new Date(latber.tanggal).toLocaleDateString('id-ID')}${latber.lokasi ? ' • ' + latber.lokasi : ''}`}
         style={{ marginBottom: 24 }}
       />
 
-      <Row gutter={16} style={{ marginBottom: 24 }}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         <Col xs={24} sm={8}>
           <Statistic
             title="Total Tiket Terjual"
             value={ringkasan.total_terjual}
+            style={{ marginBottom: isMobile ? 16 : 0 }}
           />
         </Col>
         <Col xs={24} sm={8}>
-          <div style={{ marginBottom: 8 }}>
+          <div style={{ marginBottom: isMobile ? 16 : 8 }}>
             <Statistic
               title="Pemasukan"
               value={ringkasan.pemasukan}
@@ -116,7 +124,7 @@ const LatberRoom = () => {
           )}
         </Col>
         <Col xs={24} sm={8}>
-          <div style={{ marginBottom: 8 }}>
+          <div style={{ marginBottom: isMobile ? 16 : 8 }}>
             <Statistic
               title="Total Tiket Terpesan"
               value={ringkasan.total_terpesan}
