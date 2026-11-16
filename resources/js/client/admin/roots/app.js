@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { Spin } from 'antd';
+import { Spin, ConfigProvider } from 'antd';
+import moment from 'moment';
+import 'moment/locale/id';
 import { initAuth } from '../redux/auth';
 import Login from '../components/auth/Login';
 import AppLayout from '../components/layout/AppLayout';
@@ -13,6 +15,9 @@ import UserManagement from '../components/user/UserManagement';
 import PermissionManagement from '../components/permission/PermissionManagement';
 import LatberList from '../components/latber/LatberList';
 import LatberRoom from '../components/latber/LatberRoom';
+
+// Set moment locale to Indonesian
+moment.locale('id');
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,47 +32,49 @@ const App = () => {
   }
 
   return (
-    <Router basename="/admin">
-      <Switch>
-        <Route path="/login">
-          {user ? <Redirect to="/" /> : <Login />}
-        </Route>
-        <Route path="/events/:id/rekap-dashboard">
-          <RekapDashboard />
-        </Route>
-        <Route path="/">
-          {!user ? (
-            <Redirect to="/login" />
-          ) : (
-            <AppLayout location={window.location}>
-              <Switch>
-                <Route exact path="/">
-                  <Dashboard />
-                </Route>
-                <Route exact path="/events">
-                  <EventList />
-                </Route>
-                <Route path="/events/:id">
-                  <EventRoom />
-                </Route>
-                <Route exact path="/latbers">
-                  <LatberList />
-                </Route>
-                <Route path="/latbers/:id">
-                  <LatberRoom />
-                </Route>
-                <Route exact path="/users">
-                  {user?.role === 'superadmin' ? <UserManagement /> : <Redirect to="/" />}
-                </Route>
-                <Route exact path="/permissions">
-                  {user?.role === 'superadmin' ? <PermissionManagement /> : <Redirect to="/" />}
-                </Route>
-              </Switch>
-            </AppLayout>
-          )}
-        </Route>
-      </Switch>
-    </Router>
+    <ConfigProvider locale={{ locale: 'id' }}>
+      <Router basename="/admin">
+        <Switch>
+          <Route path="/login">
+            {user ? <Redirect to="/" /> : <Login />}
+          </Route>
+          <Route path="/events/:id/rekap-dashboard">
+            <RekapDashboard />
+          </Route>
+          <Route path="/">
+            {!user ? (
+              <Redirect to="/login" />
+            ) : (
+              <AppLayout location={window.location}>
+                <Switch>
+                  <Route exact path="/">
+                    <Dashboard />
+                  </Route>
+                  <Route exact path="/events">
+                    <EventList />
+                  </Route>
+                  <Route path="/events/:id">
+                    <EventRoom />
+                  </Route>
+                  <Route exact path="/latbers">
+                    <LatberList />
+                  </Route>
+                  <Route path="/latbers/:id">
+                    <LatberRoom />
+                  </Route>
+                  <Route exact path="/users">
+                    {user?.role === 'superadmin' ? <UserManagement /> : <Redirect to="/" />}
+                  </Route>
+                  <Route exact path="/permissions">
+                    {user?.role === 'superadmin' ? <PermissionManagement /> : <Redirect to="/" />}
+                  </Route>
+                </Switch>
+              </AppLayout>
+            )}
+          </Route>
+        </Switch>
+      </Router>
+    </ConfigProvider>
   );
 };
 

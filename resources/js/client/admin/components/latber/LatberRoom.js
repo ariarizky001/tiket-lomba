@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { PageHeader, Tabs, Result, Button, Spin, Row, Col, Statistic, Grid } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import HTTP from '../../../../common/helpers/HTTP';
-import { formatRupiah, formatAngka } from '../../../common/helpers/Utils';
+import HTTP from '@/common/helpers/HTTP';
+import { formatRupiah, formatAngka } from '@/common/helpers/Utils';
 import LatberSessionTab from './LatberSessionTab';
 import SoldTab from './SoldTab';
 import OrderedTab from './OrderedTab';
+import ErrorBoundary from '@/common/components/ErrorBoundary';
 
 const LatberRoom = () => {
   const screens = Grid.useBreakpoint();
@@ -138,7 +139,9 @@ const LatberRoom = () => {
         </Col>
       </Row>
 
-      <Tabs items={items} />
+      <ErrorBoundary>
+        <Tabs items={items} />
+      </ErrorBoundary>
     </div>
   );
 };

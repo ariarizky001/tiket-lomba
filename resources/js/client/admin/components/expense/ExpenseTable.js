@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Popconfirm, message, Tag, Empty, Select, DatePicker, Input, Row, Col } from 'antd';
+import { Table, Button, Popconfirm, message, Tag, Empty, Select, Row, Col } from 'antd';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import HTTP from '../../../../common/helpers/HTTP';
-import dayjs from 'dayjs';
-import 'dayjs/locale/id';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import isBetween from 'dayjs/plugin/isBetween';
-import weekday from 'dayjs/plugin/weekday';
-
-dayjs.extend(localizedFormat);
-dayjs.extend(isBetween);
-dayjs.extend(weekday);
-dayjs.locale('id');
+import HTTP from '@/common/helpers/HTTP';
+import { toApiDate } from '@/common/helpers/Utils';
+import AppRangePicker from '@/common/components/AppRangePicker';
+import moment from 'moment';
 
 const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categories }) => {
   const [filtered, setFiltered] = useState(expenses);
@@ -29,10 +22,10 @@ const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categori
     }
 
     if (dateRange[0] && dateRange[1]) {
-      const start = dayjs(dateRange[0]);
-      const end = dayjs(dateRange[1]);
+      const start = moment(dateRange[0]);
+      const end = moment(dateRange[1]);
       result = result.filter(e => {
-        const d = dayjs(e.tanggal);
+        const d = moment(e.tanggal);
         return d.isBetween(start, end, null, '[]');
       });
     }
@@ -68,7 +61,7 @@ const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categori
       title: 'Tanggal',
       dataIndex: 'tanggal',
       key: 'tanggal',
-      render: (text) => dayjs(text).format('DD/MM/YYYY'),
+      render: (text) => moment(text).format('DD/MM/YYYY'),
       width: 100,
     },
     {
@@ -138,15 +131,14 @@ const ExpenseTable = ({ eventId, expenses, onEdit, onDelete, onRefresh, categori
           />
         </Col>
         <Col xs={24} sm={12} md={6}>
-          <DatePicker.RangePicker
+          <AppRangePicker
             value={dateRange}
             onChange={(dates) => setDateRange(dates)}
-            onClick={(e) => e.stopPropagation()}
-            style={{ width: '100%', zIndex: 9999 }}
             format="DD/MM/YYYY"
             getPopupContainer={() => document.body}
-            allowClear={false}
-            showTime={false}
+            dropdownClassName="latber-datepicker-dropdown"
+            placeholder={['Mulai', 'Sampai']}
+            style={{ width: '100%' }}
           />
         </Col>
         <Col xs={24} sm={12} md={6}>

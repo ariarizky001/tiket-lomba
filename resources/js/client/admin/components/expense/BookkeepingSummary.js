@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Statistic, Tag, Empty, Button, Drawer, Form, Input, DatePicker, Select, InputNumber, Table, Popconfirm, message } from 'antd';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import HTTP from '../../../../common/helpers/HTTP';
-import dayjs from 'dayjs';
+import HTTP from '@/common/helpers/HTTP';
 
 const BookkeepingSummary = ({ bookkeeping, onRefresh }) => {
   if (!bookkeeping) return null;

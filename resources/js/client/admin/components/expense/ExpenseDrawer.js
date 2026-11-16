@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Drawer, Form, Input, DatePicker, Select, InputNumber, Button, message } from 'antd';
-import HTTP from '../../../../common/helpers/HTTP';
-import dayjs from 'dayjs';
-import 'dayjs/locale/id';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import isBetween from 'dayjs/plugin/isBetween';
-import weekday from 'dayjs/plugin/weekday';
-
-dayjs.extend(localizedFormat);
-dayjs.extend(isBetween);
-dayjs.extend(weekday);
-dayjs.locale('id');
+import HTTP from '@/common/helpers/HTTP';
+import { toApiDate } from '@/common/helpers/Utils';
+import AppDatePicker from '@/common/components/AppDatePicker';
+import moment from 'moment';
 
 const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefresh }) => {
   const [form] = Form.useForm();
@@ -20,7 +13,7 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
     if (visible) {
       if (expense) {
         form.setFieldsValue({
-          tanggal: dayjs(expense.tanggal),
+          tanggal: moment(expense.tanggal),
           kategori: expense.kategori,
           keterangan: expense.keterangan,
           penerima: expense.penerima,
@@ -28,7 +21,7 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
         });
       } else {
         form.setFieldsValue({
-          tanggal: dayjs(),
+          tanggal: moment(),
           kategori: undefined,
           keterangan: '',
           penerima: '',
@@ -44,7 +37,7 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
     setLoading(true);
     try {
       const payload = {
-        tanggal: values.tanggal.format('YYYY-MM-DD'),
+        tanggal: toApiDate(values.tanggal),
         kategori: values.kategori,
         keterangan: values.keterangan,
         penerima: values.penerima || null,
@@ -92,13 +85,11 @@ const ExpenseDrawer = ({ visible, expense, eventId, categories, onClose, onRefre
           name="tanggal"
           rules={[{ required: true, message: 'Tanggal wajib diisi' }]}
         >
-          <div onMouseDown={(e) => e.stopPropagation()}>
-            <DatePicker
-              format="DD/MM/YYYY"
-              style={{ width: '100%', zIndex: 9999 }}
-              getPopupContainer={() => document.body}
-            />
-          </div>
+          <AppDatePicker
+            format="DD/MM/YYYY"
+            getPopupContainer={() => document.body}
+            dropdownClassName="latber-datepicker-dropdown"
+          />
         </Form.Item>
 
         <Form.Item

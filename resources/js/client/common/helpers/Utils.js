@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const formatRupiah = (amount) => {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -29,4 +31,21 @@ export const sessionName = (item) => {
   return nomor ? `${nomor}. ${nama}` : nama;
 };
 
-export default { formatRupiah, formatAngka, generateInvoiceCode, sessionName };
+// Date helper functions
+export const toMoment = (value) => {
+  if (!value) return null;
+  if (moment.isMoment(value)) return value;
+  const m = moment(value);
+  return m.isValid() ? m : null;
+};
+
+export const toApiDate = (m) => {
+  if (!m) return null;
+  if (moment.isMoment(m)) return m.format('YYYY-MM-DD');
+  const parsed = moment(m);
+  return parsed.isValid() ? parsed.format('YYYY-MM-DD') : null;
+};
+
+export const todayMoment = () => moment();
+
+export default { formatRupiah, formatAngka, generateInvoiceCode, sessionName, toMoment, toApiDate, todayMoment };

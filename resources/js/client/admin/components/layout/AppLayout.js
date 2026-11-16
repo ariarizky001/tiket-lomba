@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Layout, Menu, Button, Popconfirm, message, Tag, Drawer, Avatar, Dropdown, Space, Grid } from 'antd';
 import { LogoutOutlined, MenuOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
 import { logout } from '../../redux/auth';
+import ErrorBoundary from '@/common/components/ErrorBoundary';
 
 const { Header, Content } = Layout;
 
@@ -117,7 +118,7 @@ const AppLayout = ({ children, location }) => {
           </div>
         </Drawer>
         <Content style={{ padding: '16px' }}>
-          {children}
+          <ErrorBoundary>{children}</ErrorBoundary>
         </Content>
       </Layout>
     );
@@ -138,9 +139,9 @@ const AppLayout = ({ children, location }) => {
           </Dropdown>
         </div>
       </Header>
-      <Content style={{ padding: '24px' }}>
-        {children}
-      </Content>
+<Content style={{ padding: '24px' }}>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </Content>
     </Layout>
   );
 };

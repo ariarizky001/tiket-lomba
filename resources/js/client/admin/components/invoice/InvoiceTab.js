@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Table, Button, Input, Select, Tag, Popconfirm, message, Empty, Space } from 'antd';
 import { EyeOutlined, EditOutlined, CheckOutlined, StopOutlined, DeleteOutlined, SettingOutlined, UserAddOutlined } from '@ant-design/icons';
-import HTTP from '../../../../common/helpers/HTTP';
-import { formatRupiah, sessionName } from '../../../common/helpers/Utils';
-import dayjs from 'dayjs';
+import HTTP from '@/common/helpers/HTTP';
+import { formatRupiah, sessionName } from '@/common/helpers/Utils';
+import moment from 'moment';
 import InvoiceForm from './InvoiceForm';
 import InvoiceView from './InvoiceView';
 import InvoiceTemplateModal from './InvoiceTemplateModal';
@@ -179,7 +179,7 @@ const InvoiceTab = ({ event }) => {
       width: 120,
       render: (paidAt, record) =>
         record.status === 'lunas' && paidAt
-          ? dayjs(paidAt).format('DD/MM/YYYY')
+          ? moment(paidAt).format('DD/MM/YYYY')
           : '-',
     },
     {

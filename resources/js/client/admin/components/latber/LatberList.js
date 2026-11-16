@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Drawer, Form, DatePicker, Input, Popconfirm, message, Empty, Space, Grid } from 'antd';
+import { Table, Button, Drawer, Form, Input, Popconfirm, message, Empty, Space, Grid } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, SettingOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import HTTP from '../../../../common/helpers/HTTP';
-import { formatRupiah, formatAngka } from '../../../common/helpers/Utils';
-import dayjs from 'dayjs';
+import HTTP from '@/common/helpers/HTTP';
+import { formatRupiah, formatAngka, toApiDate } from '@/common/helpers/Utils';
+import AppDatePicker from '@/common/components/AppDatePicker';
+import AppRangePicker from '@/common/components/AppRangePicker';
+import moment from 'moment';
 
 const LatberList = () => {
   const history = useHistory();
@@ -52,7 +54,7 @@ const LatberList = () => {
       const start = dateRange[0].startOf('day');
       const end = dateRange[1].endOf('day');
       filtered = filtered.filter((l) => {
-        const tanggal = dayjs(l.tanggal);
+        const tanggal = moment(l.tanggal);
         return tanggal.isSameOrAfter(start) && tanggal.isSameOrBefore(end);
       });
     }
@@ -65,12 +67,12 @@ const LatberList = () => {
       setEditing(latber);
       form.setFieldsValue({
         ...latber,
-        tanggal: dayjs(latber.tanggal),
+        tanggal: moment(latber.tanggal),
       });
     } else {
       setEditing(null);
       form.resetFields();
-      form.setFieldValue('tanggal', dayjs());
+      form.setFieldValue('tanggal', moment());
     }
     setDrawerVisible(true);
   };
@@ -79,7 +81,7 @@ const LatberList = () => {
     try {
       const data = {
         ...values,
-        tanggal: values.tanggal.format('YYYY-MM-DD'),
+        tanggal: toApiDate(values.tanggal),
       };
 
       if (editing) {
@@ -205,7 +207,7 @@ const LatberList = () => {
           style={{ width: isMobile ? '100%' : 220 }}
           onChange={(e) => setSearchNama(e.target.value)}
         />
-        <DatePicker.RangePicker
+        <AppRangePicker
           onChange={(dates) => setDateRange(dates)}
           format="DD/MM/YYYY"
           style={{ width: isMobile ? '100%' : 'auto' }}
@@ -248,12 +250,17 @@ const LatberList = () => {
           >
             <Input />
           </Form.Item>
-          <Form.Item
+<Form.Item
             label="Tanggal"
             name="tanggal"
             rules={[{ required: true, message: 'Tanggal wajib diisi' }]}
           >
-            <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" />
+            <AppDatePicker
+              style={{ width: '100%' }}
+              format="DD/MM/YYYY"
+              getPopupContainer={() => document.body}
+              dropdownClassName="latber-datepicker-dropdown"
+            />
           </Form.Item>
           <Form.Item
             label="Lokasi"

@@ -121,3 +121,21 @@
   .safe-left { padding-left: max(16px, env(safe-area-inset-left)); }
   .safe-right { padding-right: max(16px, env(safe-area-inset-right)); }
 }
+
+/* DatePicker in Drawer fix - ensure dropdown is above drawer */
+.laber-datepicker-dropdown {
+  z-index: 2000 !important;
+}
+
+.laber-datepicker-dropdown .ant-picker-dropdown {
+  z-index: 2000 !important;
+}
+
+.laber-datepicker-dropdown .ant-picker-panel {
+  z-index: 2000 !important;
+}
+
+/* Ensure DatePicker input doesn't trigger navigation in Drawer */
+.ant-drawer .latber-datepicker-dropdown .ant-picker-input input {
+  pointer-events: auto;
+}

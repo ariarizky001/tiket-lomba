@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PageHeader, Tabs, Result, Button, Spin } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import HTTP from '../../../../common/helpers/HTTP';
+import HTTP from '@/common/helpers/HTTP';
 import SessionTab from '../session/SessionTab';
 import InvoiceTab from '../invoice/InvoiceTab';
 import ReportTab from '../report/ReportTab';
@@ -11,6 +11,7 @@ import ExpenseTab from '../expense/ExpenseTab';
 import RekapPeserta from '../rekap/RekapPeserta';
 import SpreadsheetConnection from '../spreadsheet/SpreadsheetConnection';
 import SheetRangeMappingPanel from '../spreadsheet/SheetRangeMappingPanel';
+import ErrorBoundary from '@/common/components/ErrorBoundary';
 
 const EventRoom = () => {
   const { id } = useParams();
@@ -122,7 +123,9 @@ const EventRoom = () => {
         subTitle={`${new Date(event.tanggal).toLocaleDateString('id-ID')}${event.lokasi ? ' • ' + event.lokasi : ''}`}
         style={{ marginBottom: 24 }}
       />
-      <Tabs items={filteredItems} />
+      <ErrorBoundary>
+        <Tabs items={filteredItems} />
+      </ErrorBoundary>
     </div>
   );
 };

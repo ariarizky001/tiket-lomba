@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Drawer, Form, DatePicker, Input, Switch, Popconfirm, message, Space, Tag, Grid } from 'antd';
+import { Table, Button, Drawer, Form, Input, Switch, Popconfirm, message, Space, Tag, Grid } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, SettingOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import HTTP from '../../../../common/helpers/HTTP';
-import dayjs from 'dayjs';
+import HTTP from '@/common/helpers/HTTP';
+import { toApiDate } from '@/common/helpers/Utils';
+import AppDatePicker from '@/common/components/AppDatePicker';
+import moment from 'moment';
 
 const EventList = () => {
   const history = useHistory();
@@ -36,7 +38,7 @@ const EventList = () => {
       setEditing(event);
       form.setFieldsValue({
         ...event,
-        tanggal: dayjs(event.tanggal),
+        tanggal: moment(event.tanggal),
       });
     } else {
       setEditing(null);
@@ -49,7 +51,7 @@ const EventList = () => {
     try {
       const data = {
         ...values,
-        tanggal: values.tanggal.format('YYYY-MM-DD'),
+        tanggal: toApiDate(values.tanggal),
       };
 
       if (editing) {
@@ -183,7 +185,11 @@ const EventList = () => {
             name="tanggal"
             rules={[{ required: true, message: 'Tanggal wajib diisi' }]}
           >
-            <DatePicker style={{ width: '100%' }} />
+            <AppDatePicker
+              style={{ width: '100%' }}
+              getPopupContainer={() => document.body}
+              dropdownClassName="latber-datepicker-dropdown"
+            />
           </Form.Item>
           <Form.Item
             label="Lokasi"
